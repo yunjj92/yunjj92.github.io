@@ -156,8 +156,8 @@ sitemap: true
 # Page default value
 defaults:
   home:
-    heading: "Your awesome heading"
-    subheading: "Your awesome subheading"
+    heading: "Tree-Kangaroo's archive"
+    subheading: "archive for computer Science"
     banner: "Your image url"
 
 # Banner default settings
