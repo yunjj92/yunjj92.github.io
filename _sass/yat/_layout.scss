@@ -248,7 +248,7 @@ html {
  */
 .page-content {
   @extend %flex-1; /* <-- Keep footer on the bottom */
-  -ms-flex: none; /* <-- Fix IE footer issue */
+  /*  -ms-flex: none; <-- Fix IE footer issue// and annotating '-ms-flex' for avoiding error(error comment: Also define the standard property 'flex' for compatibility)*/
   padding: $spacing-unit * 2 0;
   padding-top: 72px;
 }
