@@ -121,7 +121,7 @@ html[data-scroll-status='down'] .framework .sidebar { top: 20px; }
 .post .post-tags .post-tag { display: inline-block; margin: 0 12px 0 0; }
 
 /** Page content */
-.page-content { /* <-- Keep footer on the bottom *-ms-flex: none;/  /* <-- Fix IE footer issue */ padding: 60px 0; padding-top: 72px; }
+.page-content { /* <-- Keep footer on the bottom */ /*  -ms-flex: none; <-- Fix IE footer issue// and annotating '-ms-flex' for avoiding error(error comment: Also define the standard property 'flex' for compatibility)*/ padding: 60px 0; padding-top: 72px; }
 
 .page-heading { font-size: 28px; }
 
