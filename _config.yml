@@ -5,7 +5,7 @@
 # Yet another theme for elegant writers with modern flat style and beautiful
 # night/dark mode.
 #
-# Website: https://github.com/yunjj92/yunjj92.github.io
+Website: https://github.com/yunjj92/yunjj92.github.io
 #
 # You can do anything you want, including projects for your clients, as long
 # as you mention an attribution back (credit links in footer or project).
@@ -27,6 +27,7 @@
 title: "Tree kangaroo"
 email: yunjj92@gmail.com
 author: yunjj92
+url: https://github.com/yunjj92/yunjj92.github.io
 
 # Copyright setting
 # You can use any html code, currently below placeholders are available:
