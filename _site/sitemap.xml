@@ -10,13 +10,14 @@
 <loc>http://localhost:4000/categories.html</loc>
 </url>
 <url>
-<loc>http://localhost:4000/</loc>
-</url>
-<url>
 <loc>http://localhost:4000/tags.html</loc>
 </url>
 <url>
 <loc>http://localhost:4000/dWorkReport/2022/09/30/initPost.html</loc>
 <lastmod>2022-09-30T17:59:03+09:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/</loc>
+<lastmod>2022-10-05T11:05:13+09:00</lastmod>
 </url>
 </urlset>
