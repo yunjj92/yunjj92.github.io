@@ -1,4 +1,4 @@
-_site/
+
 *.gem
 .bundle
 .sass-cache
