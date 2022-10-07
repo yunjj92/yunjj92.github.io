@@ -1,7 +1,10 @@
-# frozen_string_literal: true
+source "https://rubygems.org"
 
-source "https://rubygems.org" do
+gem "jekyll"
 
-    gem "webrick", "~> 1.7"
-
-  end
+group :jekyll_plugins do
+  gem "jekyll-feed"
+  gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+  gem "webrick"
+  gem "jekyll-paginate"
+end

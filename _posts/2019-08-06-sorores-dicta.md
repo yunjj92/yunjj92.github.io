@@ -2,7 +2,6 @@
 layout: post
 title: "Sorores dicta insidias ferarum discedite dixit circumdata" 
 date: 2019-08-06 
-category: read 
 excerpt: ""
 ---
 
