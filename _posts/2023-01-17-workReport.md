@@ -34,7 +34,7 @@ excerpt: ""
 
             }
         ```
-        - jsp 단에서 아래와 같이 받는다고 했을 때
+        - jsp 페이지에서는 아래와 같이 받는다.
         ```
             var detailTBL = null;
             detailTBL = $('#listTable').DataTable({
@@ -70,4 +70,20 @@ excerpt: ""
 
             })
 
+        ```
+- java
+    - String 배열을 List배열로 변환
+        ```
+            Strint tempFruit = "pineApple, aplle, kiwi";
+            String [] fruitArr = String.split(","); 
+                //js 단에서 split을 사용할 때는 특수문자로 되어있는 구분자 앞에 \\를 붙여주어야 합니다!
+                // 정규표현식을 따라야 하기 때문에 아래와 같은 특수문자를 구분자로 사용할 때에는 \\을 붙여야합니다.
+                // | ? * ( ) [   ]  {  } \
+            List<String> tempList = new ArrayList();
+            temList =  Arrays.asList(fruitArr);
+        ```
+    - boolean을 String 형태로 변환
+        ```
+           boolean tempYN = false;
+           String strBoolean = String.valueOf(tempYN );
         ```
