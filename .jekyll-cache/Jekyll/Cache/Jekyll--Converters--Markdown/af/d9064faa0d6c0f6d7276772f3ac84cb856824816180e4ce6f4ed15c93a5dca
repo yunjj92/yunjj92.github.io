@@ -1,0 +1,98 @@
+I"<h1 id="2023년-01월-17일-화요일">2023년 01월 17일 화요일</h1>
+
+<h2 id="오늘의-공부-기록">오늘의 공부 기록</h2>
+<h3 id="datatable">DataTable()</h3>
+<ul>
+  <li>DataTable 활용
+    <ul>
+      <li>전체 행의 수 가져오기
+        <pre><code>      var editTable = $('#tableId').DataTable();
+      var editRow = editTable.rows().data();
+      var tableRow = editTable.data().count();
+
+      console.log("행의 수: " + tableRow);
+      console.log("행의 수: " + tableRow);
+</code></pre>
+      </li>
+      <li>Controller 단에서  List<VO> 자료형으로 반환을 했을 때 데이터 가져오는 법
+</VO>        <ul>
+          <li>예를 들어 VO 클래스에 선언된 변수가 다음과 같다고 했을 때
+            <pre><code>  @Data
+  @AllArgsConstructor
+  @ToString
+  @NoArgsConstructor
+  public class VO{
+
+      private String fruitType;
+      private String price;
+      private String brix;
+
+  }
+</code></pre>
+          </li>
+          <li>
+            <p>jsp 페이지에서는 아래와 같이 받는다.
+  ```
+  var detailTBL = null;
+  detailTBL = $(‘#listTable’).DataTable({</p>
+
+            <pre><code>  "ajax": {
+
+      "ursl": "/main/selectFruiltDetail",
+      "data": {
+          fruitType: "pineApple"
+      },
+      "dataSrc": "",
+  },
+  "columns":[
+
+      {"data" : "price", name : "price"},
+      {"data" : "brix", name : "brix"}
+
+  ]
+</code></pre>
+
+            <p>});</p>
+
+            <p>$(“#selectBrixBtn”).on(‘click’, function(){</p>
+
+            <pre><code>  var tempTable = $('#listTable').DataTable();
+  var dataArr = tempTable.rows().data();
+  var tableRows = tempTable.data().count();
+
+  for(int i = 0; i&lt;tableRows; i ++;){
+      console.log("fruitType[" + i +"]: " + dataArr[i].fruitType);
+      console.log("price[" + i +"]: " + dataArr[i].price);
+      console.log("brix[" + i +"]: " + dataArr[i].brix);
+  }
+</code></pre>
+
+            <p>})</p>
+          </li>
+        </ul>
+
+        <p>```</p>
+      </li>
+    </ul>
+  </li>
+  <li>java
+    <ul>
+      <li>String 배열을 List배열로 변환
+        <pre><code>      Strint tempFruit = "pineApple, aplle, kiwi";
+      String [] fruitArr = String.split(","); 
+          //js 단에서 split을 사용할 때는 특수문자로 되어있는 구분자 앞에 \\를 붙여주어야 합니다!
+          // 정규표현식을 따라야 하기 때문에 아래와 같은 특수문자를 구분자로 사용할 때에는 \\을 붙여야합니다.
+          // | ? * ( ) [   ]  {  } \
+      List&lt;String&gt; tempList = new ArrayList();
+      temList =  Arrays.asList(fruitArr);
+</code></pre>
+      </li>
+      <li>boolean을 String 형태로 변환
+        <pre><code>     boolean tempYN = false;
+     String strBoolean = String.valueOf(tempYN );
+</code></pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

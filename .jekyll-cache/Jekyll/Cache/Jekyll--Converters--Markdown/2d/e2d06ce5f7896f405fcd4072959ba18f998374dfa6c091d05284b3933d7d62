@@ -1,0 +1,84 @@
+I"Y
+<h2 id="공부기록">공부기록</h2>
+<h3 id="rabbit-mq">rabbit mq</h3>
+<ol>
+  <li>rabbit mq는 어떤 Message queue인지?
+    <ul>
+      <li>자체 서버에 배치하기에도 쉽고, 클라우드 환경에서도 쉽게 배치할 수 있는 메시지 브로커</li>
+      <li>다양한 개발자 도구를 제공</li>
+    </ul>
+  </li>
+  <li>rabbit mq 테스트하기
+    <ul>
+      <li>2.1 일단 event streaming?
+        <ul>
+          <li>Event Streaming은 인간의 중추신경계와 유사,</li>
+          <li></li>
+          <li>한 프로세스 내의 thread는 서로 다른 프로세스 내에 있는 thread보다 덜 차단되있음
+  즉, 서로의 메모리, file handle, 프로세스 상태를 공유</li>
+          <li>program counter: 다음에 실행될 명령어의 주소 값을 가지고 있는 레지스터</li>
+          <li>file handle: 사용자가 파일을 열어보고자 할 때, 운영체제가 해당 파일에 할당하는  임시 참조 번호</li>
+        </ul>
+      </li>
+      <li>2.2 multilple threads
+        <ul>
+          <li>동일한 메모리 주소를 공유
+            <ul>
+              <li>한 프로세스 내의 여러 개의 쓰레드가 같은 변수와 객체에 접근 가능</li>
+            </ul>
+          </li>
+          <li>Java Memory Area
+            <ul>
+              <li>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Heap Area</td>
+                      <td>Method Area</td>
+                      <td>JVM Stack</td>
+                      <td>Natice Method Statck</td>
+                      <td>PC Registers</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+              <li>Heap Area
+                <ul>
+                  <li>공유되는 런타인 데이터 영역으로 메모리에 실제 객체를 저장한다.</li>
+                  <li></li>
+                </ul>
+              </li>
+              <li>Heap
+                <ul>
+                  <li></li>
+                </ul>
+              </li>
+              <li>Stack
+                <ul>
+                  <li></li>
+                </ul>
+              </li>
+              <li>Program Counter Register
+                <ul>
+                  <li></li>
+                </ul>
+              </li>
+              <li>Native Method
+                <ul>
+                  <li></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>config 파일에서 특정 설정 값을 가져오기
+    <ul>
+      <li>2.1</li>
+    </ul>
+  </li>
+</ol>
+
+:ET
