@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: about
 ---
 <!doctype html>
 <html>
@@ -10,10 +10,8 @@ layout: default
     </head>
     <body>
         {% include navigation.html %}
-        <h1>{{ page.title }}<img src="/assets/images/house.png" width="25px" height="25px"></h1>
-        <p>{{ page.date | date_to_string }} - {{ page.author }}</p>
-        
-            {{ content }}
-
+        <h1 class="h1">{{ page.title }}<img src="/assets/images/about.png" width="25px" height="25px"></h1>
+        <p></p>
+        {{ content }}
     </body>
 </html>
