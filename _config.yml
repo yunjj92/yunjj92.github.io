@@ -10,7 +10,11 @@ sass:
   sass_dir: _sass
   style: compressed
 
-
+collections:
+  collections_dir: myCollections
+  webService: 
+  people: true
+  sort_by : language
 
 
 
