@@ -11,10 +11,7 @@ sass:
   style: compressed
 
 collections:
-  collections_dir: myCollections
-  webService: 
-  people: true
-  sort_by : language
-
-
+  authors: 
+    output: true
+    #output authors에 비해더 한칸 들여쓰기 반드시 해야만 문법 오류가 없음
 
