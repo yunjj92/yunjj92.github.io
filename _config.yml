@@ -20,3 +20,5 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 
+# Build Settings
+markdown: kramdown
