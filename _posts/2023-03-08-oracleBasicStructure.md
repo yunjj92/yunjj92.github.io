@@ -8,12 +8,16 @@ author: yunjj92
 - 한 개의 데이터 베이스, 한 개 이상의 인스턴스로 오라클 데이터베이스가 구성되어 있다. 
     - 한 개의 인스턴스 혹은 데이터베이스 인스턴스는 수행 중인 기본 시스템 운영의 한 파트인 프로세스와 메모리의 조합을 지칭하고, 한 개의 데이터 베이스는 데이터를 저장하는 파일들의 모음이라고 할 수 있다. 아래 그림은 Oracle Database server architecture를 설명한 그림이다. 
          ![Segments-Extents-and-Data-Blocks-Within-a-Tablespace](https://user-images.githubusercontent.com/81787195/223882216-edd28757-9646-41e9-9784-ff43855bcf4a.gif)
+_ _
+
 ## 2. Oracle Database server architecture
 - 위의 Database server architecture 그림을 살펴보면, Client Application은 Dataserver로 연결하여 데이터를 packet으로 쪼갠다. 이를 Connect Packet이라고 한다. 이 packet을 Database Server의 Listener과 전달받는다. 그리고 이 Listner는 Database Instance와 연결되고, Database Instance는 SGA에 메모리 영역을 할당하고 백그라운드 프로세스를 수행한다. 
 ### 2.1  Database Instance와 Databasee의 차이 
 1. 실제 데이터 베이스 파일에 접근할 필요 없이 데이터베이스 인스턴스를 수행 가능. 먼저 인스턴스를 수행하고 그 다음에 인스턴스 내에서 데이터베이스를 만드는 방식이 이 방식. 
 2. 한 개의 인스턴스는 오직 한 개의 데이터베이스에만 접근 가능. 인스턴스가 수행되면, 다음 단계는 해당 인스턴스를 한 개의 데이터베이스에 올리는 것이 된다. 인스턴스는 오직 한 번에 한개의 데이터 베이스에만 mount될 수 있다. 
 3. 여러 데이터베이스 인스턴스가 같은 데이터 베이스에 접근 할 수 있다. 클러스터링 환경에서, 여러 서버의 많은 인스턴스가 하나의 핵심 데이터 베이스에 접근할 수 있다. (즉, 인스턴스와 데이터베이스의 관계는 N:1의 관계이다. 인스턴스가 N이고, 데이터베이스가 1)
+_ _
+ 
 ## 3. Oracle Database
 ### 3.1 개요
 - 오라클 데이터베이스의 핵심 작업 중의 하나는 데이터를 저장하는 일. 오라클 데이터베이스 저장 구조에는 물리적 구조와 논리적 구조 2가지 유형이 존재
@@ -36,17 +40,48 @@ author: yunjj92
 ### 3.3 logical storage structures
     - Oracle Database는 디스크 공간 사용을 섬세하게 제어하기 위해 논리적 저장 구조(logical storage structure)를 사용한다. 다음은 오라클 데이터베이스의 logical storage stucture에 해당되는 것들이다. 
         1. Data blocks
-            - 데이터 블록은 디스크 상의 바이트 수에 상응한다. 오라클은 데이터를 데이터 블록 안에 저장한다. 'Data Blocks'은 또한 'logical blocks', 'Oracle blocks', 'pages'라고 칭할 수 있다. 
+            - 하나의 데이터 블록은 디스크 상에 2 바이트 이상에 상응하며, 오라클은 데이터를 다수의 데이터 블록에 저장한다. 다수의 데이터 블록은 'logical blocks', 'Oracle blocks' 혹은 Oracle pages'라고도 불린다. 
+            (* a number of: more than two but fewer than many, serveral)
         2. Extents
-            - 'extent'는 논리적으로 연속성을 띄는 데이터 블록들이 가지고 있는 특정 숫자를 지칭하는 것으로, 특정 타입의 정보를 저장하기 위해 사용된다. 
+            - 'extent'는 특정 유형의 정보를 저장하기 위해 사용되는 '다수의 데이터 블록'을 의미하며, 이 '다수의 데이터 블록'은 논리적으로 인접한 블록이여야 한다. 
+            (* extent는 어떤 심각한 '정도'를 얘기할 때도 사용되지만, 여기서 사용된 의미는 'area or length'에 더 가깝다.
+            * contiguous: next to or touching another, usually similar thing
+            * a specific number of: '상당수의, 다수의'라고 해석했다)
         3. Segments
             - 'segments'는 'extents'의 한 묶음으로 데이터베이스 객체, 테이블, 인덱스와 같은 것들을 저장하기 위해 할당된다. 
         4. Tablespaces
-            - 데이터베이스는  'tablespace'라는 논리적 저장 단위로 쪼개질 수 있다. tablespace는 segment를 담기 위한 논리적인 컨테이너에 해당된다. 각각의 tablespace는 적어도 하나의 파일 이상으로 이루어져있다. 
+            - 데이터베이스는 'tablespace'라는 논리적 저장 단위로 쪼개질 수 있다. tablespace는 segment를 담기 위한 논리적인 컨테이너에 해당된다. 각각의 tablespace는 적어도 하나의 파일 이상으로 이루어져있다. 
     - logical storage structure 요약
+        ```
+            → Data block  * n = Data Blocks
+            → Data Blocks * n = Extent
+            → Extent * n = Segment
+            → Segment * n = Tablespace
+            → Tablespace * n = Database
+        ```
         - 데이터는 'Data block'에 담긴다. 
         - 'Data block'들이 모여 'Data blocks'가 된다. 
-        - 'Data blocks'
+        - 'Data blocks'은 저장하는 정보 유형에 따라 각기 또 'Extents'로 묶인다. 
+        - 'Extents'는 또 '다수의 데이터베이스 객체' 즉 예를 들자면 테이블과 인덱스와 같은 것들을 저장하기 위해 메모리가 할당되어 '여러 개의 Extents'가 묶여 하나의 'Segments'로 묶인다. 
+        - 한 개의 'tablespace'는 한 개의 'segement'를 위한 하나의 논리적인 container 역할을 수행한다. 따라서 각 'tablespace'는 적어도 한 개의 데이터 파일로 구성되어 있다. 
+        - 마침내 한 개의 'database'는 'tablespaces'라는 논리적인 저장 단위들로 쪼개질 수 있는 가장 큰 단위라고 할 수 있다. 
+        - 참고
+            - 아래 그림은 'logical storage structures'와 'physical storage structures' 사이의 관계를 설명한 그림이다. 
+                 ![logical-and-physical-storage](https://user-images.githubusercontent.com/81787195/224207074-3382c855-f39c-423c-8d2e-bbef95b02bc4.gif)
+_ _
+ 
+## 4. Database Instance
+- 하나의 데이터베이스 인스턴스는 최종 사용자 측(client applications)과 데이터베이스 간의 인터페이스라고 할 수 있다. 오라클 인스턴스는 'System GLobal Area' , 'Program Global Area', 'background processes' 이렇게 3가지 파트로 구성되어 있다. 
+    ![Oracle-Database-Architecture-database-instance](https://user-images.githubusercontent.com/81787195/224207537-73fa1a5a-ec7e-40bf-af75-9702b6b5d8a0.png)
+    - SGA는 공유 메모리 구조체로 데이터베이스 인스턴스가 데이터베이스 서버 상에 올라갈 때, 내려갈 때 할당되는 공간이다. 역할 상에서 SGA를 살펴보면, 한 개의 데이터베이스 인스턴스에 속한 정보를 제어하고 해당 데이터를 저장하는 하나의 그룹이라고도 볼 수 있다. (이때, 이 하나의 그룹은 공유되어진 메모리 구조체의 여러개로 구성되어 있다)
+
+_ _
+ 
+## 5. Major Oracle Database's background processes 
+- 
+
+_ _
+ 
 ### * 용어 및 개념 정리 
     1. DBMS 관점에서의 instance? 
         - 특정 순간에 하나의 데이터 혹은 정보가 데이터베이스에 저장되는 그 상황을 인스턴스라고 한다. 
@@ -98,4 +133,11 @@ author: yunjj92
         - Shared Global Area 혹은 클라이언트 애플리케이션 메모리 내의 메모리 영역을 의미. 이 메모리 영역은 데이터베이스 쿼리의 결과와 재사용 목적의 쿼리 블록을 저장한다. 이미 캐시 메모리에 저장된 행들은 유시되기 전까지 SQL문 전체가 공유한다. 
     7. Oracle Streams feature
         - 한 개의 데이터베이스 안에서 혹은 하나의 데이터베이스에서 다른 데이터베이스로의 데이터 흐름 내에서 일어나는 이벤트 혹은 교환 혹은 데이터를 뿌리는 작업을 말함
-                    
+    8. Namespace
+        - 유사한 이름을 가진 다수의 객체들 중에서 각 객체들을 식별하기 위해서 사용되는 것이 'namespace'이다. Namespace는 유사한 이름을 가진 서로 다른 객체들을 구별할 수 있도록 한다. 
+    9. Database schema
+        - 각 사용자 게정은 고유의 스키마를 가지고 잇는데, 이 스키마는 사용자 이름과 동일한 명칭을 가지고 있다. 예를 들어 HR 사용자 계정은 HR 스키마를 가지고 있다. 
+        - 데이터베이스 스키마는 데이터가 조직되는 방식 그리고 데이터간의 관계를 규정하고 있으며 데이터에 적용되는 모든 제한을 정의하고 있다. 
+        - 데이터베이스의 다른 객체들(e.g. a table, an index)을 위한 container의 역할을 수행한다. tablespace 또한 segments를 위한 container이지만 이는 다른 객체들을 저장하는 것과 관련이 있으며, 스키마의 경우에는 다른 객체들을 위한 container역할을 수행하지만 논리적 연결과 관련되어 있다. 예를 들어 스키마가 수행하는 container의 역할에는 데이터베이스 관리자가 각 계정에게 역할과 권한을 부여하여 데이터베이스 내의 데이터 작업과 관련된 보안을 관리할 수 있도록 도와주는 것이 포함되어 있다. 
+        - 즉 사용자 계정과 동일한 이름의 스키마가 부여됨으로써 관리자는 각 사용자 계정별로 각기 데이터베이스 내의 데이터 접근 권한을 달리 할 수 있게된다. 
+            ![What_is_Database_Schema](https://user-images.githubusercontent.com/81787195/224235693-8f95c001-59f2-4991-aeaa-42e458290d4c.jpg)
