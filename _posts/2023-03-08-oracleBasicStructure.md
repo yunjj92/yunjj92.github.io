@@ -68,7 +68,7 @@ author: yunjj92
         - 참고
             - 아래 그림은 'logical storage structures'와 'physical storage structures' 사이의 관계를 설명한 그림이다. 
                  ![logical-and-physical-storage](https://user-images.githubusercontent.com/81787195/224207074-3382c855-f39c-423c-8d2e-bbef95b02bc4.gif)
-_ _
+
  
 ## 4. Database Instance
 - 하나의 데이터베이스 인스턴스는 최종 사용자 측(client applications)과 데이터베이스 간의 인터페이스라고 할 수 있다. 오라클 인스턴스는 'System GLobal Area' , 'Program Global Area', 'background processes' 이렇게 3가지 파트로 구성되어 있다. 
@@ -142,5 +142,5 @@ _ _
         - 데이터베이스 스키마는 데이터가 조직되는 방식 그리고 데이터간의 관계를 규정하고 있으며 데이터에 적용되는 모든 제한을 정의하고 있다. 
         - 데이터베이스의 다른 객체들(e.g. a table, an index)을 위한 container의 역할을 수행한다. tablespace 또한 segments를 위한 container이지만 이는 다른 객체들을 저장하는 것과 관련이 있으며, 스키마의 경우에는 다른 객체들을 위한 container역할을 수행하지만 논리적 연결과 관련되어 있다. 예를 들어 스키마가 수행하는 container의 역할에는 데이터베이스 관리자가 각 계정에게 역할과 권한을 부여하여 데이터베이스 내의 데이터 작업과 관련된 보안을 관리할 수 있도록 도와주는 것이 포함되어 있다. 
         - 즉 사용자 계정과 동일한 이름의 스키마가 부여됨으로써 관리자는 각 사용자 계정별로 각기 데이터베이스 내의 데이터 접근 권한을 달리 할 수 있게된다. 
-        
+
             ![What_is_Database_Schema](https://user-images.githubusercontent.com/81787195/224235693-8f95c001-59f2-4991-aeaa-42e458290d4c.jpg)
