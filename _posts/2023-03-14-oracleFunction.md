@@ -5,18 +5,56 @@ author: yunjj92
 # oracle function 
 ## oracle function 개요
 ### 1.CREATE FUNCTION
-#### 1.1 CREATE FUNCTION
-- 1) 목적
-    - 
+#### 1.1 CREATE FUNCTION 개요
+- 'CREATE FUNCTION'문은 단독으로 저장된 function 혹은 'call speicification'을 만들 때 사용한다.
+- 사용자 정의 함수(혹은 'a stored function')는 PL/SQL 구문의 세트로 프로시저와 유사하다
+- function은 호출되고 나면 결과 값을 리턴한다는 점이 procedure와는 다른 점이다. 
+#### 1.2. OR REPLACE 사용 케이스
+- 'OR REPLACE'는 해당 함수가 이미 존재하면 다시 만든다는 의미를 가진 함수이다.
+-  해당 함수에 접근 가능한 권한을 얻은 상태를 유지하면서도 현재 존재하는 해당 함수의 정의를 변경하고자 할 때 사용한다. 
+- 만약 해당 함수를 재정의한다면, Oracle Database는 해당 함수를 재컴파일한다. 
+#### 1.3 CREATE FUNCTION 상세 사용 가이드
+##### 1.3.1 에러가 있다면
+- 만약 함수 기반의 index가 있다면 Oracle Database는 해당 인덱스들을 'DISABLEE'처리 할 것이다. 
+- 'FUNCTION'을 만들었는데 만일 컴파일 에러가 있다면, Oracle Database는 에러를 뱉는다. 'SHOW ERRORS' 명령어를 통해 관련 컴파일 에러 메시지를 보는 것이 가능하다. 
+##### 1.3.2 사용 가능한 조건 
+- 사용자 정의 함수가 모든 경우에 사용가능한 건 아니고, 불가능한 경우가 존재하는데 그 조건은 아래와 같다.
+    - 'CREATE TABLE' 혹은 'ALTER TABLE'에서의 'CHECK'절에서는 사용할 수 없다.
+    - 'CREATE TABLE' 혹은 'ALTER TABLE'DPTJDML 'DEFAULT'절에서도 사용할 수 없다.
+
+##### 1.3.3 상세 사용 조건
+- 쿼리문이나 혹은 DML문에서 FUNCTION은 다음과 같은 것들이 불가능하다. 
+    - OUT 혹은 IN OUT 파라미터를 가지는 것이 불가능하다. 아래 예시처럼 IN은 가능
+        - 'CREATE FUNCTION funcation_name(num IN VARCHAR2).... '
+    - DDL 구문(DML처럼 데이터 자체를 조작하는 것이 아니라 테이블 자체를 다루는 구문)에서는 사용자 정의 함수를 사용하지 못한다. DDL문의 경우 반드시 현재 트랜젝션에서 COMMIT이 이루어져야 하기 때문이다. 
+
+##### 1.3.4  RETURN 절
+-  FUNCTION에서는 결과값에 대한 자료형을 반드시 명시해야 한다. 모든 FUNCTION은 반드시 반환하는 값이 존재하기 때문에, RETURN 절은 반드시 필요하다. 자료형의 경우 PL/SQL에서 지원가능한 자료형이면 모두 가능하다. 
 
 ### 2. 함수 구조 예시
+![create_function](https://user-images.githubusercontent.com/81787195/225175571-1dae5b08-c3d5-4008-a364-b23121c365f3.gif)
 #### 2.1 
 ```
-
+    CREATE FUNCTION get_bal(acc_no IN NUMBER) 
+   RETURN NUMBER 
+   IS acc_bal NUMBER(11,2);
+BEGIN 
+   SELECT order_total 
+   INTO acc_bal 
+   FROM orders 
+   WHERE customer_id = acc_no; 
+   RETURN(acc_bal); 
+ END;
 ```
+- FUNCTION을 호출할 때 위의 파라미터 acc_no를 명시해야 하고 해당 파라미터의 자료형은 NUMBER이다.
+- 위의 함수가 반환하는 결과값은 NUMBER 자료형이고, acc_bal이 해당 결과값에 해당된다. 
+- 실제 수행되어야 하는 구문은 다음과 같다.
+- BEGIN '실제 FUNCTION이 호출되면 수행되어야 하는 SQL 구문' END
+- 
+
 ### 기타 용어 및 개념 정리
 - 1) Call Speicification
-    - 자바 함수 혹은 c 언어 부프로그램(subprogram)을 선언하여, 
+    - 자바 함수 혹은 c 언어 부프로그램(subprogram)을 선언하여, PL/SQL에서 해당 함수 (혹은 부프로그램) 호출을 가능하게 한다. sql문에서 'CALL'을 사용함으로써 method(subprogram)을 호출할 수 있다. 'call speicification'은 어떤  라이브러리의 java method 혹은 어떤 이름의 'subprogram'이 호출되어 수행되어야 하는지 알려주는 역할을 수행한다. 
 - 2) RETURNING clause
     - 추가, 수정, 삭제에 의해 변경된 컬럼의 값을 반환하기 위해 사용
     - 이 구문을 사용하지 않으면, DML 구문 수행이 완료된 후 변경된 값을 보기 위해서는 다시 SELECT 문을 수행해야 한다. 
