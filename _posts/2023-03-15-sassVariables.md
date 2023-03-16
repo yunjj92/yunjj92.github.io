@@ -94,7 +94,20 @@ $accent-color: #6a1b9a !default;
 
 ### Advanced Variable Functions
 - Sass의 핵심 라이브러리는 여러 향상된 기능을 제공한다. meta.variable-exists()라는 함수는 주어진 이름의 변수가 현재 범위 내에 존재하는지 아닌지를 리턴한다.  meta.global-variable-exists() 함수는 동일한 기능을 띄지만, 전역범위라는 점이 다르다. 
-- 사용자들은 때떄로 
+
+### font 관련
+- _variable.scss에서 css의 기본적인 요소들을 변수로서 원하는 값을 정의할 수 있고, 전역변수로 선언된 css의 기본적인 요소들의 경우 다른 파일에서도 사용 가능하다. 
+  - 이 때, 다른 파일의 전역변수를 사용하려면, 일단 두 가지를 기재해야 하며, 중요한 지점은 scss 파일 내 가장 상단에 위치시켜야 한다는 점이다.
+  ```
+  @use "path/filename"
+  @import "path/filename"
+  ```
+- @serif를 전역변수로 _variable.scss 파일에 선언하고, 값을 할당할 때, 여러개의 font를 선언하는 이유는 브라우저가 적용할 수 있는 글씨체를 여러개를 마련함으로써, 사용자 환경에 따라 지원불가한 글씨체가 있을 경우 우선순위에 따라 다음의 글씨체를 적용할 수 있도록 하기 위함이다. 
+  ```
+   $serif: Georgia, Times, serif !default; 
+  ```
+  - 위의 코드같이 선언되어 있다면, 삐침이 있는 글자를 쓰고자 $serif를 사용한다면, Georgia 글씨체를 가장 우선적으로 쓰고, 만일 사용자 브라우저 환경에서 해당 글씨체가 사용불가라면 Times를 사용
+  
 
 ### 주의사항
 - CSS는 자체 변수를 가지고 있고, 이 변수는 Sass 변수와는 완전히 다르므로 그 차이를 알아두어야 한다. 
@@ -119,10 +132,25 @@ $accent-color: #6a1b9a !default;
 /* Example: tells browser to use UTF-8 character set */
 @charset "utf-8";
 ```
+- @font-face font에 대한 이름을 규정하고, 이 font 파일의 url을 지정한다. html element에서 이 폰트를 사용하기 위해서는 font-family 속성에 본인이 지정한 font에 대한 이릉을 넣으면 된다. 예시는 다음과 같다. 
+```
+@font-face {
+  font-family: myFirstFont;
+  src: url(sansation_light.woff);
+}
+```
+```
+div {
+  font-family: myFirstFont;
+}
+```
+- 몇 가지 at-rule 종류
+  - @use 'URL for other stylesheet'
 
 ### variables.scss 파일 분석
 - [출처] https://github.com/mmistakes/minimal-mistakes/blob/master/_sass/minimal-mistakes/_variables.scss
-- 
+- import url은 @import "path/filename";
+        - filename 적을 때, _post.scss이면 post만 쓰면 된다. 
 
 ### 단어 정리
 1. interpolation
