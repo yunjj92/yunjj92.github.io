@@ -1,6 +1,5 @@
 @use 'agnes-theme-scss/variables';
 @import "agnes-theme-scss/variables";
-
 .currentmenu{
   color:palevioletred;
   font-weight: bold;
@@ -22,3 +21,8 @@
   src: url("../font/NanumhandWriteMongdol.ttf");
 }
 
+body{
+
+  font-family: $myCustomFont;
+  
+}

@@ -11,11 +11,20 @@ layout: default
         {%  seo %}
     </head>
     <body>
-        {% include navigation.html %}
-        <h1>{{ page.title }}<img src="/assets/images/house.png" width="25px" height="25px"></h1>
-        <p>{{ page.date | date_to_string }} - {{ page.author }}</p>
+        <main>
+            {% include navigation.html %}
+            <h1>{{ page.title }}<img src="/assets/images/house.png" width="25px" height="25px"></h1>
+            <p>{{ page.date | date_to_string }} - {{ page.author }}</p>
+            
+            <div class="contentDiv">
+
+                {{ content }}
+                
+            </div>
         
-            {{ content }}
+        </main>
+
+        {% include footer.html %}
 
     </body>
 </html>
