@@ -34,3 +34,22 @@ author: yunjj92
 <spring-framework.version>5.2.4.RELEASE</spring-framework.version>
 ```
 ### 2.3 라이브러리 설치
+- pom.xml에 다음과 같이 추가
+```
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+```
+- 라이브러리 추가시 주의사항
+    - 아래와 같이 추가하면 thymeleaf 버전 충돌로 오류가 발생하니 반드시 위의 의존성만 추가
+        ```
+            <dependency>
+                <groupId>org.thymeleaf</groupId>
+                <artifactId>thymeleaf</artifactId>
+                <version>3.1.1.RELEASE</version>
+            </dependency>
+        ```
+    - 만약 위와 같이 의존성을 추가하면, thymeleaf와 spring 간 버전 충돌로 아래와 같은 에러화면이 발생
+        - ![thymeleafErrorCapture](https://user-images.githubusercontent.com/81787195/229447755-8077f234-929a-49a9-bb34-f5abdb6a3a25.PNG)
+    
