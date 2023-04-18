@@ -1,6 +1,7 @@
 ---
 layout: post
 author: yunjj92
+categories: liquid
 ---
 # Templating Languages란 무엇인가?
 ### 1. 개요

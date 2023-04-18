@@ -1,6 +1,7 @@
 ---
 layout: post
 author: yunjj92 
+categories: css
 ---
 # Sass Variables 
 ## Sass Variables 개요

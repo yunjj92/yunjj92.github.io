@@ -1,6 +1,7 @@
 ---
 layout: post
 author: yunjj92
+categories: webDevelopment
 ---
 # 프로젝트 시작 전 문서화 작업
 ## 1. 기획 단계에서의 문서 개요

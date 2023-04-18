@@ -1,8 +1,8 @@
 
+# Build Settings
+markdown: kramdown
 
-markdown : kramdown
-
-kramdown: 
+kramdown:
   input: GFM
   syntax_highlighter: rouge
 
@@ -20,5 +20,5 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 
-# Build Settings
-markdown: kramdown
+
+

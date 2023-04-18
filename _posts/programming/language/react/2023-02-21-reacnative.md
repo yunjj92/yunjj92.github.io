@@ -1,6 +1,7 @@
 ---
 layout: post
 author: yunjj92 
+categories: react native
 ---
 An apple is a sweet, edible fruit produced by an apple tree.
 

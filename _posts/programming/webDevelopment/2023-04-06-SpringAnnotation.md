@@ -1,6 +1,7 @@
 ---
 layout: post
 author: yunjj92
+categories: webDevelopment
 ---
 # Spring annotation
 ### 1. Spring annotation VO 클래스 관련 

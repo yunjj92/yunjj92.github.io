@@ -1,6 +1,7 @@
 ---
 layout: post
 author: yunjj92
+categories: javascript
 ---
 # 다른 이름으로 저장하기 
 ## 관련 javascript 

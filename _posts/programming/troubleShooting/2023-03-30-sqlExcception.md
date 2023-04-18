@@ -1,6 +1,7 @@
 ---
 layout: post
 author: yunjj92 
+categories: troubleShooting
 ---
 # sql구문 중 인수 사용 관련 에러
 ## 1. 지원하지 않는 토큰

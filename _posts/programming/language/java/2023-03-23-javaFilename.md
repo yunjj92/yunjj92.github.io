@@ -1,6 +1,7 @@
 ---
  layout: post
  author: yunjj92
+ categories: java
 ---
 # File Class
 ## 1. File Class 개요

@@ -1,26 +1,52 @@
 ---
 layout: post
 author: yunjj92 
+categories: database
 ---
-# oracle function 
-## oracle function 개요
-### 1.CREATE FUNCTION
-#### 1.1 CREATE FUNCTION 개요
-- 'CREATE FUNCTION'문은 단독으로 저장된 function 혹은 'call speicification'을 만들 때 사용한다.
-- 사용자 정의 함수(혹은 'a stored function')는 PL/SQL 구문의 세트로 프로시저와 유사하다
-- function은 호출되고 나면 결과 값을 리턴한다는 점이 procedure와는 다른 점이다. 
-#### 1.2. OR REPLACE 사용 케이스
-- 'OR REPLACE'는 해당 함수가 이미 존재하면 다시 만든다는 의미를 가진 함수이다.
--  해당 함수에 접근 가능한 권한을 얻은 상태를 유지하면서도 현재 존재하는 해당 함수의 정의를 변경하고자 할 때 사용한다. 
-- 만약 해당 함수를 재정의한다면, Oracle Database는 해당 함수를 재컴파일한다. 
+<article>
+<!--     <header>
+        oralce function 
+    </header> -->
+    <section>
+    <h4>1. CREATE FUNCTION</h4>
+    <p>
+        'CREATE FUNCTION'문은 사용자 정의 함수 혹은 'call speicification'을 만들 때 사용하며, 
+        여기서 사용자 정의 함수라는 것은 PL/SQL 구문의 세트로 프로시저와 유사하다. 참고로, 함수와 
+        프로시저의 차이는 결과 값 리턴의 여부로, 함수는 프로시저와 달리 결과 값을 리턴한다. 
+    </p>
+    <h4>2. OR REPLACE 사용 케이스</h4>
+    <p>
+        'OR REPLACE'는 해당 함수가 이미 존재하면 다시 만든다는 의미를 가진다. 특히 해당 함수에 
+        접근 가능한 권한을 얻은 상태를 유지하면서도, 현재 존재하는 해당 함수의 정의를 변경하고자
+        할 때 사용한다. 만약 해당 함수를 재정의한다면, Oracle Database는 해당 함수를 재컴파일한다. 
+    </p>
+    <h4>3. CREATE FUNCTION 사용 중 에러가 발생했다면</h4>
+    <p>
+        만약 함수 기반의 index가 있다면 Oracle Database는 해당 인덱스들을 'DISABLEE'처리 할 것이다. 
+        'FUNCTION'을 만들었는데 만일 컴파일 에러가 있다면, Oracle Database는 에러를 뱉는다. 'SHOW 
+        ERRORS' 명령어를 통해 관련 컴파일 에러 메시지를 보는 것이 가능하다. 
+    </p>
+    <h4>4. CREATE FUNCTION 사용 조건 </h4>
+    <p>
+        사용자 정의 함수가 모든 경우에 사용가능한 건 아니고, 불가능한 경우가 존재한다. 
+        첫 번째,'CREATE TABLE' 혹은 'ALTER TABLE'에서의 'CHECK'절에서는 사용할 수 없다.
+        두 번째, 'CREATE TABLE' 혹은 'ALTER TABLE'DPTJDML 'DEFAULT'절에서도 사용할 수 없다.
+
+    </p>
+    <h4>RETURN 절</h4>
+    <p>
+    </p>
+    <p>
+    </p>
+    <p>
+    </p>
+
 #### 1.3 CREATE FUNCTION 상세 사용 가이드
 ##### 1.3.1 에러가 있다면
-- 만약 함수 기반의 index가 있다면 Oracle Database는 해당 인덱스들을 'DISABLEE'처리 할 것이다. 
-- 'FUNCTION'을 만들었는데 만일 컴파일 에러가 있다면, Oracle Database는 에러를 뱉는다. 'SHOW ERRORS' 명령어를 통해 관련 컴파일 에러 메시지를 보는 것이 가능하다. 
+- 
+- 
 ##### 1.3.2 사용 가능한 조건 
-- 사용자 정의 함수가 모든 경우에 사용가능한 건 아니고, 불가능한 경우가 존재하는데 그 조건은 아래와 같다.
-    - 'CREATE TABLE' 혹은 'ALTER TABLE'에서의 'CHECK'절에서는 사용할 수 없다.
-    - 'CREATE TABLE' 혹은 'ALTER TABLE'DPTJDML 'DEFAULT'절에서도 사용할 수 없다.
+- 
 
 ##### 1.3.3 상세 사용 조건
 - 쿼리문이나 혹은 DML문에서 FUNCTION은 다음과 같은 것들이 불가능하다. 
@@ -33,19 +59,23 @@ author: yunjj92
 
 ### 2. 함수 구조 예시
 ![create_function](https://user-images.githubusercontent.com/81787195/225175571-1dae5b08-c3d5-4008-a364-b23121c365f3.gif)
+
 #### 2.1 
-```
-    CREATE FUNCTION get_bal(acc_no IN NUMBER) 
+
+<!-- <code class="codeblock"> -->
+```sql
+    CREATE FUNCTION GET_BAL(ACC_NO IN NUMBER) 
    RETURN NUMBER 
-   IS acc_bal NUMBER(11,2);
+   IS ACC_BAL NUMBER(11,2);
 BEGIN 
-   SELECT order_total 
-   INTO acc_bal 
-   FROM orders 
-   WHERE customer_id = acc_no; 
-   RETURN(acc_bal); 
+   SELECT ORDER_TOTAL
+   INTO ACC_BAL
+   FROM ORDERS
+   WHERE CUSOTMER_ID = ACC_NO; 
+   RETURN(ACC_BAL); 
  END;
-```
+ ```
+<!-- </code>  -->
 - FUNCTION을 호출할 때 위의 파라미터 acc_no를 명시해야 하고 해당 파라미터의 자료형은 NUMBER이다.
 - 위의 함수가 반환하는 결과값은 NUMBER 자료형이고, acc_bal이 해당 결과값에 해당된다. 
 - 실제 수행되어야 하는 구문은 다음과 같다.
@@ -73,3 +103,5 @@ BEGIN
 - 4) constructs
     - 좁은 의미로는 일반적으로 끝맺음이 필요한 반복문과 같은 작업을 수행하기 위해 프로그래밍 언어에 포함된 일부 특정 문법을 얘기한다. 
         - 예를 들어 loop문, if else문 등이 여기에 속한다. 
+    </section>
+</article>

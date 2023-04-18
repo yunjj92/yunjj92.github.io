@@ -1,6 +1,7 @@
 ---
 layout: post
 author: yunjj92
+categories: database
 ---
 # 1. Oracle JOIN 유형
 #### 1.1 조인 유형

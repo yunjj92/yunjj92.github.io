@@ -1,6 +1,7 @@
 ---
 layout: post
 author: yunjj92
+categories: troubleShooting
 ---
 # Run/Debug 관련 오류
 ### 1. Run on Server / Debug on Server 실행 중 오류 

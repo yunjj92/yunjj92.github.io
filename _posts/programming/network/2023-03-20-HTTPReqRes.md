@@ -1,6 +1,7 @@
 ---
 layout: post
 author: yunjj92 
+categories: network
 ---
 # Http Request and Response
 ## HTTP 개요

@@ -1,6 +1,7 @@
 ---
 layout: post
 author: yunjj92 
+categories: database
 ---
 # Database and Instance
 ## 1. 기초 개요
@@ -51,14 +52,14 @@ author: yunjj92
             - 'segments'는 'extents'의 한 묶음으로 데이터베이스 객체, 테이블, 인덱스와 같은 것들을 저장하기 위해 할당된다. 
         4. Tablespaces
             - 데이터베이스는 'tablespace'라는 논리적 저장 단위로 쪼개질 수 있다. tablespace는 segment를 담기 위한 논리적인 컨테이너에 해당된다. 각각의 tablespace는 적어도 하나의 파일 이상으로 이루어져있다. 
+            
     - logical storage structure 요약
-        ```
             → Data block  * n = Data Blocks
             → Data Blocks * n = Extent
             → Extent * n = Segment
             → Segment * n = Tablespace
             → Tablespace * n = Database
-        ```
+    
         - 데이터는 'Data block'에 담긴다. 
         - 'Data block'들이 모여 'Data blocks'가 된다. 
         - 'Data blocks'은 저장하는 정보 유형에 따라 각기 또 'Extents'로 묶인다. 
