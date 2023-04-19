@@ -5,13 +5,28 @@ body {
  font-family: $myCustomFont;
 }
 
-article:first-letter{
+.codeblock{
+
+  box-sizing: border-box;
+  padding: 15px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  border-radius: 5px;
+  border: 1px solid #6e7781;
+  margin: 3px;
+  background-color: #24292f;
+  color: #ffebe9;
+
+}
+
+/* .firstP:first-letter{
     float:letter;
-    font-size:5em;
+    font-size:3em;
     line-height:1;
     margin:0 .2em 0 0;
     vertical-align: top;
-}
+} 가독성이 떨어진다.*/
+
 @font-face{
     font-family: $myCustomFont;
     src: url("/assets/font/NanumhandWriteMongdol.ttf");

@@ -9,7 +9,7 @@ categories: database
     </header> -->
     <section>
     <h4>1. CREATE FUNCTION</h4>
-    <p>
+    <p class="firstP">
         'CREATE FUNCTION'문은 사용자 정의 함수 혹은 'call speicification'을 만들 때 사용하며, 
         여기서 사용자 정의 함수라는 것은 PL/SQL 구문의 세트로 프로시저와 유사하다. 참고로, 함수와 
         프로시저의 차이는 결과 값 리턴의 여부로, 함수는 프로시저와 달리 결과 값을 리턴한다. 
