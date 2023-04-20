@@ -62,8 +62,7 @@ categories: database
 
 #### 2.1 
 
-<!-- <code class="codeblock"> -->
-```sql
+<pre class="codeblock">
     CREATE FUNCTION GET_BAL(ACC_NO IN NUMBER) 
    RETURN NUMBER 
    IS ACC_BAL NUMBER(11,2);
@@ -73,9 +72,9 @@ BEGIN
    FROM ORDERS
    WHERE CUSOTMER_ID = ACC_NO; 
    RETURN(ACC_BAL); 
- END;
- ```
-<!-- </code>  -->
+ END
+ </pre>
+ 
 - FUNCTION을 호출할 때 위의 파라미터 acc_no를 명시해야 하고 해당 파라미터의 자료형은 NUMBER이다.
 - 위의 함수가 반환하는 결과값은 NUMBER 자료형이고, acc_bal이 해당 결과값에 해당된다. 
 - 실제 수행되어야 하는 구문은 다음과 같다.
