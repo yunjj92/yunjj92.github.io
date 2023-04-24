@@ -107,7 +107,7 @@ title: java Thead Class
 </h4>
 <p>
 	start method는 thread 수행을 시작하기 위해 사용하는 method로 , JVM은 수행 대상 thread의 run method를 호출한다. 즉 위의 4번에서 run method만 override하는 이유는 start를 통해서 thread를 수행하기 시작하면 run method가 자동으로 호출되기 떄문이다.  thread가 어느 지점에서 수행되는지를 소스에서 찾고자 한다면, run method가 아닌 start() method를 중심으로 찾아야 한다.Thead클래스의 start method 내부를 살펴보면, group.add가 수행되고 나서, start0 이라는 native method가 수행된다. 이 start0이라는 method는 새로운 thread의 수행을 만들어내고, 이 새로운 thead의 Thread 객체의 run method를 호출한다.  
-	요약: 이 native method start method가 호출되면, 새로운 thead가 생성되고, 생성된 새로운 thread를 서버에 올리고, 그 새로운 thread는 run method를 호출한다. 그렇게 해서 사용자가 구현한 run method내의 코드가 수행된다. 해당 작업이 완료되면, thread는 수명을 다하게 된다. 참고로 thread가 만들어지고, 초기에 runnable 상태에 놓이게되면, 그것은 곧 run을 할 준비가 되어있다는 의미가 된다. 그러나 이 상태는 운영체제에 의해 작업수행이 이루어지도록 등록된 것은 아님을 유념해야 한다. 운영체제가 추후 어느 시점에, thread 수행을 작업 스케줄에 등록하고, 해당 thread가 나타나게 되면, 그 때, 운영체제는 새로운 thread의 run method를 수행한다. 
+	요약: 이 native method start method가 호출되면, 새로운 thread가 생성되고, 생성된 새로운 thread가 서버에 올라가고, 그 새로운 thread는 run method를 호출한다. 그렇게 해서 사용자가 구현한 run method 내의 코드가 수행된다. 해당 작업이 완료되면, thread는 수명을 다하게 된다. 참고로 thread가 만들어지고, 초기에 runnable 상태에 놓이게되면, 그것은 곧 run을 할 준비가 되어있다는 의미가 된다. 그러나 이 상태는 운영체제에 의해 작업수행이 이루어지도록 등록된 것은 아님을 유념해야 한다. 운영체제가 추후 어느 시점에, thread 수행을 작업 스케줄에 등록하고, 해당 thread가 나타나게 되면, 그 때, 운영체제는 새로운 thread의 run method를 수행한다. 
 </p>
 <h4>
 	참고 native method?
@@ -115,11 +115,14 @@ title: java Thead Class
 <p>
 	Thread 클래스에서, 몇 개의 method들은 native로 선언이 되어 있다. 예를 들어 yield, start0, isActive, 등등. c/c++의 언어로 정의되어 있는 method일 때, native를 사용한다. Java Native Interface는 JVM이  c 혹은 c++ 언어로 쓰여진 native library를 호출하도록 도와준다. 
 </p>
-<pre class="codeblock">
-
-</pre>
 <p>
 	이 start method 수행의 결과로 2개의 thread가 동시에 수행된다. 한 개는 run method를 수행하는 thread와 start method로 부터 호출되어 반환되는 thread가 그 2개의 thread에 해당된다. 주의할 것은 하나의 thread는 한 번 start되면 그것으로 수명주기가 시작되어 위에서 말한대로의 과정을 거치면 수명을 다한다. 두 번 시작할 수 없다는 이야기이다. 해당 thread가 완전히 수행을 완료하면 수명을 다하고 그 도중에 재시작은 불가하다. (지양해야 한다.)
+</p>
+<h4>
+	thread 작업의 순서 요약
+</h4>
+<p>
+	1. 
 </p>
 <h4>
 	Theread 클래스의 setName method
@@ -182,6 +185,12 @@ security manager의 기본 역할은 예외를 뱉기 전에, 작업 수행의 �
 </pre>
 <p>
 	주의할 점은, 만약 system에 securityManager가 세팅되어 있지 않아도 security는 null이 되기 때문에 setting 후 사용해야 한다. 
+</p>
+<h4>
+	Runtime Class?
+</h4>
+<p>
+	Runtime 클래스는 애플리케이션이 
 </p>
 </article> 
    
