@@ -12,7 +12,21 @@ layout: default
     </head>
     <body>
         <main>
-            {% include navigation.html %}
+            <div>
+                <!-- layout 구성(sidebar + main) -->
+                <div id="sidebar">
+                    
+                </div>
+                <div id="main">
+                    <header> <strong> Archive </strong> for programming </header>
+                    <ul class="snsIcon">
+                        <li> <a class="bi bi-twitter"></a></li>
+                    </ul>
+                </div>
+                <a class="toggle"></a>
+                {% include navigation.html %}
+
+            </div>
             <h1>{{ page.title }}<img src="/assets/images/house.png" width="25px" height="25px"></h1>
             <p>{{ page.date | date_to_string }} - {{ page.author }}</p>
             
