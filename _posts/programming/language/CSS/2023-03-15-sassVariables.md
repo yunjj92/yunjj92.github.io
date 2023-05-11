@@ -158,10 +158,14 @@ Sass는 수많은 at-rule을 제공하여 스타일이 영향을 받는 정도�
 </p>
 <p>
   2. At-rules<br>
-- CSS 선언 방식으로 CSS가 무엇을 해야할지 지시하는 역할을 한다. @identifier의 형식으로 사용되며, 다음 세미콜론 전까지 모든 것이 포함된다. <br>
-- @font-face font에 대한 이름을 규정하고, 이 font 파일의 url을 지정한다. html element에서 이 폰트를 사용하기 위해서는 font-family 속성에 본인이 지정한 font에 대한 이릉을 넣으면 된다. 예시는 다음과 같다. <br>
+CSS 선언 방식으로 CSS가 무엇을 해야할지 지시하는 역할을 한다. @identifier의 형식으로 사용되며, 다음 세미콜론 전까지 모든 것이 포함된다. <br>
+@font-face font에 대한 이름을 규정하고, 이 font 파일의 url을 지정한다. html element에서 이 폰트를 사용하기 위해서는 font-family 속성에 본인이 지정한 font에 대한 이릉을 넣으면 된다. 예시는 다음과 같다. <br>
 - 몇 가지 at-rule 종류<br>
   - @use 'URL for other stylesheet'<br>
+  - @mixin : 이 at-rule을 이용하여, 자주 사용하는 스타일을 함수의 형태로 간단히 호출하여 적용할 수 있다. @mixin 사용자지정이름(속성명, 속성값....)의 형태로 시작하며 자세한 사용 형태는 아래 코드를 첨부한다. <br>
+  - @include : 앞의 mixin at-rule을 사용하여 사용자 지정 스타일을 호출할 때 사용하는 at-rule로, @incldue 호출하고자하는이름(속성명, 속성값1, 속성값2....)의 형태로 사용한다. <br>
+  - 
+
 </p>
 <h4></h4>
 <pre class="codeblock">
