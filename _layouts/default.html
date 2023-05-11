@@ -17,21 +17,19 @@ layout: default
                 <div id="sidebar">
                     
                 </div>
-                <div class="horizontal">
-                    <header> <strong> Archive </strong> for programming </header>
-                    <ul class="icons">
-                        <a href="#" target="_blank">
-                            <i class="bi bi-twitter"> <strong class="label">twitter</strong></i>
-                        </a>
-                    </ul>
+                <!-- <div class="horizontal"> -->
+                <div>
+                    {% include header.html %}
                 </div>
                 
             </div>
-
-            <div>
+            
+        <div>
+        </div>
+<!--             <div>
                 <a class="toggle"></a>
                 {% include navigation.html %}
-            </div>
+            </div> -->
             <h1>{{ page.title }}<img src="/assets/images/house.png" width="25px" height="25px"></h1>
             <p>{{ page.date | date_to_string }} - {{ page.author }}</p>
             
