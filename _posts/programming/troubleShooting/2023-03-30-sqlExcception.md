@@ -23,8 +23,16 @@ categories: troubleShooting
         아래와 같은 에러가 발생한다면 처음부터 sql 쿼리 조회 결과를 제대로 가져올 수 있는 상태인지 살펴보는 것이 해결의 첫걸음이다. 
         ReturnType인 RepsonseList 자료형에 
         </p>
+        <p>2. 쿼리 조회 결과를 Client단으로 전송받지 못하는 경우<br>
+        아래 에러가 발생했을 경우의 에러 원인은 Client단에서 보낸 요청을 최초로 받는 Controller의 method에 @GetMapping은 붙여주었으나, @ResponseBody를 붙이지 않았기 때문에 발생한다. 즉, @GetMapping어노테이션을 붙임으로써 Client단으로부터의 
+        요청은 받을 수 있었으나, 요청 결과를 처리한 결과를 다시 Client단으로 보내기 위해서는 @ReasponseBody어노테이션을 붙임으로써
+        해당 method가 Client단으로 결과를 전송할 수 있다. 해당 method의 존재 이유는 결국 응답을 위한 것임으로, 응답용임을 선언해야만 
+        요청을 한 url로 응답을 보낼 수 있다. 주의!
+        </p>
         <pre class="codeblock">
-        org.springframework.http.converter.HttpMessageConversionException: Type definition error: [simple type, class com.yunCompany.yun.store.fruit.dto.FruitNameDto]; nested exception is com.fasterxml.jackson.databind.exc.InvalidDefinitionException: No serializer found for class com.yunCompany.yun.store.fruit.dto.FruitNameDto and no properties discovered to create BeanSerializer (to avoid exception, disable SerializationFeature.FAIL_ON_EMPTY_BEANS) (through reference chain: com.yunCompany.yun.application.common.ResponseList["data"]->java.util.ArrayList[0])
+        2023-07-28 10:14:27.305 ERROR 25752 --- [io-10140-exec-5] org.thymeleaf.TemplateEngine             : [THYMELEAF][http-nio-10140-exec-5] Exception processing template "api/searchFruitPrices": Error resolving template [api/searchFruitPrices], template might not exist or might not be accessible by any of the configured Template Resolvers
+        org.thymeleaf.exceptions.TemplateInputException: Error resolving template [api/searchFruitPrices], template might not exist or might not be accessible by any of the configured Template Resolvers
+        at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869) ~[thymeleaf-3.0.15.RELEASE.jar:3.0.1
         </pre>
     </section>
 </article>
