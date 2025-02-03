@@ -1,5 +1,7 @@
-@use 'agnes-theme-scss/variables';
-@import "agnes-theme-scss/variables";
+---
+---
+
+@use './variables';
 
 body {
  font-family: $myCustomFont;
