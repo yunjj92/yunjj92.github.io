@@ -7,7 +7,7 @@
         {% assign page_list = site.pages %}
         {% for node in pages_list %}
         {{ node.title }}
-<!--            {% if node.title != null %}-->
+            {% if node.title != null %}
                 {% if node.layout == "page" %}
                 <li>
                     <a class="category-link {% if page.url == node.url %}  active{% endif %}"
@@ -15,7 +15,7 @@
                     </a>
                 </li>
                 {% endif %}
-<!--            {% endif %}-->
+            {% endif %}
         {% endfor %}
     </ul>
 </header>
