@@ -1,24 +1,24 @@
 ---
     title: Home
-    layout: default
+    layout: home-main
 ---
-<header class="site-category">
-    <ul>
-        {% assign page_list = site.pages %}
-        {% for node in pages_list %}
-        {{ node.title }}
-            {% if node.title != null %}
-                {% if node.layout == "page" %}
-                <li>
-                    <a class="category-link {% if page.url == node.url %}  active{% endif %}"
-                    href="{{ page.url }}{{ node.url }}">{{ node.title }}
-                    </a>
-                </li>
-                {% endif %}
-            {% endif %}
-        {% endfor %}
-    </ul>
-</header>
-<h1>
-    {{"Hello World!" | downcase }}
-</h1>
+{% include navigation.html%}
+<!--<header class="site-category">-->
+<!--    <ul>-->
+<!--        {% assign page_list = site.pages %}-->
+<!--        {% for node in pages_list %}-->
+<!--        {{ node.title }}-->
+<!--            {% if node.title != null %}-->
+<!--                {% if node.layout == "page" %}-->
+<!--                <li>-->
+<!--                    <a class="category-link {% if page.url == node.url %}  active{% endif %}"-->
+<!--                    href="{{ page.url }}{{ node.url }}">{{ node.title }}-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                {% endif %}-->
+<!--            {% endif %}-->
+<!--        {% endfor %}-->
+<!--    </ul>-->
+<!--</header>-->
+
+{% include footer.html %}

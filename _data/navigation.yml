@@ -1,8 +1,12 @@
 - name: Home
   link: /
+  layout: default
 - name: About
   link: /about.html
+  layout: default
 - name: Blog
   link: /blog.html
+  layout: default
 - name: Staff
   link: /staff.html
+  layout: default

@@ -1,45 +1,11 @@
 ---
-layout: home-main
+layout: default
 ---
-    <head>
-        <meta charset="utf=8">
-        <title>{{ page.title }}</title>
-        <link rel="stylesheet" href="/assets/css/style.css" >
-        <link rel="text/javascript" href="/assets/js/defaultPage.js" >
-        {% feed_meta %}
-        {%  seo %}
-    </head>
-    <body>
-        <main>
-            <div>
-                <!-- layout 구성(sidebar + main) -->
-                <div id="sidebar">
-                    
-                </div>
-                <!-- <div class="horizontal"> -->
-                <div>
-                    {% include header.html %}
-                </div>
-                
-            </div>
-            
-        <div>
-        </div class="content-body">
-<!--             <div>
-                <a class="toggle"></a>
-                {% include navigation.html %}
-            </div> -->
-            <h1>{{ page.title }}<img src="/assets/images/house.png" width="25px" height="25px" class="house-icon"></h1>
-            <p>{{ page.date | date_to_string }} - {{ page.author }}</p>
-            
-            <div class="contentDiv">
-
-                {{ content }}
-                
-            </div>
-        
-        </main>
-
-        {% include footer.html %}
-
-    </body>
+{% include head.html %}
+<div class="flex-container transparent">
+    {% include header.html %}
+    <div class="content wrapper">
+        {{ content }}
+    </div>
+    {% include footer.html %}
+</div>

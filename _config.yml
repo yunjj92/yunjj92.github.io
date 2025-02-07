@@ -1,27 +1,43 @@
 
-# Build Settings
-markdown: kramdown
+logo: "/assets/images/brain-circuit.png"
+logo-icon: "/assets/images/brain-circuit.png"
 
-kramdown:
-  input: GFM
-  syntax_highlighter: rouge
-
-sass: 
-  sass_dir: _sass
+# Where things are
+layouts_dir: _layouts
+includes_dir: _includes
+sass:
+  sass_dir: assets/css
   style: compressed
-  sass_files: #순서를 명시해야 bootstrap css 파일과의 충돌 방지 가능, 또한 main.scss에도 @import url ("주소")형태로 import
+  load_paths: #순서를 명시해야 bootstrap css 파일과의 충돌 방지 가능, 또한 main.scss에도 @import url ("주소")형태로 import
     - https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css
-    - _sass/main.scss
 
 collections:
-  authors: 
+  authors:
     output: true
     #output authors에 비해더 한칸 들여쓰기 반드시 해야만 문법 오류가 없음
 
+# Conversion
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: coderay
+  syntax_highlighter_opts:
+    line_numbers: table
+    bold_every: 5
+
+
+
+# plugins
 plugins: 
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+
+# Serving
+port : 4000
+host : 127.0.0.1
+baseurl: ""
+
 
 
 

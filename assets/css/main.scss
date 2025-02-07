@@ -1,6 +1,5 @@
 ---
 ---
-
 @import "post";
 @import "variables";
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
@@ -23,7 +22,7 @@
 
 @font-face{
   font-family: $myCustomFont;
-  src: url("assets/font/NanumhandWriteMongdol.ttf");
+  src: url("../font/NanumhandWriteMongdol.ttf");
 }
 
 body, head{
@@ -105,7 +104,9 @@ body, head{
   }
 
   .menu-icon,
-  .search-icon{
+  .menu-icon-close,
+  .search-icon,
+  .search-icon-close{
     cursor:pointer;
     font-size: 15px;
     color: darkslateblue;
@@ -115,5 +116,20 @@ body, head{
       opacity: .8;
     }
   }
+
+  .right{
+    float: right;
+  }
+
+  .left{
+    float: left;
+  }
+
+  .content{
+    flex-grow: 1;
+    //3개 요소중에  1개가  저 속성이 지정되어 있다면, 1일 경우 다른 요소들과의 너비*1의 비율로 동일한 너비를 차지
+  }
+
+
 
 }

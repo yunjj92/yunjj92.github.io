@@ -1,7 +1,5 @@
----
----
 
-@use 'variables';
+@import "variables";
 
 body {
  font-family: $myCustomFont;
