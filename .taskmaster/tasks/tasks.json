@@ -1,0 +1,213 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Separate Vite Entry Point from Jekyll Templates",
+        "description": "Create a dedicated Vite entry file to prevent build conflicts with Jekyll's Liquid templating system",
+        "details": "Create `index.vite.html` as a separate entry point for Vite that doesn't contain Liquid template syntax. This file should serve as the main HTML template for Vite development and building, while keeping Jekyll's `index.html` intact with its Liquid templating. Structure the file with proper DOCTYPE, meta tags, and script/link imports that Vite can process without conflicts.",
+        "testStrategy": "Verify that Vite can successfully use the new entry file without parsing errors. Test that Jekyll can still process its original index.html with Liquid syntax. Ensure both systems can run independently without build conflicts.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 2,
+        "title": "Configure Vite Build System",
+        "description": "Update vite.config.js to use the separated entry point and configure output settings for Jekyll integration",
+        "details": "Modify `vite.config.js` to specify the new `index.vite.html` as the entry point instead of Jekyll's templated index.html. Configure build output directory to be compatible with Jekyll's asset structure. Set up proper asset handling, including CSS and JS bundling. Configure base URL and public path settings to work with Jekyll's site structure. Ensure output files are named consistently for Jekyll integration.",
+        "testStrategy": "Run `npm run build` and verify that Vite generates assets without errors. Check that output directory structure is compatible with Jekyll expectations. Validate that built assets can be referenced correctly in Jekyll templates.",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 3,
+        "title": "Complete hideLayer Function Implementation",
+        "description": "Finish implementing the incomplete hideLayer() function in assets/js/main.js:12",
+        "details": "Complete the `hideLayer()` function implementation in `assets/js/main.js` at line 12. The function should properly handle layer visibility toggling with smooth animations and proper DOM manipulation. Implement error handling for cases where target elements don't exist. Add proper event listeners and ensure the function works across different browser environments. Include proper CSS class management for show/hide states.",
+        "testStrategy": "Test hideLayer() function manually in browser console and through user interactions. Verify smooth animations and proper DOM state changes. Test edge cases like calling function on non-existent elements. Ensure no JavaScript errors occur during execution.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "Setup Jekyll-Vite Build Integration",
+        "description": "Create build pipeline that integrates Vite output with Jekyll's _site directory",
+        "details": "Develop a build script that coordinates Vite and Jekyll build processes. First run Vite build to generate optimized assets, then copy/move those assets to appropriate locations within Jekyll's structure before running Jekyll build. Create npm scripts for development and production builds. Ensure Vite's dist output is properly integrated into Jekyll's _site directory with correct asset paths and references.",
+        "testStrategy": "Run integrated build process and verify that _site directory contains both Jekyll-generated content and Vite-optimized assets. Test that all asset references work correctly in the final output. Verify build process completes without errors in both development and production modes.",
+        "priority": "high",
+        "dependencies": [
+          1,
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 5,
+        "title": "Configure Development Server with HMR",
+        "description": "Setup Vite development server to work alongside Jekyll for local development with Hot Module Replacement",
+        "details": "Configure Vite dev server to run on localhost:5173 while Jekyll runs on its default port. Set up proxy configuration or asset serving strategy so that Jekyll pages can load Vite-served assets during development. Implement HMR (Hot Module Replacement) for CSS and JS changes. Create development scripts that can run both servers simultaneously. Ensure proper CORS and asset loading between the two servers.",
+        "testStrategy": "Start both Jekyll and Vite dev servers and verify they work together. Test HMR functionality by making changes to CSS and JS files. Verify that changes appear instantly without full page reloads. Test that Jekyll templating continues to work while using Vite-served assets.",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          4
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 6,
+        "title": "Implement CSS Build Pipeline with PostCSS",
+        "description": "Setup Vite-based CSS processing pipeline with PostCSS and potential Tailwind CSS integration",
+        "details": "Configure Vite to process CSS files through PostCSS pipeline. Set up autoprefixer, CSS minification, and other PostCSS plugins for production builds. If using Tailwind CSS, configure it properly with Vite. Ensure CSS is properly extracted and optimized for production. Set up CSS modules or scoped styling if needed. Configure proper source maps for development.",
+        "testStrategy": "Build CSS assets and verify proper PostCSS processing with autoprefixer and minification. Test CSS loading in both development and production modes. Verify that CSS changes trigger HMR during development. Check that final CSS output is optimized and includes necessary vendor prefixes.",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          4
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 7,
+        "title": "Create GitHub Pages Deployment Pipeline",
+        "description": "Setup automated deployment pipeline for GitHub Pages with integrated Jekyll-Vite build process",
+        "details": "Create GitHub Actions workflow that runs the integrated build process (Vite + Jekyll) and deploys to GitHub Pages. Configure workflow to install both Node.js and Ruby dependencies. Set up proper caching for faster builds. Handle asset optimization and cache busting for production deployment. Ensure proper permissions and secrets configuration for GitHub Pages deployment. Consider alternative deployment options like Netlify or Vercel if GitHub Pages limitations are encountered.",
+        "testStrategy": "Test deployment pipeline in a staging environment. Verify that GitHub Actions workflow completes successfully. Check that deployed site loads correctly with all assets. Test deployment rollback procedures. Verify that the integrated build process works consistently in CI environment.",
+        "priority": "medium",
+        "dependencies": [
+          4,
+          5
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Implement Asset Versioning and Cache Busting",
+        "description": "Add versioning system for built assets to ensure proper cache invalidation during updates",
+        "details": "Configure Vite to generate assets with content-based hash names for cache busting. Update Jekyll templates to reference the correctly versioned assets from Vite's manifest file. Implement a system to inject proper asset URLs into Jekyll layouts and includes. Set up asset manifest processing so Jekyll can dynamically reference the latest asset versions. Configure proper cache headers for different asset types.",
+        "testStrategy": "Deploy updates and verify that asset URLs change when content changes. Test that browser caches are properly invalidated. Verify that Jekyll templates correctly reference the hashed asset names. Test asset loading performance and cache behavior in production environment.",
+        "priority": "medium",
+        "dependencies": [
+          4,
+          6
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 9,
+        "title": "Setup Image Optimization Pipeline",
+        "description": "Integrate image optimization plugins with Vite for automatic image compression and format conversion",
+        "details": "Install and configure Vite plugins for image optimization (vite-plugin-imagemin or similar). Set up automatic WebP/AVIF conversion for modern browsers with fallbacks. Configure responsive image generation for different screen sizes. Implement lazy loading for images where appropriate. Set up proper image serving strategy that works with Jekyll's asset handling. Configure compression levels and optimization settings for different image types.",
+        "testStrategy": "Test image optimization by comparing original and optimized file sizes. Verify that different image formats are generated correctly. Test image loading performance and visual quality. Check that responsive images work correctly across different devices and screen sizes.",
+        "priority": "low",
+        "dependencies": [
+          6,
+          8
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "Performance Optimization and Lighthouse Scoring",
+        "description": "Implement comprehensive performance optimizations and achieve high Lighthouse scores",
+        "details": "Run Lighthouse audits and address performance bottlenecks. Implement code splitting for JavaScript bundles. Optimize CSS delivery with critical CSS extraction. Set up proper preloading and prefetching strategies. Configure service worker for caching if beneficial. Optimize font loading with proper display strategies. Implement lazy loading for non-critical resources. Fine-tune bundle sizes and eliminate unnecessary code.",
+        "testStrategy": "Run Lighthouse audits before and after optimizations to measure improvements. Test site performance on various devices and network conditions. Verify that all performance optimizations work correctly without breaking functionality. Aim for Lighthouse scores above 90 in all categories (Performance, Accessibility, Best Practices, SEO).",
+        "priority": "low",
+        "dependencies": [
+          7,
+          8,
+          9
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Run Initial Lighthouse Audits and Identify Performance Bottlenecks",
+            "description": "Perform comprehensive Lighthouse audits to establish baseline performance metrics and identify specific optimization opportunities",
+            "dependencies": [],
+            "details": "Run Lighthouse audits on both development and production builds to establish baseline scores. Analyze Core Web Vitals (LCP, FID, CLS) and identify specific bottlenecks. Document current performance metrics across all Lighthouse categories (Performance, Accessibility, Best Practices, SEO). Create a prioritized list of optimization opportunities based on impact and effort required.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement JavaScript Code Splitting and Bundle Optimization",
+            "description": "Configure Vite for optimal JavaScript code splitting and bundle size reduction",
+            "dependencies": [
+              "10.1"
+            ],
+            "details": "Configure Vite's code splitting options to create optimized JavaScript bundles. Implement dynamic imports for route-based and component-based code splitting. Analyze and optimize bundle sizes using Vite's built-in bundle analyzer. Remove unused JavaScript code and dependencies. Configure proper chunk naming and caching strategies for optimal loading performance.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Setup Critical CSS Extraction and Optimized CSS Delivery",
+            "description": "Implement critical CSS extraction and optimize CSS delivery for faster rendering",
+            "dependencies": [
+              "10.1"
+            ],
+            "details": "Configure critical CSS extraction to inline above-the-fold styles. Set up CSS minification and optimization in the build pipeline. Implement proper CSS loading strategies with preload hints for non-critical CSS. Configure CSS purging to remove unused styles from production builds. Optimize CSS delivery to prevent render-blocking and improve First Contentful Paint.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Configure Resource Preloading and Prefetching Strategies",
+            "description": "Implement intelligent preloading and prefetching for critical resources",
+            "dependencies": [
+              "10.2",
+              "10.3"
+            ],
+            "details": "Configure preload hints for critical resources like fonts, CSS, and JavaScript. Implement prefetch strategies for likely-to-be-needed resources. Set up resource hints (dns-prefetch, preconnect) for external domains. Configure proper priority loading for images and other assets. Implement intelligent prefetching based on user interaction patterns and route predictions.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Service Worker and Advanced Caching Strategies",
+            "description": "Deploy service worker with intelligent caching for improved performance and offline functionality",
+            "dependencies": [
+              "10.2",
+              "10.3"
+            ],
+            "details": "Implement service worker for asset caching and offline functionality. Configure cache-first, network-first, and stale-while-revalidate strategies based on resource types. Set up proper cache versioning and invalidation strategies. Implement background sync for improved user experience. Configure service worker to work seamlessly with Vite's build process and Jekyll's static site generation.",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Final Performance Testing and Lighthouse Score Validation",
+            "description": "Conduct comprehensive performance testing and validate Lighthouse scores meet optimization targets",
+            "dependencies": [
+              "10.4",
+              "10.5"
+            ],
+            "details": "Run final Lighthouse audits to measure performance improvements across all categories. Test performance on various devices and network conditions using throttling. Validate that all optimizations work correctly without breaking functionality. Ensure Lighthouse scores above 90 in Performance, Accessibility, Best Practices, and SEO categories. Document final performance metrics and create performance monitoring strategy for ongoing optimization.",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-09-23T02:38:19.920Z",
+      "updated": "2025-09-23T02:38:19.920Z",
+      "description": "Tasks for master context"
+    }
+  }
+}
