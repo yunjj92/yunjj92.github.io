@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(for file in _projects/*.md)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(head:*)",
+      "Bash(done)",
+      "Bash(task-master set-status:*)",
+      "Bash(task-master update-subtask --id=16.3 --prompt=\"Successfully enhanced featured projects section with comprehensive functionality:\n\nENHANCED PROJECT CARDS:\n1. Visual Improvements:\n   - Rounded-xl cards with elevated shadows\n   - Hover effects: lift animation (translate-y), shadow intensification\n   - Image zoom on hover (scale-110 with smooth transition)\n   - Gradient fallback backgrounds for projects without images\n   - Group hover states for coordinated animations\n\n2. Badge System:\n   - Category badge (top-left): Shows project category with backdrop blur\n   - Status badge (top-right): Color-coded completion status\n     * Green for ''completed'' projects\n     * Yellow for ''in-progress'' projects\n   - Professional rounded-full styling with shadows\n\n3. Project Metadata Display:\n   - Duration with clock icon\n   - Team size with people icon\n   - Role with briefcase icon\n   - All with SVG icons and responsive layout\n   - Flex-wrap for mobile optimization\n\n4. Enhanced Tech Stack:\n   - Shows up to 4 technologies with styled badges\n   - Blue color scheme (bg-blue-50, text-blue-700, border-blue-200)\n   - Hover effects on tech badges\n   - ''+X more'' indicator for additional technologies\n   - Responsive flex-wrap layout\n\n5. Action Buttons:\n   - Primary: ''View Details'' button (full-width, blue background)\n   - GitHub link button (icon-only, gray background)\n   - Demo link button (external link icon, gray background)\n   - All buttons with hover states and transitions\n   - Proper external link security (rel=''noopener noreferrer'')\n   - Accessibility labels on icon buttons\n\nJEKYLL INTEGRATION:\n- Filters projects by ''featured: true'' attribute\n- Sorts by date (most recent first)\n- Limits display to 6 projects\n- Conditional rendering for all metadata fields\n- Empty state with icon and friendly messaging\n\nRESPONSIVE DESIGN:\n- Grid: 1 column (mobile) → 2 columns (tablet) → 3 columns (desktop)\n- Gap-8 spacing between cards\n- All metadata responsive with flex-wrap\n- Text truncation where needed (line-clamp-2 for descriptions)\n\nVISUAL ENHANCEMENTS:\n- Card lift effect on hover (-translate-y-1)\n- Shadow progression (md → 2xl on hover)\n- Image scale animation (500ms duration)\n- Color transitions on all interactive elements\n- Group states for coordinated hover effects\n\nACCESSIBILITY:\n- Semantic article elements\n- Descriptive aria-labels\n- Proper alt text on images\n- High contrast colors\n- Keyboard navigation support\n\nEMPTY STATE:\n- Friendly icon (document SVG)\n- Clear messaging\n- Centered layout with max-width constraint\n- Subtle gray color scheme\n\nREADY FOR:\n- Dynamic project data from _projects collection\n- Filtering by ''featured: true'' frontmatter\n- Display of GitHub and demo links when available\n- Responsive display across all devices\")",
+      "Bash(task-master update-subtask:*)",
+      "Bash(task-master show:*)",
+      "Bash(task-master update-task:*)",
+      "Bash(ruby:*)",
+      "Bash(bundle:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

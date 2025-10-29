@@ -1,13 +1,98 @@
-<nav>
+<!-- Mobile menu button -->
+<button
+  id="mobile-menu-button"
+  type="button"
+  class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-colors duration-200"
+  aria-controls="mobile-menu"
+  aria-expanded="false"
+  aria-label="Toggle navigation menu"
+>
+  <span class="sr-only">Open main menu</span>
+  <!-- Hamburger icon -->
+  <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+  </svg>
+  <!-- Close icon (hidden by default) -->
+  <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+  </svg>
+</button>
+
+<!-- Desktop navigation -->
+<nav class="hidden md:flex md:space-x-8" role="navigation" aria-label="Main navigation">
     {% for item in site.data.navigation %}
-      
-
       {% if item.link == page.url %}
-          <a href="{{ item.link }}" class="currentmenu">{{ item.name }}</a>
-
+          <a href="{{ item.link }}"
+             class="inline-flex items-center px-3 py-2 text-sm font-medium text-blue-600 border-b-2 border-blue-600 transition-colors duration-200"
+             aria-current="page">
+            {{ item.name }}
+          </a>
       {% else %}
-          <a href="{{ item.link }}" class="navimenu">{{ item.name }}</a> 
+          <a href="{{ item.link }}"
+             class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:border-b-2 hover:border-blue-300 transition-colors duration-200">
+            {{ item.name }}
+          </a>
       {% endif %}
-    
     {% endfor %}
 </nav>
+
+<!-- Mobile menu (hidden by default) -->
+<div class="hidden md:hidden" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+  <div class="space-y-1 px-2 pb-3 pt-2">
+    {% for item in site.data.navigation %}
+      {% if item.link == page.url %}
+          <a href="{{ item.link }}"
+             class="block px-3 py-2 rounded-md text-base font-medium text-blue-600 bg-blue-50"
+             aria-current="page">
+            {{ item.name }}
+          </a>
+      {% else %}
+          <a href="{{ item.link }}"
+             class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors duration-200">
+            {{ item.name }}
+          </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  // Toggle mobile menu
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !isExpanded);
+        mobileMenu.classList.toggle('hidden');
+
+        // Toggle icons
+        const hamburgerIcon = this.querySelector('svg:first-of-type');
+        const closeIcon = this.querySelector('svg:last-of-type');
+        hamburgerIcon.classList.toggle('hidden');
+        hamburgerIcon.classList.toggle('block');
+        closeIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('block');
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', function(event) {
+        const isClickInsideMenu = mobileMenu.contains(event.target);
+        const isClickOnButton = mobileMenuButton.contains(event.target);
+
+        if (!isClickInsideMenu && !isClickOnButton && !mobileMenu.classList.contains('hidden')) {
+          mobileMenuButton.click();
+        }
+      });
+
+      // Handle keyboard navigation (ESC to close)
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+          mobileMenuButton.click();
+        }
+      });
+    }
+  });
+</script>

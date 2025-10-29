@@ -1,12 +1,15 @@
 - name: Home
   link: /
   layout: default
+- name: Projects
+  link: /projects.html
+  layout: default
 - name: About
   link: /about.html
   layout: default
 - name: Blog
   link: /blog.html
   layout: default
-- name: Staff
-  link: /staff.html
+- name: Contact
+  link: /contact.html
   layout: default

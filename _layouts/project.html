@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include head.html %}
+
+<body class="bg-white">
+  <!-- Header with Navigation -->
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <!-- Logo/Brand -->
+        <div class="flex items-center">
+          <a href="/" class="flex items-center space-x-3">
+            {% if site.logo %}
+            <img src="{{ site.logo }}" alt="Logo" class="h-10 w-10" />
+            {% endif %}
+            <span class="text-xl font-bold text-gray-900">TreeKangaroo</span>
+          </a>
+        </div>
+
+        <!-- Navigation -->
+        <div class="flex items-center space-x-4">
+          {% include navigation.html %}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Project Hero Section -->
+  <section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-12 sm:py-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Back to Projects Link -->
+      <div class="mb-6">
+        <a href="/projects.html" class="inline-flex items-center text-indigo-600 hover:text-indigo-700 font-medium transition-colors">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Projects
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+        <!-- Project Info -->
+        <div>
+          <!-- Category Badge -->
+          {% if page.category %}
+          <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold bg-white/90 backdrop-blur-sm text-indigo-700 shadow-sm mb-4">
+            {{ page.category }}
+          </span>
+          {% endif %}
+
+          <!-- Title -->
+          <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">{{ page.title }}</h1>
+
+          <!-- Description -->
+          <p class="text-xl text-gray-600 mb-6">{{ page.description }}</p>
+
+          <!-- Metadata -->
+          <div class="flex flex-wrap gap-4 mb-6 text-sm text-gray-600">
+            {% if page.duration %}
+            <div class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span class="font-medium">Duration:</span>&nbsp;{{ page.duration }}
+            </div>
+            {% endif %}
+
+            {% if page.team_size %}
+            <div class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <span class="font-medium">Team:</span>&nbsp;{{ page.team_size }} {% if page.team_size == 1 %}person{% else %}people{% endif %}
+            </div>
+            {% endif %}
+
+            {% if page.role %}
+            <div class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span class="font-medium">Role:</span>&nbsp;{{ page.role }}
+            </div>
+            {% endif %}
+
+            {% if page.status %}
+            <div class="flex items-center">
+              <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span class="font-medium">Status:</span>&nbsp;<span class="{% if page.status == 'completed' %}text-green-600{% elsif page.status == 'in-progress' %}text-yellow-600{% else %}text-gray-600{% endif %} font-semibold capitalize">{{ page.status | replace: '-', ' ' }}</span>
+            </div>
+            {% endif %}
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap gap-3">
+            {% if page.github_url %}
+            <a href="{{ page.github_url }}" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-gray-800 transition-colors shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+              </svg>
+              View Code
+            </a>
+            {% endif %}
+
+            {% if page.demo_url %}
+            <a href="{{ page.demo_url }}" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              Live Demo
+            </a>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Project Image -->
+        <div class="order-first lg:order-last">
+          {% if page.image %}
+          <div class="rounded-xl overflow-hidden shadow-2xl">
+            <img src="{{ page.image }}" alt="{{ page.title }}" class="w-full h-auto" loading="eager">
+          </div>
+          {% else %}
+          <div class="rounded-xl overflow-hidden shadow-2xl bg-gradient-to-br from-indigo-500 to-purple-600 aspect-video flex items-center justify-center">
+            <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Section -->
+  {% if page.tech_stack %}
+  <section class="py-12 bg-white border-b border-gray-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+        <svg class="w-6 h-6 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+        </svg>
+        Technology Stack
+      </h2>
+      <div class="flex flex-wrap gap-3">
+        {% for tech in page.tech_stack %}
+        <span class="px-4 py-2 bg-indigo-50 text-indigo-700 rounded-lg font-medium border border-indigo-200 hover:bg-indigo-100 transition-colors">
+          {{ tech }}
+        </span>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- Highlights Section -->
+  {% if page.highlights %}
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+        <svg class="w-6 h-6 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+        </svg>
+        Key Highlights
+      </h2>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {% for highlight in page.highlights %}
+        <li class="flex items-start bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+          <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span class="text-gray-700">{{ highlight }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+  {% endif %}
+
+  <!-- Main Content -->
+  <main class="py-12 bg-white">
+    <article class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-none
+                  prose-headings:text-gray-900
+                  prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-3 prose-h2:border-b prose-h2:border-gray-200 prose-h2:flex prose-h2:items-center
+                  prose-h3:text-xl prose-h3:font-semibold prose-h3:mt-8 prose-h3:mb-4
+                  prose-h4:text-lg prose-h4:font-semibold prose-h4:mt-6 prose-h4:mb-3
+                  prose-p:text-gray-600 prose-p:leading-relaxed prose-p:mb-4
+                  prose-a:text-indigo-600 prose-a:no-underline hover:prose-a:text-indigo-700 hover:prose-a:underline
+                  prose-strong:text-gray-900 prose-strong:font-semibold
+                  prose-ul:my-6 prose-ul:space-y-2
+                  prose-li:text-gray-600
+                  prose-code:text-indigo-600 prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
+                  prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:rounded-lg prose-pre:shadow-lg
+                  prose-blockquote:border-l-4 prose-blockquote:border-indigo-500 prose-blockquote:bg-indigo-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:italic
+                  prose-hr:border-gray-200 prose-hr:my-8
+                  prose-img:rounded-lg prose-img:shadow-lg">
+        {{ content }}
+      </div>
+    </article>
+  </main>
+
+  <!-- Related Projects Section -->
+  <section class="py-12 bg-gray-50 border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">More Projects</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% assign related_projects = site.projects | where_exp: "item", "item.url != page.url" | limit: 3 %}
+
+        {% for related_project in related_projects %}
+          {% include project-card.html project=related_project %}
+        {% endfor %}
+      </div>
+
+      <div class="mt-8 text-center">
+        <a href="/projects.html" class="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg">
+          View All Projects
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  {% include footer.html %}
+</body>
+</html>

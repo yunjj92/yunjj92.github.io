@@ -1,7 +1,8 @@
 ---
 ---
-@import "post";
-@import "variables";
+@use "variables" as *;
+@use "portfolio";
+@use "post";
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 
 .currentmenu{
@@ -131,4 +132,199 @@ body, head{
   }
 
 
+}
+
+// ============================================
+// ACCESSIBILITY UTILITIES
+// ============================================
+
+// Screen Reader Only - Hide visually but keep accessible to screen readers
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Make SR-only element visible on focus (for skip links)
+.sr-only:focus,
+.sr-only:active {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  background-color: #6366f1;
+  color: white;
+  text-decoration: none;
+  z-index: 9999;
+  border-radius: 0.25rem;
+  font-weight: 600;
+}
+
+// Focus Visible Styles - Enhanced focus indicators for keyboard navigation
+*:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+// Remove default focus for mouse users
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+// Button and Link Focus States
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+// Form Element Focus States
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 0;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+// Skip Navigation Link
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #6366f1;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0 0 4px 0;
+  z-index: 100;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+// High Contrast Mode Support
+@media (prefers-contrast: high) {
+  * {
+    border-color: currentColor;
+  }
+
+  button,
+  a {
+    text-decoration: underline;
+  }
+}
+
+// Reduced Motion Support
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Print Styles
+@media print {
+  // Hide navigation, footer, and non-essential elements when printing
+  nav,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  // Ensure content is readable
+  body {
+    font-size: 12pt;
+    color: black;
+    background: white;
+  }
+
+  // Show link URLs in print
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  // Don't show URLs for fragments or JavaScript
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+}
+
+// ============================================
+// RESPONSIVE TYPOGRAPHY
+// ============================================
+
+// Ensure text remains readable on all devices
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+// Minimum touch target size for accessibility (44x44px)
+button,
+a,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+// ============================================
+// COLOR CONTRAST UTILITIES
+// ============================================
+
+// Ensure sufficient color contrast for text
+.text-high-contrast {
+  color: #1f2937; // Dark gray on white background = 12.6:1 ratio
+}
+
+.bg-high-contrast {
+  background-color: #1f2937;
+  color: #ffffff; // White on dark gray = 12.6:1 ratio
+}
+
+// ============================================
+// UTILITY CLASSES
+// ============================================
+
+// Visually hidden but accessible to screen readers
+.visually-hidden {
+  @extend .sr-only;
+}
+
+// Not visually hidden
+.not-sr-only {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
 }

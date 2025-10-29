@@ -15,6 +15,9 @@ collections:
   authors:
     output: true
     #output authors에 비해더 한칸 들여쓰기 반드시 해야만 문법 오류가 없음
+  projects:
+    output: true
+    permalink: /projects/:name/
 
 # Conversion
 markdown: kramdown

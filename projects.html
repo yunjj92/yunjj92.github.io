@@ -1,0 +1,333 @@
+---
+layout: home-main
+title: Projects
+description: Explore my portfolio of web development projects showcasing full-stack, frontend, and backend expertise
+---
+
+<!-- Projects Page Header -->
+<section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-12 sm:py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">My Projects</h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        A showcase of web development projects spanning full-stack applications, frontend interfaces, and backend systems
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Filters Section -->
+<section class="bg-white border-b border-gray-200 sticky top-16 z-40 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- Category Filters -->
+    <div class="mb-4">
+      <h3 class="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wider">Filter by Category</h3>
+      <div class="flex flex-wrap gap-2">
+        <button class="filter-btn active px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                data-filter="all"
+                aria-pressed="true">
+          All Projects
+        </button>
+        <button class="filter-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                data-filter="full stack"
+                aria-pressed="false">
+          Full Stack
+        </button>
+        <button class="filter-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                data-filter="frontend"
+                aria-pressed="false">
+          Frontend
+        </button>
+        <button class="filter-btn px-4 py-2 rounded-lg font-medium transition-all duration-200 bg-gray-100 text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                data-filter="backend"
+                aria-pressed="false">
+          Backend
+        </button>
+      </div>
+    </div>
+
+    <!-- Tech Stack Filters -->
+    <div>
+      <h3 class="text-sm font-semibold text-gray-700 mb-3 uppercase tracking-wider">Filter by Technology</h3>
+      <div class="flex flex-wrap gap-2">
+        <!-- Dynamically populated tech filters -->
+        {% assign all_tech = "" | split: "" %}
+        {% for proj_item in site.projects %}
+          {% for tech in proj_item.tech_stack %}
+            {% unless all_tech contains tech %}
+              {% assign all_tech = all_tech | push: tech %}
+            {% endunless %}
+          {% endfor %}
+        {% endfor %}
+
+        {% assign sorted_tech = all_tech | sort %}
+        {% for tech in sorted_tech limit:10 %}
+        <button class="tech-filter-btn px-3 py-1.5 text-sm rounded-md font-medium transition-all duration-200 bg-blue-50 text-blue-700 border border-blue-200 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                data-tech="{{ tech | downcase }}"
+                aria-pressed="false">
+          {{ tech }}
+        </button>
+        {% endfor %}
+        {% if sorted_tech.size > 10 %}
+        <button id="show-more-tech" class="px-3 py-1.5 text-sm rounded-md font-medium transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+          +{{ sorted_tech.size | minus: 10 }} more
+        </button>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Active Filters Display -->
+    <div id="active-filters" class="mt-4 hidden">
+      <div class="flex items-center flex-wrap gap-2">
+        <span class="text-sm font-medium text-gray-600">Active filters:</span>
+        <div id="active-filters-list" class="flex flex-wrap gap-2"></div>
+        <button id="clear-filters" class="text-sm text-indigo-600 hover:text-indigo-700 font-medium underline">
+          Clear all
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects Grid -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Results Count -->
+    <div class="mb-6">
+      <p id="results-count" class="text-gray-600">
+        <span id="results-number" class="font-semibold text-gray-900">{{ site.projects.size }}</span> projects found
+      </p>
+    </div>
+
+    <!-- Projects Grid -->
+    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {% assign sorted_projects = site.projects | sort: 'date' | reverse %}
+      {% for current_project in sorted_projects %}
+        {% include project-card.html project=current_project %}
+      {% endfor %}
+    </div>
+
+    <!-- No Results Message -->
+    <div id="no-results" class="hidden text-center py-12">
+      <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">No projects found</h3>
+      <p class="text-gray-600 mb-4">Try adjusting your filters to see more projects</p>
+      <button id="reset-filters" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors">
+        Reset Filters
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Filtering JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Get all filter elements
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const techFilterButtons = document.querySelectorAll('.tech-filter-btn');
+  const projectCards = document.querySelectorAll('#projects-grid article');
+  const activeFiltersContainer = document.getElementById('active-filters');
+  const activeFiltersList = document.getElementById('active-filters-list');
+  const clearFiltersBtn = document.getElementById('clear-filters');
+  const resetFiltersBtn = document.getElementById('reset-filters');
+  const resultsNumber = document.getElementById('results-number');
+  const noResultsMessage = document.getElementById('no-results');
+  const projectsGrid = document.getElementById('projects-grid');
+
+  let activeCategory = 'all';
+  let activeTechs = new Set();
+
+  // Filter projects based on active filters
+  function filterProjects() {
+    let visibleCount = 0;
+
+    projectCards.forEach(card => {
+      const category = card.getAttribute('data-category');
+      const techStack = card.getAttribute('data-tech').split(',');
+
+      // Check category filter
+      const categoryMatch = activeCategory === 'all' || category === activeCategory;
+
+      // Check tech filters (if any tech filter is active, card must match at least one)
+      const techMatch = activeTechs.size === 0 ||
+                        [...activeTechs].some(tech => techStack.includes(tech));
+
+      if (categoryMatch && techMatch) {
+        card.style.display = '';
+        // Add animation
+        card.style.animation = 'fadeIn 0.3s ease-in';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Update results count
+    resultsNumber.textContent = visibleCount;
+
+    // Show/hide no results message
+    if (visibleCount === 0) {
+      noResultsMessage.classList.remove('hidden');
+      projectsGrid.classList.add('hidden');
+    } else {
+      noResultsMessage.classList.add('hidden');
+      projectsGrid.classList.remove('hidden');
+    }
+
+    // Update active filters display
+    updateActiveFiltersDisplay();
+  }
+
+  // Update active filters display
+  function updateActiveFiltersDisplay() {
+    activeFiltersList.innerHTML = '';
+
+    // Add category filter if not "all"
+    if (activeCategory !== 'all') {
+      const badge = createFilterBadge(activeCategory, 'category');
+      activeFiltersList.appendChild(badge);
+    }
+
+    // Add tech filters
+    activeTechs.forEach(tech => {
+      const badge = createFilterBadge(tech, 'tech');
+      activeFiltersList.appendChild(badge);
+    });
+
+    // Show/hide active filters container
+    if (activeCategory !== 'all' || activeTechs.size > 0) {
+      activeFiltersContainer.classList.remove('hidden');
+    } else {
+      activeFiltersContainer.classList.add('hidden');
+    }
+  }
+
+  // Create filter badge
+  function createFilterBadge(label, type) {
+    const badge = document.createElement('span');
+    badge.className = 'inline-flex items-center gap-1 px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium';
+    badge.innerHTML = `
+      ${label}
+      <button class="hover:bg-indigo-200 rounded-full p-0.5 transition-colors"
+              data-type="${type}"
+              data-value="${label}"
+              aria-label="Remove ${label} filter">
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    `;
+
+    // Add click handler to remove button
+    badge.querySelector('button').addEventListener('click', function() {
+      if (type === 'category') {
+        activeCategory = 'all';
+        updateCategoryButtons();
+      } else {
+        activeTechs.delete(label.toLowerCase());
+        updateTechButtons();
+      }
+      filterProjects();
+    });
+
+    return badge;
+  }
+
+  // Update category button states
+  function updateCategoryButtons() {
+    filterButtons.forEach(btn => {
+      const filter = btn.getAttribute('data-filter');
+      if (filter === activeCategory) {
+        btn.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+        btn.classList.add('bg-indigo-600', 'text-white', 'hover:bg-indigo-700', 'active');
+        btn.setAttribute('aria-pressed', 'true');
+      } else {
+        btn.classList.remove('bg-indigo-600', 'text-white', 'hover:bg-indigo-700', 'active');
+        btn.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+        btn.setAttribute('aria-pressed', 'false');
+      }
+    });
+  }
+
+  // Update tech button states
+  function updateTechButtons() {
+    techFilterButtons.forEach(btn => {
+      const tech = btn.getAttribute('data-tech');
+      if (activeTechs.has(tech)) {
+        btn.classList.remove('bg-blue-50', 'text-blue-700', 'border-blue-200');
+        btn.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600');
+        btn.setAttribute('aria-pressed', 'true');
+      } else {
+        btn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
+        btn.classList.add('bg-blue-50', 'text-blue-700', 'border-blue-200');
+        btn.setAttribute('aria-pressed', 'false');
+      }
+    });
+  }
+
+  // Category filter click handlers
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      activeCategory = this.getAttribute('data-filter');
+      updateCategoryButtons();
+      filterProjects();
+    });
+  });
+
+  // Tech filter click handlers
+  techFilterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const tech = this.getAttribute('data-tech');
+      if (activeTechs.has(tech)) {
+        activeTechs.delete(tech);
+      } else {
+        activeTechs.add(tech);
+      }
+      updateTechButtons();
+      filterProjects();
+    });
+  });
+
+  // Clear all filters
+  if (clearFiltersBtn) {
+    clearFiltersBtn.addEventListener('click', function() {
+      activeCategory = 'all';
+      activeTechs.clear();
+      updateCategoryButtons();
+      updateTechButtons();
+      filterProjects();
+    });
+  }
+
+  // Reset filters from no results message
+  if (resetFiltersBtn) {
+    resetFiltersBtn.addEventListener('click', function() {
+      activeCategory = 'all';
+      activeTechs.clear();
+      updateCategoryButtons();
+      updateTechButtons();
+      filterProjects();
+    });
+  }
+
+  // Add fadeIn animation to CSS
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  `;
+  document.head.appendChild(style);
+});
+</script>

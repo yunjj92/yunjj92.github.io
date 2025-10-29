@@ -1,14 +1,83 @@
 <head>
+    <!-- Character Encoding -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width initial-scale=1" />
+
+    <!-- Viewport for Responsive Design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <!-- IE Compatibility -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
-    <meta name="description" content="{{ site.description }}">
+    <!-- Primary Meta Tags -->
+    <title>{% if page.title %}{{ page.title }} | {{ site.title | default: "TreeKangaroo" }}{% else %}{{ site.title | default: "TreeKangaroo - Full Stack Developer Portfolio" }}{% endif %}</title>
+    <meta name="title" content="{% if page.title %}{{ page.title }} | {{ site.title | default: "TreeKangaroo" }}{% else %}{{ site.title | default: "TreeKangaroo - Full Stack Developer Portfolio" }}{% endif %}">
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description | default: "Full Stack Developer specializing in Java, React, and modern web development. Explore my portfolio of projects, technical blog posts, and professional experience." }}{% endif %}">
+    <meta name="author" content="{{ site.author | default: "TreeKangaroo" }}">
+    <meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}full stack developer, web development, Java, React, JavaScript, Spring Framework, portfolio, software engineer, programming, web design{% endif %}">
 
-    <link rel="stylesheet" href="{{ '/assets/css/main.css'  }}">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title | default: "TreeKangaroo - Full Stack Developer" }}{% endif %}">
+    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description | default: "Full Stack Developer specializing in Java, React, and modern web development." }}{% endif %}">
+    <meta property="og:image" content="{{ site.logo | default: "/assets/images/brain-circuit.png" | prepend: site.baseurl | prepend: site.url }}">
+    <meta property="og:site_name" content="{{ site.title | default: "TreeKangaroo Portfolio" }}">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title | default: "TreeKangaroo - Full Stack Developer" }}{% endif %}">
+    <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description | default: "Full Stack Developer specializing in Java, React, and modern web development." }}{% endif %}">
+    <meta name="twitter:image" content="{{ site.logo | default: "/assets/images/brain-circuit.png" | prepend: site.baseurl | prepend: site.url }}">
+    {% if site.twitter_username %}
+    <meta name="twitter:creator" content="@{{ site.twitter_username }}">
+    {% endif %}
+
+    <!-- Robots Meta Tag -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#6366f1">
+    <meta name="msapplication-TileColor" content="#6366f1">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/images/brain-circuit.png" type="image/png" sizes="72x72">
+    <link rel="apple-touch-icon" href="/assets/images/brain-circuit.png">
+
+    <!-- DNS Prefetch for Performance -->
+    <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
     <link rel="stylesheet" href="/assets/font/font-awesome/css/font-awesome.min.css">
-    <link rel="icon" href="/assets/images/brain-circuit.png" type="image/x-icon" sizes="72x72">
-<!--    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">-->
-<!--    <link rel="shortcut icon" type="image/x-icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" >-->
+
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "{% if page.layout == 'post' %}BlogPosting{% else %}WebPage{% endif %}",
+      "headline": "{% if page.title %}{{ page.title }}{% else %}{{ site.title | default: "TreeKangaroo Portfolio" }}{% endif %}",
+      "description": "{% if page.description %}{{ page.description }}{% else %}{{ site.description | default: "Full Stack Developer Portfolio" }}{% endif %}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ site.author | default: "TreeKangaroo" }}"
+      },
+      "url": "{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}"
+      {% if page.date %},
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "dateModified": "{{ page.date | date_to_xmlschema }}"
+      {% endif %}
+    }
+    </script>
 </head>

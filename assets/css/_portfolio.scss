@@ -1,0 +1,75 @@
+// Portfolio Theme Variables
+// This file contains custom variables for the portfolio transformation
+
+// Color Scheme
+$primary-color: #6366f1 !default;        // Indigo - primary brand color
+$secondary-color: #8b5cf6 !default;      // Purple - secondary accent
+$accent-color: #ec4899 !default;         // Pink - call-to-action
+$text-primary: #1f2937 !default;         // Dark gray - primary text
+$text-secondary: #6b7280 !default;       // Medium gray - secondary text
+$text-light: #9ca3af !default;           // Light gray - muted text
+$bg-light: #f9fafb !default;             // Light background
+$bg-white: #ffffff !default;             // White background
+$border-color: #e5e7eb !default;         // Light border
+
+// Typography
+$font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-headings: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !default;
+$font-family-mono: "Fira Code", "Courier New", monospace !default;
+
+$font-size-base: 1rem !default;
+$font-size-lg: 1.125rem !default;
+$font-size-sm: 0.875rem !default;
+$font-size-xs: 0.75rem !default;
+
+$font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
+
+$line-height-base: 1.6 !default;
+$line-height-tight: 1.25 !default;
+$line-height-relaxed: 1.75 !default;
+
+// Spacing
+$spacing-xs: 0.25rem !default;
+$spacing-sm: 0.5rem !default;
+$spacing-md: 1rem !default;
+$spacing-lg: 1.5rem !default;
+$spacing-xl: 2rem !default;
+$spacing-2xl: 3rem !default;
+$spacing-3xl: 4rem !default;
+
+// Border Radius
+$radius-sm: 0.25rem !default;
+$radius-md: 0.5rem !default;
+$radius-lg: 0.75rem !default;
+$radius-xl: 1rem !default;
+$radius-full: 9999px !default;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !default;
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !default;
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !default;
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !default;
+
+// Transitions
+$transition-fast: 150ms ease-in-out !default;
+$transition-base: 250ms ease-in-out !default;
+$transition-slow: 350ms ease-in-out !default;
+
+// Breakpoints (matching Tailwind defaults)
+$breakpoint-sm: 640px !default;
+$breakpoint-md: 768px !default;
+$breakpoint-lg: 1024px !default;
+$breakpoint-xl: 1280px !default;
+$breakpoint-2xl: 1536px !default;
+
+// Z-index layers
+$z-dropdown: 1000 !default;
+$z-sticky: 1020 !default;
+$z-fixed: 1030 !default;
+$z-modal-backdrop: 1040 !default;
+$z-modal: 1050 !default;
+$z-popover: 1060 !default;
+$z-tooltip: 1070 !default;

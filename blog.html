@@ -3,31 +3,151 @@ layout: home-main
 title: Blog
 ---
 
-<!-- <h1>Latest Posts</h1>
-
-<ul>
-    {% for post in site.posts %}
-        <li>
-            <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-            {{ post.excerpt | truncate: 150}}
-        </li>
-    {% endfor %}
-</ul> -->
-
-<div id="archives">
-    {% for category in site.categories %}
-      <div class="archive-group">
-        {% capture category_name %}{{ category | first }}{% endcapture %}
-        <div id="#{{ category_name | slugize }}"></div>
-        <p></p>
-    
-        <h3 class="category-head">{{ category_name }}</h3>
-        <a name="{{ category_name | slugize }}"></a>
-        {% for post in site.categories[category_name] %}
-        <article class="archive-item">
-          <h4><a href="{{ site.baseurl }}{{ post.url }}">{{post.title}}</a></h4>
-        </article>
-        {% endfor %}
-      </div>
-    {% endfor %}
+<!-- Blog Header Section -->
+<section class="bg-gradient-to-br from-blue-50 to-indigo-100 py-12 sm:py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h1 class="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">Blog</h1>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Insights, tutorials, and thoughts on software development
+      </p>
     </div>
+  </div>
+</section>
+
+<!-- Latest Posts Section -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-gray-900 mb-8">Latest Posts</h2>
+
+    {% if site.posts.size > 0 %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {% for post in site.posts limit:6 %}
+      <article class="group bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-1">
+        <!-- Post Card Header with Category Badge -->
+        <div class="relative bg-gradient-to-br from-blue-500 to-indigo-600 h-32 flex items-center justify-center">
+          <!-- Category Badge -->
+          {% if post.categories %}
+          <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold bg-white/90 backdrop-blur-sm text-indigo-700 shadow-sm">
+            {{ post.categories | first | capitalize }}
+          </span>
+          {% endif %}
+
+          <!-- Post Icon -->
+          <svg class="w-16 h-16 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+
+        <!-- Post Content -->
+        <div class="p-6">
+          <!-- Post Date and Author -->
+          <div class="flex items-center text-sm text-gray-500 mb-3">
+            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
+            {% if post.author %}
+            <span class="mx-2">•</span>
+            <span>{{ post.author }}</span>
+            {% endif %}
+          </div>
+
+          <!-- Post Title -->
+          <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-indigo-600 transition-colors">
+            <a href="{{ site.baseurl }}{{ post.url }}" class="hover:underline">
+              {{ post.title }}
+            </a>
+          </h3>
+
+          <!-- Post Excerpt -->
+          {% if post.excerpt %}
+          <p class="text-gray-600 mb-4 line-clamp-3">
+            {{ post.excerpt | strip_html | truncate: 150 }}
+          </p>
+          {% endif %}
+
+          <!-- Read More Link -->
+          <a href="{{ site.baseurl }}{{ post.url }}"
+             class="inline-flex items-center text-indigo-600 font-semibold hover:text-indigo-700 transition-colors group/link">
+            Read More
+            <svg class="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-12">
+      <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+      <p class="text-gray-500 text-lg">No blog posts yet. Check back soon!</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Posts by Category Section -->
+{% if site.categories.size > 0 %}
+<section class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-gray-900 mb-12">Browse by Category</h2>
+
+    <div id="archives" class="space-y-12">
+      {% for category in site.categories %}
+        {% capture category_name %}{{ category | first }}{% endcapture %}
+        <div class="archive-group" id="{{ category_name | slugize }}">
+          <!-- Category Header -->
+          <div class="flex items-center mb-6">
+            <h3 class="text-2xl font-bold text-gray-900 capitalize">{{ category_name }}</h3>
+            <span class="ml-3 px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm font-semibold">
+              {{ site.categories[category_name].size }} posts
+            </span>
+          </div>
+
+          <!-- Category Posts Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for post in site.categories[category_name] %}
+            <article class="bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden border border-gray-200 hover:border-indigo-300 group">
+              <div class="p-5">
+                <!-- Post Date -->
+                <time datetime="{{ post.date | date_to_xmlschema }}" class="text-sm text-gray-500 mb-2 block">
+                  {{ post.date | date: "%B %d, %Y" }}
+                </time>
+
+                <!-- Post Title -->
+                <h4 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-indigo-600 transition-colors">
+                  <a href="{{ site.baseurl }}{{ post.url }}" class="hover:underline">
+                    {{ post.title }}
+                  </a>
+                </h4>
+
+                <!-- Post Excerpt -->
+                {% if post.excerpt %}
+                <p class="text-gray-600 text-sm line-clamp-2 mb-3">
+                  {{ post.excerpt | strip_html | truncate: 100 }}
+                </p>
+                {% endif %}
+
+                <!-- Author (if available) -->
+                {% if post.author %}
+                <div class="flex items-center text-sm text-gray-500">
+                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  {{ post.author }}
+                </div>
+                {% endif %}
+              </div>
+            </article>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
