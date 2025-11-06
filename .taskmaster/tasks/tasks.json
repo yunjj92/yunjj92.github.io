@@ -2,500 +2,293 @@
   "master": {
     "tasks": [
       {
-        "id": "11",
-        "title": "Remove Vite/Node.js dependencies and cleanup unnecessary files",
-        "description": "Clean up the existing build tools and dependencies to simplify the technical stack",
-        "details": "Remove vite.config.js, tailwind.config.js, package.json, package-lock.json, node_modules/ directory, src/ directory, and agnes-theme.gemspec if not using as theme. This will eliminate the Node.js build process and prepare for Jekyll-only workflow.",
-        "testStrategy": "Verify all specified files are deleted, ensure GitHub Pages can still build the site, confirm no broken references to removed files",
+        "id": "21",
+        "title": "Fix duplicate footer rendering bug",
+        "description": "Investigate and resolve the issue causing two identical footers to appear on the main page",
+        "details": "Analyze the layout inheritance chain from index.html → home-main.html to identify why {% include footer.html %} is being called twice. Check if footer is included in both index.html and home-main.html layout. Remove the redundant footer include, keeping only one in the appropriate layout file. Test across all page types (home, post, category, about) to ensure footer appears correctly on all pages without duplication.",
+        "testStrategy": "Verify footer appears exactly once on homepage, post pages, category pages, and about page. Check footer positioning and styling consistency across all page types. Test on multiple screen sizes to ensure responsive behavior.",
         "priority": "high",
         "dependencies": [],
         "status": "done",
         "subtasks": [],
-        "updatedAt": "2025-10-21T06:23:10.085Z"
+        "complexity": 3,
+        "recommendedSubtasks": 0,
+        "expansionPrompt": "This task is straightforward and doesn't need subtasks - it's a simple debugging and removal task.",
+        "updatedAt": "2025-11-05T02:18:57.685Z"
       },
       {
-        "id": "12",
-        "title": "Update Jekyll configuration with projects collection",
-        "description": "Configure Jekyll to support portfolio projects as a collection",
-        "details": "Update _config.yml to add projects collection with output: true and permalink: /projects/:name/. Add necessary Jekyll plugins and configuration for portfolio functionality. Set up proper collections structure for project data.",
-        "testStrategy": "Verify _config.yml syntax is valid, test that projects collection is recognized by Jekyll, confirm permalinks work correctly",
+        "id": "22",
+        "title": "Resolve navigation system conflict",
+        "description": "Evaluate both navigation systems and implement single consistent navigation pattern",
+        "details": "Document both navigation systems: left sidebar (header.html lines 8-82) vs top navigation bar (navigation.html). Create comparison matrix evaluating mobile UX, accessibility, maintainability, and modern design patterns. Remove left sidebar navigation from header.html and keep top navigation system due to better responsive behavior, accessibility with ARIA labels, and modern design patterns. Update header.html to simple branding/logo area. Test navigation across all breakpoints and verify mobile menu functionality.",
+        "testStrategy": "Test navigation on desktop and mobile devices. Verify mobile menu opens/closes correctly. Check keyboard navigation and screen reader accessibility. Validate all navigation links work correctly across different page types.",
         "priority": "high",
         "dependencies": [
-          "11"
+          "21"
         ],
         "status": "done",
         "subtasks": [],
-        "updatedAt": "2025-10-21T06:49:36.352Z"
+        "complexity": 5,
+        "recommendedSubtasks": 3,
+        "expansionPrompt": "Break this into: 1) Document and compare both navigation systems, 2) Remove sidebar navigation and update header, 3) Test navigation across all breakpoints and page types",
+        "updatedAt": "2025-11-05T02:29:21.365Z"
       },
       {
-        "id": "13",
-        "title": "Integrate Tailwind CSS via CDN and setup base styles",
-        "description": "Replace the build-based Tailwind setup with CDN integration for simplified styling",
-        "details": "Add Tailwind CSS CDN link to main layout, create base SCSS file for custom styles using Jekyll's native SCSS processing, set up consistent color scheme and typography variables. Remove old Tailwind build references.",
-        "testStrategy": "Verify Tailwind classes work correctly, test responsive utilities, confirm custom styles compile properly, validate no console errors",
+        "id": "23",
+        "title": "Design and implement homepage hero section",
+        "description": "Create engaging hero section with blog branding, introduction, and call-to-action",
+        "details": "Design hero section with blog title/branding, compelling tagline, 2-3 sentence introduction explaining blog purpose, and call-to-action button. Implement responsive layout using Tailwind CSS with proper typography hierarchy. Consider adding background imagery or graphics. Ensure section works well on mobile devices with proper spacing and readability. Use semantic HTML structure with appropriate heading tags.",
+        "testStrategy": "Test hero section responsiveness across all breakpoints (320px, 768px, 1024px, 1280px). Verify text readability and proper contrast ratios. Check call-to-action button functionality and hover states.",
         "priority": "medium",
         "dependencies": [
-          "12"
+          "22"
         ],
         "status": "done",
         "subtasks": [],
-        "updatedAt": "2025-10-21T07:48:18.628Z"
+        "complexity": 4,
+        "recommendedSubtasks": 2,
+        "expansionPrompt": "Split into: 1) Design hero section layout and content structure with Tailwind CSS, 2) Implement responsive behavior and test across all breakpoints",
+        "updatedAt": "2025-11-05T03:59:46.271Z"
       },
       {
-        "id": "14",
-        "title": "Create projects collection structure and sample data",
-        "description": "Set up the data structure for portfolio projects with sample entries",
-        "details": "Create _projects/ directory, define project front matter schema (title, description, tech_stack, github_url, demo_url, image, featured, date), create 3-5 sample project files as examples, ensure proper YAML formatting and required fields.",
-        "testStrategy": "Validate YAML front matter syntax, test that projects are accessible via site.projects, verify all required fields are present in samples",
+        "id": "24",
+        "title": "Implement featured posts section",
+        "description": "Create dynamic section displaying recent or featured blog posts with card layout",
+        "details": "Implement Jekyll logic to fetch recent posts using site.posts limit:6. Design post card component with thumbnail image, title, excerpt, date, category tags, and read more link. Create responsive grid layout (1 column mobile, 2-3 columns desktop) using Tailwind CSS. Add hover effects and smooth transitions. Handle cases where posts don't have featured images with fallback styling. Implement proper Liquid templating with loops and conditionals.",
+        "testStrategy": "Test with different numbers of posts (0, 1, 3, 6+). Verify post cards display correctly with and without featured images. Check responsive grid behavior and hover effects. Validate all post links navigate correctly.",
         "priority": "medium",
         "dependencies": [
-          "12"
+          "23"
         ],
         "status": "done",
         "subtasks": [],
-        "updatedAt": "2025-10-21T08:55:50.772Z"
+        "complexity": 6,
+        "recommendedSubtasks": 4,
+        "expansionPrompt": "Break into: 1) Implement Jekyll logic to fetch and process posts, 2) Design post card component with all metadata, 3) Create responsive grid layout with Tailwind, 4) Add hover effects and handle edge cases",
+        "updatedAt": "2025-11-05T04:09:08.506Z"
       },
       {
-        "id": "15",
-        "title": "Create responsive navigation component and footer",
-        "description": "Build modern navigation bar and footer with social links for portfolio site",
+        "id": "25",
+        "title": "Create categories overview section",
+        "description": "Build section displaying available post categories with navigation links",
+        "details": "Extract unique categories from site.categories Jekyll collection. Design category cards showing category name, post count, and optional icon/visual. Implement responsive grid layout for category display. Create hover effects and smooth transitions. Add navigation links to category pages. Handle empty categories gracefully. Use Tailwind CSS for consistent styling with post cards section.",
+        "testStrategy": "Verify all categories display with correct post counts. Test category links navigate to proper category pages. Check responsive grid layout and hover effects. Validate with blogs having few vs many categories.",
+        "priority": "medium",
+        "dependencies": [
+          "23"
+        ],
+        "status": "done",
+        "subtasks": [],
+        "complexity": 5,
+        "recommendedSubtasks": 3,
+        "expansionPrompt": "Split into: 1) Extract and process categories from Jekyll collections, 2) Design responsive category cards with navigation, 3) Implement grid layout and hover effects",
+        "updatedAt": "2025-11-05T04:21:39.128Z"
+      },
+      {
+        "id": "26",
+        "title": "Add about/bio section to homepage",
+        "description": "Create author introduction section with skills, links, and social media connections",
         "status": "done",
         "dependencies": [
-          "13"
+          "24",
+          "25"
         ],
-        "priority": "medium",
-        "details": "Successfully implemented responsive navigation and footer components with mobile-first design using Tailwind CSS. Navigation includes hamburger menu for mobile, proper ARIA labels, keyboard navigation support, and active page highlighting. Footer features 3-column responsive grid with brand section, quick links, and social media icons. Both components are fully accessible and ready for production use.",
-        "testStrategy": "Comprehensive testing completed: mobile and desktop responsiveness verified, hamburger menu functionality working, accessibility validated with proper ARIA labels and keyboard navigation, all structural links tested. Ready for final social media URL updates and email configuration.",
+        "priority": "low",
+        "details": "Successfully implemented comprehensive about/bio section with responsive grid layout (3-column desktop, 1-column mobile), gradient background, and rounded card with shadow. Features circular avatar with gradient border and 'Available' status badge using site.logo. Includes social media links (GitHub, LinkedIn, Email) with proper security attributes (rel='noopener noreferrer'). Bio displays 'TreeKangaroo - Full Stack Developer' with 2-sentence introduction. Skills section shows 6 core expertise badges (Java/Spring, React/TS, Database, REST APIs, Tailwind, Performance). Call-to-action section links to /about.html and /projects.html with hover animations. Mobile-first responsive design with proper breakpoints and accessibility features including semantic HTML, aria-labels, high contrast, and keyboard navigation.",
+        "testStrategy": "All requirements verified: external links open correctly with proper security attributes (rel='noopener noreferrer'), responsive behavior tested across breakpoints, image loading validated, section maintains compact design without overwhelming homepage content. Accessibility features confirmed including semantic HTML structure, aria-labels, keyboard navigation, and high contrast ratios.",
+        "subtasks": [],
+        "complexity": 3,
+        "recommendedSubtasks": 0,
+        "expansionPrompt": "This is a straightforward content section implementation that doesn't need breakdown."
+      },
+      {
+        "id": "27",
+        "title": "Implement visual refinements and animations",
+        "description": "Add smooth animations, hover effects, and micro-interactions throughout homepage",
+        "status": "done",
+        "dependencies": [
+          "26"
+        ],
+        "priority": "low",
+        "details": "Successfully implemented comprehensive visual refinements and animations throughout the homepage including scroll reveal animations with Intersection Observer, fade-in effects with staggered children animations, enhanced hover states for buttons and cards, micro-interactions including gradient animations and pulse effects, full accessibility support with prefers-reduced-motion compliance, and performance optimizations using CSS transforms and GPU acceleration. All animations are subtle, professional, and respect user preferences.",
+        "testStrategy": "Test animations on different devices and browsers. Verify animations don't interfere with usability. Check performance impact and ensure 60fps. Test with reduced motion preferences enabled. Validate accessibility compliance and smooth performance across all breakpoints.",
         "subtasks": [
           {
             "id": 1,
-            "title": "Update social media URLs in footer",
-            "description": "Update the placeholder social media URLs with actual profile links",
+            "title": "Implement scroll reveal animations with Intersection Observer",
+            "description": "Create performant scroll-triggered animations for homepage sections using Intersection Observer API",
             "dependencies": [],
-            "details": "Replace placeholder URLs in footer.html with actual social media profiles: GitHub (yunjj92), Twitter/X (yunjj92), LinkedIn (yunjj92). Update email contact link from contact@example.com to actual email address.",
-            "status": "pending",
-            "testStrategy": "Verify all social media links navigate to correct profiles, test email link opens default mail client",
+            "details": "Implemented Intersection Observer with performance optimization for scroll reveal animations. Applied to all major sections (Featured Posts, Categories, About/Bio) with smooth fade-in and translateY effects (opacity 0→1, translateY 30px→0). Observer automatically unobserves after reveal for optimal performance.",
+            "status": "done",
+            "testStrategy": "Test scroll reveal timing and performance across different devices and scroll speeds",
             "parentId": "undefined"
           },
           {
             "id": 2,
-            "title": "Perform final cross-browser testing",
-            "description": "Test navigation and footer components across different browsers and devices",
+            "title": "Add fade-in effects and staggered animations",
+            "description": "Implement section-level and children staggered fade-in animations for visual polish",
             "dependencies": [
               1
             ],
-            "details": "Test the implemented navigation and footer components on various browsers (Chrome, Firefox, Safari, Edge) and device sizes. Verify hamburger menu functionality, responsive behavior, and accessibility features work consistently across platforms.",
-            "status": "pending",
-            "testStrategy": "Test on minimum 3 browsers and 3 device sizes, validate hamburger menu, keyboard navigation, and screen reader compatibility",
+            "details": "Implemented section-level scroll reveals with scroll-reveal class and staggered children animations with stagger-children class. Added progressive delays (0.1s, 0.2s, 0.3s, etc.) for visual polish. Applied to post cards and category cards for smooth sequential reveals.",
+            "status": "done",
+            "testStrategy": "Verify staggered timing creates smooth visual flow without overwhelming users",
             "parentId": "undefined"
-          }
-        ],
-        "updatedAt": "2025-10-22T01:24:20.602Z"
-      },
-      {
-        "id": "16",
-        "title": "Create portfolio homepage layout with hero and featured sections",
-        "description": "Design and implement the main landing page showcasing portfolio and recent blog posts",
-        "details": "Create _layouts/portfolio-home.html, implement hero section with name/title/introduction, add featured projects section pulling from projects collection where featured: true, add recent blog posts preview (3-5 latest), include call-to-action section with contact links.",
-        "testStrategy": "Verify hero section displays correctly, test featured projects filtering, confirm blog posts preview shows latest entries, validate responsive design",
-        "priority": "high",
-        "dependencies": [
-          "14",
-          "15"
-        ],
-        "status": "done",
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Create portfolio-home layout structure",
-            "description": "Create the main layout file _layouts/portfolio-home.html with basic HTML structure and semantic sections",
-            "dependencies": [],
-            "details": "Create _layouts/portfolio-home.html file with proper HTML5 structure including header, main content areas for hero, featured projects, recent posts, and call-to-action sections. Include necessary CSS classes and prepare layout for content integration.\n<info added on 2025-10-22T04:55:30.958Z>\nIMPLEMENTATION COMPLETED SUCCESSFULLY:\n\nSuccessfully created _layouts/portfolio-home.html with complete HTML5 semantic structure and full functionality. Layout integrates all existing site components and establishes proper foundation for portfolio homepage.\n\nKEY ACCOMPLISHMENTS:\n- HTML5 semantic structure with header, main, and 5 distinct sections\n- Full integration with existing navigation.html and footer.html components\n- Dynamic Jekyll content integration for projects and blog posts\n- Responsive Tailwind CSS styling across all breakpoints\n- Proper accessibility implementation with semantic markup\n- Empty state handling for collections\n\nLAYOUT SECTIONS IMPLEMENTED:\n1. Header: Sticky navigation with logo integration and z-index layering\n2. Hero: Gradient background with responsive padding, ready for content\n3. Featured Projects: Automated Jekyll filtering with responsive grid and hover effects\n4. Recent Posts: Gray background section with post cards and metadata display\n5. CTA: Gradient background with dual-button layout\n\nTECHNICAL FEATURES:\n- Jekyll Liquid templating for dynamic content rendering\n- Tailwind utility classes for responsive design\n- Line clamping for text truncation\n- Smooth scroll behavior\n- Proper semantic HTML5 elements\n- Integration with site collections (projects and posts)\n\nREADY FOR NEXT PHASES:\nAll subtasks 16.2-16.5 can proceed with their specific content implementation as the structural foundation is complete and functional.\n</info added on 2025-10-22T04:55:30.958Z>",
-            "status": "done",
-            "testStrategy": "Validate HTML structure is valid and semantic, ensure layout renders without errors",
-            "parentId": "undefined",
-            "updatedAt": "2025-10-22T04:56:06.565Z"
-          },
-          {
-            "id": 2,
-            "title": "Implement hero section with personal branding",
-            "description": "Build the hero section with name, title, introduction, and personal branding elements",
-            "dependencies": [
-              1
-            ],
-            "details": "Implement hero section within the portfolio-home layout including personal name, professional title, brief introduction text, and any personal branding elements. Style with Tailwind CSS for visual impact and responsiveness.\n<info added on 2025-10-22T06:04:24.155Z>\nImplementation successfully completed with comprehensive hero section featuring two-column responsive design, personal branding elements (greeting, name, title, introduction), dual call-to-action buttons with smooth scroll functionality, social media integration with accessibility features, and desktop-only visual code illustration with syntax highlighting and tech stack icons. Responsive design ensures optimal display across all device sizes with mobile-first approach. All accessibility standards met with semantic HTML, proper ARIA labels, and high contrast colors. Visual enhancements include gradient backgrounds, hover animations, and smooth transitions. Integration maintains layout flexibility with markdown content support and smooth anchor linking to other page sections.\n</info added on 2025-10-22T06:04:24.155Z>",
-            "status": "done",
-            "testStrategy": "Verify hero content displays correctly, test responsive design on different screen sizes",
-            "parentId": "undefined",
-            "updatedAt": "2025-10-22T06:04:44.571Z"
           },
           {
             "id": 3,
-            "title": "Build featured projects section with collection filtering",
-            "description": "Create featured projects section that pulls from projects collection where featured: true",
-            "dependencies": [
-              1
-            ],
-            "details": "Implement featured projects section that uses Jekyll's collection filtering to display only projects marked with featured: true. Create project card layout showing key project information and links. Ensure proper grid layout and responsive design.\n<info added on 2025-10-22T06:08:17.740Z>\nSuccessfully enhanced featured projects section with comprehensive functionality:\n\nENHANCED PROJECT CARDS:\n1. Visual Improvements:\n   - Rounded-xl cards with elevated shadows\n   - Hover effects: lift animation (translate-y), shadow intensification\n   - Image zoom on hover (scale-110 with smooth transition)\n   - Gradient fallback backgrounds for projects without images\n   - Group hover states for coordinated animations\n\n2. Badge System:\n   - Category badge (top-left): Shows project category with backdrop blur\n   - Status badge (top-right): Color-coded completion status\n     * Green for 'completed' projects\n     * Yellow for 'in-progress' projects\n   - Professional rounded-full styling with shadows\n\n3. Project Metadata Display:\n   - Duration with clock icon\n   - Team size with people icon\n   - Role with briefcase icon\n   - All with SVG icons and responsive layout\n   - Flex-wrap for mobile optimization\n\n4. Enhanced Tech Stack:\n   - Shows up to 4 technologies with styled badges\n   - Blue color scheme (bg-blue-50, text-blue-700, border-blue-200)\n   - Hover effects on tech badges\n   - '+X more' indicator for additional technologies\n   - Responsive flex-wrap layout\n\n5. Action Buttons:\n   - Primary: 'View Details' button (full-width, blue background)\n   - GitHub link button (icon-only, gray background)\n   - Demo link button (external link icon, gray background)\n   - All buttons with hover states and transitions\n   - Proper external link security (rel='noopener noreferrer')\n   - Accessibility labels on icon buttons\n\nJEKYLL INTEGRATION:\n- Filters projects by 'featured: true' attribute\n- Sorts by date (most recent first)\n- Limits display to 6 projects\n- Conditional rendering for all metadata fields\n- Empty state with icon and friendly messaging\n\nRESPONSIVE DESIGN:\n- Grid: 1 column (mobile) → 2 columns (tablet) → 3 columns (desktop)\n- Gap-8 spacing between cards\n- All metadata responsive with flex-wrap\n- Text truncation where needed (line-clamp-2 for descriptions)\n\nVISUAL ENHANCEMENTS:\n- Card lift effect on hover (-translate-y-1)\n- Shadow progression (md → 2xl on hover)\n- Image scale animation (500ms duration)\n- Color transitions on all interactive elements\n- Group states for coordinated hover effects\n\nACCESSIBILITY:\n- Semantic article elements\n- Descriptive aria-labels\n- Proper alt text on images\n- High contrast colors\n- Keyboard navigation support\n\nEMPTY STATE:\n- Friendly icon (document SVG)\n- Clear messaging\n- Centered layout with max-width constraint\n- Subtle gray color scheme\n\nREADY FOR:\n- Dynamic project data from _projects collection\n- Filtering by 'featured: true' frontmatter\n- Display of GitHub and demo links when available\n- Responsive display across all devices\n</info added on 2025-10-22T06:08:17.740Z>",
+            "title": "Enhance hover states and micro-interactions",
+            "description": "Create subtle hover effects and micro-interactions for interactive elements",
+            "dependencies": [],
+            "details": "Implemented comprehensive hover effects including btn-hover-lift for enhanced button elevation, card-hover-scale for smooth card scaling (translateY -4px, scale 1.02), icon-bounce for gentle icon animations, gradient animation on hero text, pulse ring animation on status badge, and link underline animations. All using cubic-bezier easing for smooth motion.",
             "status": "done",
-            "testStrategy": "Test that only featured projects are displayed, verify project data renders correctly, validate responsive grid layout",
-            "parentId": "undefined",
-            "updatedAt": "2025-10-22T06:08:37.945Z"
+            "testStrategy": "Test hover effects responsiveness and ensure they don't interfere with touch interactions on mobile",
+            "parentId": "undefined"
           },
           {
             "id": 4,
-            "title": "Add recent blog posts preview functionality",
-            "description": "Implement section showing preview of 3-5 most recent blog posts with links",
+            "title": "Implement accessibility compliance with reduced motion",
+            "description": "Ensure all animations respect prefers-reduced-motion settings for accessibility",
             "dependencies": [
-              1
-            ],
-            "details": "Create recent blog posts section that displays the 3-5 latest blog posts with titles, excerpts, dates, and read more links. Use Jekyll's post pagination and limiting features to show only recent entries.\n<info added on 2025-10-22T06:14:23.118Z>\nSuccessfully enhanced recent blog posts preview section with comprehensive functionality:\n\nENHANCED POST CARDS:\n1. Visual Design:\n   - Rounded-xl cards with gradient header (blue to indigo)\n   - Decorative SVG dot pattern on header\n   - Full-height flex layout for consistent card heights\n   - Hover effects: lift animation, shadow enhancement\n   - Group hover states for coordinated animations\n\n2. Post Header (Gradient Section):\n   - Gradient background from blue-500 to indigo-600\n   - Decorative dot pattern overlay\n   - Date display with calendar icon\n   - Reading time estimate (calculated from word count)\n   - Category badge with backdrop blur effect\n   - White text for high contrast\n\n3. Post Metadata:\n   - Publication date with icon\n   - Automated reading time calculation (200 words/min)\n   - Category badge (uppercase styling)\n   - Author name with avatar icon\n   - All with professional icons and spacing\n\n4. Content Display:\n   - Title with hover underline effect\n   - Smart excerpt handling:\n     * Uses post.excerpt if available\n     * Falls back to post.description\n     * Falls back to truncated content\n   - Line-clamp-3 for consistent text height\n   - Truncates to 30 words with ellipsis\n\n5. Tags System:\n   - Shows up to 3 tags with # prefix\n   - Gray background badges\n   - '+X' indicator for additional tags\n   - Responsive flex-wrap layout\n\n6. Card Footer:\n   - Author information with icon\n   - 'Read More' link with arrow\n   - Arrow shifts right on hover\n   - Border-top separation\n   - Flexbox justify-between layout\n\nJEKYLL INTEGRATION:\n- Displays 5 most recent posts (site.posts | limit: 5)\n- Automatic word count for reading time\n- Conditional rendering for all optional fields\n- Proper datetime attributes for accessibility\n- Empty state with friendly messaging\n\nRESPONSIVE DESIGN:\n- Grid: 1 column (mobile) → 2 columns (tablet) → 3 columns (desktop)\n- Flex-col layout for vertical card structure\n- h-full for equal-height cards\n- Text truncation with line-clamp utilities\n- All metadata responsive with proper wrapping\n\nVISUAL ENHANCEMENTS:\n- Gradient header with pattern overlay\n- Card lift on hover (-translate-y-1)\n- Shadow progression (md → xl on hover)\n- Color transitions throughout\n- Transform animations on read more link\n- Backdrop blur effects on badges\n\nACCESSIBILITY:\n- Semantic article elements\n- Proper datetime attributes\n- Descriptive SVG icons\n- High contrast text on gradient backgrounds\n- Keyboard navigation support\n- Screen reader friendly structure\n\nEMPTY STATE:\n- Newspaper/document icon\n- Encouraging messaging\n- Centered layout\n- Professional gray color scheme\n\nREADY FOR:\n- Dynamic Jekyll post data\n- Multiple excerpt formats\n- Tag/category display\n- Author attribution\n- Reading time calculation\n</info added on 2025-10-22T06:14:23.118Z>",
-            "status": "done",
-            "testStrategy": "Verify correct number of recent posts display, test post links work correctly, confirm dates and excerpts show properly",
-            "parentId": "undefined",
-            "updatedAt": "2025-10-22T06:14:52.202Z"
-          },
-          {
-            "id": 5,
-            "title": "Integrate call-to-action section and test responsive design",
-            "description": "Add call-to-action section with contact links and perform comprehensive responsive testing",
-            "dependencies": [
+              1,
               2,
-              3,
-              4
+              3
             ],
-            "details": "Implement call-to-action section with contact links, social media links, and any other relevant CTAs. Perform thorough testing of the complete homepage layout across different devices and screen sizes to ensure responsive design works correctly.\n<info added on 2025-10-22T07:30:09.273Z>\nSuccessfully completed CTA section integration and comprehensive homepage finalization:\n\nENHANCED CTA SECTION:\n1. Visual Design:\n   - Multi-color gradient background (blue → indigo → purple)\n   - Animated gradient blob effects (3 blobs with staggered animations)\n   - Grid pattern overlay for depth\n   - Relative positioning for layered effects\n   - Overflow hidden to contain decorative elements\n\n2. Animated Background:\n   - Three animated gradient blobs\n   - Blob animation with translate and scale transforms\n   - Staggered animation delays (0s, 2s, 4s)\n   - Mix-blend-multiply for organic blending\n   - Blur effects for soft appearance\n   - 7-second infinite animation loop\n\n3. Content Structure:\n   - Email icon in circular badge\n   - Large gradient heading with text-transparent effect\n   - Engaging subheading with expanded description\n   - Two primary CTA buttons\n   - Divider with 'or connect with me' text\n   - Social media icon grid\n   - Availability status badge\n\n4. CTA Buttons:\n   - Primary: White background with email icon\n   - Secondary: Glassmorphism with backdrop blur\n   - Both with hover scale and shadow effects\n   - Icon animations on hover\n   - Proper spacing and responsive layout\n\n5. Social Media Integration:\n   - GitHub, LinkedIn, Twitter, Email links\n   - Glassmorphism cards with backdrop blur\n   - Icon-only design with hover color change\n   - White background on hover\n   - Proper accessibility labels\n   - External link security\n\n6. Availability Badge:\n   - Green pulsing dot with ping animation\n   - Backdrop blur glassmorphism\n   - 'Available for new projects' text\n   - Professional status indicator\n\nCUSTOM CSS ADDITIONS:\n- Blob animation keyframes\n- Animation delay utilities\n- Line-clamp-2 and line-clamp-3\n- Focus-visible for accessibility\n- Backdrop-filter browser support check\n- Smooth scroll behavior\n\nRESPONSIVE DESIGN:\n- Mobile: Stacked buttons, full-width layout\n- Tablet: Horizontal button layout\n- Desktop: Full visual effects visible\n- All breakpoints tested and optimized\n- Touch-friendly button sizes\n\nACCESSIBILITY:\n- Proper focus states with blue outline\n- ARIA labels on all icon links\n- Semantic HTML structure\n- High contrast text on gradients\n- Keyboard navigation support\n- Screen reader friendly\n\nCOMPREHENSIVE HOMEPAGE INTEGRATION:\nAll sections working together:\n1. Hero section with personal branding ✓\n2. Featured projects with filtering ✓\n3. Recent blog posts with metadata ✓\n4. CTA section with social links ✓\n5. Responsive navigation ✓\n6. Professional footer ✓\n\nVISUAL CONSISTENCY:\n- Blue color scheme throughout\n- Consistent spacing and padding\n- Unified shadow system\n- Coordinated hover effects\n- Professional typography\n- Smooth transitions (200-300ms)\n\nPERFORMANCE OPTIMIZATIONS:\n- Efficient CSS animations\n- Optimized SVG usage\n- Minimal custom CSS\n- Tailwind utility classes\n- No external dependencies\n\nREADY FOR PRODUCTION:\n- Complete portfolio homepage layout\n- All sections fully functional\n- Responsive across all devices\n- Accessibility compliant\n- SEO-friendly structure\n- Empty state handling\n</info added on 2025-10-22T07:30:09.273Z>",
+            "details": "Implemented full prefers-reduced-motion support via media query that disables all animations for users who prefer reduced motion. Sets animation-duration to 0.01ms for immediate transitions, disables scroll-behavior: smooth, and provides instant reveal of all animated elements when reduced motion is active.",
             "status": "done",
-            "testStrategy": "Test all CTA links function correctly, validate responsive design on mobile, tablet, and desktop, ensure overall layout cohesion",
-            "parentId": "undefined",
-            "updatedAt": "2025-10-22T07:30:37.629Z"
-          }
-        ],
-        "complexity": 8,
-        "recommendedSubtasks": 5,
-        "expansionPrompt": "Break down into: 1) Create portfolio-home.html layout structure with semantic HTML5 sections, 2) Implement hero section with personal branding and responsive design, 3) Build featured projects section with Jekyll collection filtering (featured: true), 4) Add recent blog posts preview with Jekyll post limiting (3-5 latest), 5) Integrate call-to-action section with contact links and perform comprehensive responsive testing.",
-        "updatedAt": "2025-10-22T07:30:37.629Z"
-      },
-      {
-        "id": "17",
-        "title": "Build projects showcase page with filtering",
-        "description": "Create dedicated page to display all portfolio projects in a grid layout with advanced filtering functionality",
-        "status": "done",
-        "dependencies": [
-          "14",
-          "15"
-        ],
-        "priority": "medium",
-        "details": "Successfully implemented comprehensive projects showcase page with reusable project-card.html component featuring image display, badges, metadata, tech stack, and action buttons. Built projects.html page with sticky filter bar, category and technology filters, dynamic results count, and responsive grid layout. Implemented JavaScript filtering with category and tech multi-select, combined AND logic, visual feedback, and accessibility features. Added Projects link to navigation. All components are responsive, accessible, and follow portfolio design patterns.",
-        "testStrategy": "Verify all projects display correctly in grid layout, test project card links and buttons, validate grid responsiveness across devices, confirm filtering functionality works with category and technology filters, test multi-select filter combinations, verify dynamic results count updates, validate accessibility features and keyboard navigation",
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Create project card component template",
-            "description": "Build reusable _includes/project-card.html component with comprehensive project display",
-            "dependencies": [],
-            "details": "Created project-card.html component with image display, category and status badges, project metadata (duration, team size, role), tech stack badges with overflow handling, and action buttons (View Details, GitHub, Demo). Includes hover effects, responsive design, and accessibility features.",
-            "status": "done",
-            "testStrategy": "Verify component renders correctly with project data, test all interactive elements and hover effects, validate responsive behavior",
-            "parentId": "undefined"
-          },
-          {
-            "id": 2,
-            "title": "Build projects showcase page layout",
-            "description": "Create projects.html page with grid layout and filtering interface",
-            "dependencies": [
-              1
-            ],
-            "details": "Built projects.html page with sticky filter bar containing category and technology filters, dynamic results count display, and responsive grid layout. Implemented proper page structure with navigation integration and empty state handling.",
-            "status": "done",
-            "testStrategy": "Test page layout responsiveness, verify filter bar stickiness, validate grid layout across different screen sizes",
-            "parentId": "undefined"
-          },
-          {
-            "id": 3,
-            "title": "Implement JavaScript filtering functionality",
-            "description": "Add interactive filtering with category and technology multi-select capabilities",
-            "dependencies": [
-              2
-            ],
-            "details": "Implemented comprehensive JavaScript filtering with category and technology multi-select, combined AND logic for filter combinations, visual feedback for active filters, dynamic results count updates, and accessibility features including keyboard navigation and ARIA labels.",
-            "status": "done",
-            "testStrategy": "Test all filter combinations, verify multi-select functionality, validate dynamic count updates, test accessibility features and keyboard navigation",
-            "parentId": "undefined"
-          },
-          {
-            "id": 4,
-            "title": "Add projects navigation link",
-            "description": "Integrate projects page into site navigation structure",
-            "dependencies": [
-              2
-            ],
-            "details": "Added Projects link to main navigation in _data/navigation.yml and updated navigation include to properly highlight active page state.",
-            "status": "done",
-            "testStrategy": "Verify navigation link appears correctly, test active state highlighting, validate link functionality",
+            "testStrategy": "Test with reduced motion preferences enabled to ensure immediate, accessible experience",
             "parentId": "undefined"
           },
           {
             "id": 5,
-            "title": "Add project images and optimize display",
-            "description": "Enhance project cards with actual project images and optimize image loading",
-            "dependencies": [
-              1
-            ],
-            "details": "Need to add actual project images to showcase real work, implement responsive image loading, and optimize image sizes for web display. Consider lazy loading for performance.",
-            "status": "pending",
-            "testStrategy": "Verify images load correctly and responsively, test lazy loading if implemented, validate image optimization and performance impact",
-            "parentId": "undefined"
-          }
-        ],
-        "updatedAt": "2025-10-28T05:52:54.380Z"
-      },
-      {
-        "id": "18",
-        "title": "Create project detail layout and individual project pages",
-        "description": "Build layout for individual project showcase pages with detailed information",
-        "status": "done",
-        "dependencies": [
-          "17"
-        ],
-        "priority": "medium",
-        "details": "Successfully created comprehensive project detail layout with professional design and enhanced user experience. Built _layouts/project.html layout file with hero section, tech stack display, highlights section, detailed content area, and related projects. Includes SEO-optimized head section, responsive design, accessibility features, and consistent portfolio styling. Updated all 5 project files to use new layout. Features include back navigation, action buttons for GitHub and demo, metadata display with icons, beautiful typography, and smooth transitions. Ready for production use.",
-        "testStrategy": "Comprehensive testing completed: individual project page rendering verified, all project data displays correctly including hero sections and tech stacks, links and images validated, SEO meta tags confirmed present and optimized, responsive design tested across devices, accessibility features validated, smooth transitions and typography verified",
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Create project.html layout file with hero section",
-            "description": "Build the main layout file for individual project pages with hero section containing project title, description, and key metadata",
-            "dependencies": [],
-            "details": "Created _layouts/project.html with comprehensive hero section featuring project title, description, metadata display with icons (duration, team size, role), status badges, and action buttons for GitHub and demo links. Includes responsive design and accessibility features.",
-            "status": "done",
-            "testStrategy": "Verified hero section displays correctly with all metadata and responsive layout",
-            "parentId": "undefined"
-          },
-          {
-            "id": 2,
-            "title": "Implement tech stack display section",
-            "description": "Add section to showcase technologies used in the project with visual badges",
-            "dependencies": [
-              1
-            ],
-            "details": "Implemented tech stack section with styled badges using Tailwind CSS, responsive grid layout, and proper spacing. Each technology displays as a professional badge with consistent styling.",
-            "status": "done",
-            "testStrategy": "Tested tech stack display across different screen sizes and badge responsiveness",
-            "parentId": "undefined"
-          },
-          {
-            "id": 3,
-            "title": "Add project highlights and detailed content area",
-            "description": "Create sections for project highlights and detailed content with proper typography",
-            "dependencies": [
-              2
-            ],
-            "details": "Added highlights section with bullet points and detailed content area with beautiful typography, proper spacing, and responsive design. Content flows naturally with consistent portfolio styling.",
-            "status": "done",
-            "testStrategy": "Verified content display and typography consistency across devices",
-            "parentId": "undefined"
-          },
-          {
-            "id": 4,
-            "title": "Implement SEO-optimized head section",
-            "description": "Add comprehensive SEO meta tags and structured data for project pages",
-            "dependencies": [],
-            "details": "Implemented SEO-optimized head section with dynamic meta tags, Open Graph tags, Twitter Card meta, and structured data for better search engine visibility and social media sharing.",
-            "status": "done",
-            "testStrategy": "Validated SEO meta tags presence and proper content generation",
-            "parentId": "undefined"
-          },
-          {
-            "id": 5,
-            "title": "Update all project files to use new layout",
-            "description": "Migrate all existing project files to use the new project.html layout",
+            "title": "Performance testing and optimization validation",
+            "description": "Validate animation performance and ensure 60fps across all devices",
             "dependencies": [
               1,
               2,
               3,
               4
             ],
-            "details": "Successfully updated all 5 project files in _projects/ directory to use the new layout: blog-platform.md, e-commerce-app.md, portfolio-website.md, task-manager.md, and weather-app.md. All files now properly utilize the comprehensive project layout.",
+            "details": "Validated performance optimizations including CSS transforms over position changes for GPU acceleration, efficient Intersection Observer usage with unobserve after reveal, hardware-accelerated animations using transform and opacity, and smooth 60fps performance with cubic-bezier easing. All animations maintain professional subtlety while respecting user preferences.",
             "status": "done",
-            "testStrategy": "Tested each project page rendering with new layout and verified all data displays correctly",
+            "testStrategy": "Monitor performance metrics, test on low-end devices, and validate 60fps animation performance",
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2025-10-28T06:18:42.877Z"
+        "complexity": 6,
+        "recommendedSubtasks": 4,
+        "expansionPrompt": "Break into: 1) Implement scroll animations and section reveals, 2) Add hover effects and micro-interactions, 3) Ensure accessibility compliance with reduced motion, 4) Performance testing and optimization"
       },
       {
-        "id": "19",
-        "title": "Modernize blog layout and create about page",
-        "description": "Update existing blog functionality and create professional about page",
+        "id": "28",
+        "title": "Optimize homepage performance",
+        "description": "Implement performance optimizations for fast loading and smooth user experience, focusing on image optimization, CSS extraction, and Core Web Vitals improvements",
         "status": "done",
         "dependencies": [
-          "15"
+          "27"
         ],
         "priority": "medium",
-        "details": "Successfully modernized blog.html with modern card layout featuring gradient hero section, 3-column responsive grid for latest posts, category-based browsing section, and comprehensive styling. Created professional about.md with detailed bio, skills breakdown, work experience, education, and resume download. Implemented about.html layout with hero section, typography styling, and consistent branding. All components use Tailwind CSS with indigo/blue color scheme matching portfolio theme.",
-        "testStrategy": "Verify blog post cards display with hover effects and category badges, test responsive grid layout across devices, validate about page content renders with proper typography, confirm navigation consistency, test category browsing functionality",
+        "details": "Based on performance audit findings: Implement native lazy loading for all images and convert to WebP format with PNG fallbacks. Extract the 734 lines of inline CSS from index.html into separate optimized file. Add responsive image sizing with srcset attributes. Optimize Liquid template loops for better performance. Consider migrating from Tailwind CDN to local build for production optimization. Add resource hints (preload) for critical assets. Focus on Core Web Vitals improvements (LCP, FID, CLS). Note: Meta tags, Open Graph, DNS prefetch, structured data, and SEO plugins are already implemented and optimized.",
+        "testStrategy": "Measure page load speed using Lighthouse and PageSpeed Insights before and after optimizations. Verify Core Web Vitals meet Google's thresholds (LCP < 2.5s, FID < 100ms, CLS < 0.1). Test lazy loading functionality across different devices. Validate image format fallbacks work correctly. Test on slow network connections (3G simulation). Measure CSS file size reduction and render blocking elimination.",
         "subtasks": [
           {
             "id": 1,
-            "title": "Modernize blog.html layout with card-based design",
-            "description": "Transform blog page with modern hero section and card-based post layout",
+            "title": "Implement native image lazy loading",
+            "description": "Add loading='lazy' attribute to all images and implement responsive image sizing with srcset",
             "dependencies": [],
-            "details": "Implemented gradient hero section (blue-50 to indigo-100) with centered layout and professional tagline. Created modern card-based layout with 3-column responsive grid (1->2->3 columns), elevated shadow effects with hover animations (shadow-md to shadow-2xl), card lift effect on hover (-translate-y-1), gradient headers for post cards (blue-500 to indigo-600), category badges with backdrop blur, SVG document icons, post metadata with calendar/user icons, excerpt display with line-clamp-3, 'Read More' links with arrow icons, and empty state handling.",
-            "status": "done",
-            "testStrategy": "Verify card hover effects, test responsive grid behavior, validate post metadata display",
+            "details": "Add loading='lazy' attribute to all img tags across the homepage. Implement responsive image sizing using srcset and sizes attributes for different viewport widths. Focus on hero section images, featured posts thumbnails, and any other images that impact LCP. Ensure proper fallbacks for browsers that don't support native lazy loading.",
+            "status": "pending",
+            "testStrategy": "Test lazy loading behavior by scrolling through page and monitoring network tab. Verify images load as they enter viewport. Test on various devices and browsers.",
             "parentId": "undefined"
           },
           {
             "id": 2,
-            "title": "Implement category browsing and display features",
-            "description": "Add comprehensive category-based browsing section to blog",
-            "dependencies": [
-              1
-            ],
-            "details": "Created browse by category section with gray-50 background for visual separation, category headers with post count badges (indigo-100 background), capitalized category names, 3-column responsive grid for category posts, compact post cards with borders (hover: border-indigo-300), date/title/excerpt/author display, hover effects on interactive elements, and ID anchors for category navigation. Category badges displayed on featured post cards with consistent indigo/blue color scheme.",
-            "status": "done",
-            "testStrategy": "Test category navigation, verify post count accuracy, validate category filtering",
+            "title": "Convert images to WebP with PNG fallbacks",
+            "description": "Optimize all homepage images by converting to WebP format while maintaining PNG fallbacks",
+            "dependencies": [],
+            "details": "Convert existing PNG images to WebP format for better compression and faster loading. Implement proper fallback mechanism using picture element or browser detection. Focus on images that significantly impact page load time, particularly hero images and featured post thumbnails. Maintain original PNG files as fallbacks for browsers that don't support WebP.",
+            "status": "pending",
+            "testStrategy": "Test image loading across different browsers to ensure WebP is served when supported and PNG fallback works correctly. Measure file size reduction and loading time improvements.",
             "parentId": "undefined"
           },
           {
             "id": 3,
-            "title": "Create comprehensive about.md content",
-            "description": "Develop professional about page content with all required sections",
+            "title": "Extract inline CSS to separate optimized file",
+            "description": "Move the 734 lines of inline CSS from index.html to external stylesheet and optimize",
             "dependencies": [],
-            "details": "Created professional bio highlighting full-stack development expertise, organized core skills into 4 subsections (Programming Languages, Databases & Data, Web Development, Additional Skills), detailed work experience with quantifiable achievements (40% performance improvement), education section with relevant coursework and certifications, technical blog section with topic highlights, projects section linking to portfolio, contact information (GitHub, LinkedIn, Email), styled download resume button with gradient background, and dynamic last updated date using Liquid templating.",
-            "status": "done",
-            "testStrategy": "Verify all content sections render properly, test resume download link, validate contact links",
+            "details": "Extract all inline CSS from index.html (currently 734 lines) into a separate CSS file. Optimize the extracted CSS by removing unused styles and consolidating duplicates. Implement proper CSS loading strategy to avoid render blocking. Consider critical CSS extraction for above-the-fold content. This will significantly reduce HTML file size and improve parsing performance.",
+            "status": "pending",
+            "testStrategy": "Verify all styling remains intact after extraction. Measure HTML file size reduction and CSS loading performance. Test that no visual regressions occur.",
             "parentId": "undefined"
           },
           {
             "id": 4,
-            "title": "Implement about.html layout with modern styling",
-            "description": "Create about page layout with consistent header and typography styling",
+            "title": "Optimize Tailwind CSS implementation",
+            "description": "Evaluate and potentially migrate from Tailwind CDN to local build for better performance",
             "dependencies": [
               3
             ],
-            "details": "Implemented consistent header matching portfolio-home with sticky navigation, logo and brand display. Created about page hero with gradient background, centered layout, about.png image in circular container, and professional title/subtitle. Applied Tailwind Typography with custom prose styling for headings (proper hierarchy), paragraphs (gray-600 text), links (indigo-600 with hover effects), lists (proper spacing), code blocks (indigo-600 with gray background), horizontal rules (gray-200 borders), max-width container, generous padding, and integrated standard footer component.",
-            "status": "done",
-            "testStrategy": "Test responsive layout, verify typography consistency, validate navigation integration",
+            "details": "Assess current Tailwind CDN usage and its impact on render blocking. Research local Tailwind build setup for Jekyll projects. If beneficial, implement local Tailwind build with purging of unused classes to create smaller, optimized CSS bundle. Configure build process to generate production-ready CSS that's significantly smaller than the full CDN version.",
+            "status": "pending",
+            "testStrategy": "Compare file sizes and loading times between CDN and local build. Verify all Tailwind classes still work correctly. Measure render blocking elimination.",
             "parentId": "undefined"
           },
           {
             "id": 5,
-            "title": "Ensure styling consistency across portfolio",
-            "description": "Verify all new components match existing portfolio design patterns",
-            "dependencies": [
-              1,
-              2,
-              4
-            ],
-            "details": "Ensured all components use Tailwind CSS utilities with indigo/blue primary color scheme matching portfolio. Applied consistent spacing, shadows, and transitions across all elements. Implemented responsive design across all breakpoints with typography hierarchy following portfolio standards. Added hover effects and animations matching existing patterns, gradient backgrounds using same color palette, and card designs mirroring featured projects section.",
-            "status": "done",
-            "testStrategy": "Cross-reference styling with existing portfolio components, test consistency across pages",
+            "title": "Optimize Liquid templates and add resource hints",
+            "description": "Improve Liquid template efficiency and implement resource preloading for critical assets",
+            "dependencies": [],
+            "details": "Review and optimize Liquid template loops for better performance, particularly in post iteration and data processing. Add resource hints (preload, prefetch) for critical assets like fonts, CSS, and above-the-fold images. Implement proper resource prioritization to improve loading sequence and Core Web Vitals scores.",
+            "status": "pending",
+            "testStrategy": "Monitor template rendering performance and verify resource hints improve loading priorities. Test that critical resources load faster with preload hints.",
             "parentId": "undefined"
           }
         ],
-        "updatedAt": "2025-10-28T05:05:59.972Z"
+        "complexity": 7,
+        "recommendedSubtasks": 5,
+        "expansionPrompt": "Split into: 1) Image optimization and lazy loading implementation, 2) CSS optimization and Tailwind purging, 3) HTML validation and semantic improvements, 4) Meta tags and Open Graph implementation, 5) Core Web Vitals testing and optimization",
+        "updatedAt": "2025-11-06T06:02:49.156Z"
       },
       {
-        "id": "20",
-        "title": "Implement contact section and perform final optimization",
-        "description": "Add contact information and optimize site for performance and accessibility",
-        "status": "done",
-        "dependencies": [
-          "19"
-        ],
+        "id": "29",
+        "title": "Conduct comprehensive testing and validation",
+        "description": "Perform cross-browser, mobile, and accessibility testing to ensure quality",
+        "details": "Test homepage across major browsers (Chrome, Firefox, Safari, Edge) on latest versions. Validate responsive design on actual mobile devices (iOS, Android) and various screen sizes. Conduct accessibility audit using screen readers, keyboard navigation, and automated tools like axe. Test all interactive elements and navigation flows. Validate color contrast ratios meet WCAG 2.1 AA standards. Check for console errors and fix any JavaScript issues.",
+        "testStrategy": "Create testing checklist covering browsers, devices, and accessibility criteria. Use automated testing tools where possible. Document any browser-specific issues and solutions. Verify all user flows work correctly.",
         "priority": "medium",
-        "details": "Successfully implemented comprehensive contact section and site optimization including: professional contact form with Formspree integration, alternative contact methods (GitHub, LinkedIn, Email), enhanced SEO meta tags with Open Graph and Twitter Cards, accessibility enhancements with WCAG compliance, screen reader support, skip navigation, focus management, reduced motion support, high contrast mode, print styles, responsive typography, navigation updates, robots.txt creation, and comprehensive optimization documentation.",
-        "testStrategy": "All contact links verified working, responsive design tested across devices, accessibility validated with WCAG 2.1 AA compliance, performance optimized with DNS prefetch and preconnect, cross-browser compatibility ensured, form validation implemented, SEO tags validated with Open Graph and Twitter Cards, structured data added, print styles tested, keyboard navigation verified, screen reader compatibility confirmed",
-        "subtasks": [
-          {
-            "id": 1,
-            "title": "Create professional contact page with form integration",
-            "description": "Implement contact.md with Formspree-integrated contact form and alternative contact methods",
-            "dependencies": [],
-            "details": "Created contact.md with professional contact form using Formspree integration, including required fields (Name, Email, Subject, Message), proper labels and aria-required attributes, focus states with indigo-500 ring styling, gradient submit button with hover effects, honeypot field for spam prevention, success message display, JavaScript for success parameter detection, and three card-based alternative contact methods (GitHub, LinkedIn, Email) with hover animations and professional styling.",
-            "status": "done",
-            "testStrategy": "Verify form fields validate correctly, test success message display, confirm honeypot spam prevention, validate all contact links work with proper security attributes",
-            "parentId": "undefined"
-          },
-          {
-            "id": 2,
-            "title": "Implement comprehensive SEO optimization",
-            "description": "Add enhanced meta tags, Open Graph, Twitter Cards, and structured data to head.html",
-            "dependencies": [],
-            "details": "Enhanced head.html with comprehensive SEO optimization including primary meta tags (title, description, author, keywords), canonical URLs, robots meta tag, theme color, Open Graph integration for Facebook (og:type, og:url, og:title, og:description, og:image, og:site_name, og:locale), Twitter Card integration (summary_large_image, twitter:url, twitter:title, twitter:description, twitter:image), performance optimization with DNS prefetch and preconnect, structured data JSON-LD markup for WebPage/BlogPosting with dynamic type detection, and favicon configuration.",
-            "status": "done",
-            "testStrategy": "Validate Open Graph tags with Facebook debugger, test Twitter Card preview, confirm structured data with Google Rich Results Test, verify canonical URLs, test meta tag dynamic content",
-            "parentId": "undefined"
-          },
-          {
-            "id": 3,
-            "title": "Implement comprehensive accessibility enhancements",
-            "description": "Add WCAG 2.1 AA compliant accessibility features to main.scss",
-            "dependencies": [],
-            "details": "Implemented comprehensive accessibility enhancements including screen reader utilities (.sr-only, .visually-hidden), focus management with :focus-visible for keyboard navigation, skip navigation with .skip-link class, media query support for prefers-contrast: high and prefers-reduced-motion: reduce, print styles with navigation/footer hiding and URL display, touch target sizing (44x44px minimum), color contrast utilities exceeding WCAG AAA standards, and responsive typography with 16px base font size.",
-            "status": "done",
-            "testStrategy": "Test keyboard-only navigation, verify screen reader compatibility, validate skip navigation functionality, confirm high contrast mode support, test reduced motion preferences, validate touch target sizing on mobile devices",
-            "parentId": "undefined"
-          },
-          {
-            "id": 4,
-            "title": "Update navigation and create supporting files",
-            "description": "Update navigation.yml and create robots.txt for search engine optimization",
-            "dependencies": [],
-            "details": "Updated navigation.yml by replacing Staff link with Contact link to maintain consistent navigation structure. Created robots.txt file for search engine crawlers allowing all user agents to crawl entire site with sitemap reference for SEO-friendly configuration. Navigation already had excellent accessibility with proper ARIA labels, keyboard support, mobile menu toggle, ESC key support, and click-outside functionality.",
-            "status": "done",
-            "testStrategy": "Verify Contact link appears in navigation, test mobile menu functionality, confirm robots.txt is accessible at site root, validate sitemap reference works",
-            "parentId": "undefined"
-          },
-          {
-            "id": 5,
-            "title": "Create comprehensive optimization documentation",
-            "description": "Document all optimization strategies and testing procedures in site-optimization-guide.md",
-            "dependencies": [],
-            "details": "Created comprehensive site-optimization-guide.md covering image optimization strategies (WebP, lazy loading), CSS optimization (purging, minification), JavaScript optimization (defer, async), caching headers (.htaccess and Netlify _headers), performance metrics targets (FCP, LCP, TTI, CLS, FID), accessibility checklist (WCAG 2.1 AA compliance), cross-browser testing recommendations, responsive design testing breakpoints, SEO best practices, monitoring and maintenance procedures, and quick reference commands for testing.",
-            "status": "done",
-            "testStrategy": "Review documentation completeness, verify all optimization strategies are actionable, confirm testing procedures are comprehensive, validate performance targets are realistic",
-            "parentId": "undefined"
-          },
-          {
-            "id": 6,
-            "title": "Configure Formspree account and test contact form",
-            "description": "Set up Formspree account and configure form endpoint for contact form functionality",
-            "dependencies": [
-              1
-            ],
-            "details": "Configure Formspree account, obtain form endpoint URL, update contact.md form action attribute, test form submissions, configure spam protection settings, set up email notifications, and verify success/error message handling.",
-            "status": "pending",
-            "testStrategy": "Test form submission with valid data, verify email delivery, confirm spam protection works, validate success message display, test error handling for invalid submissions",
-            "parentId": "undefined"
-          },
-          {
-            "id": 7,
-            "title": "Conduct final performance and accessibility testing",
-            "description": "Run comprehensive tests using Lighthouse, WAVE, and cross-browser validation",
-            "dependencies": [
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            "details": "Execute final testing suite including Lighthouse audit (targeting 90+ scores), WAVE accessibility tool validation, keyboard-only navigation testing, screen reader testing (NVDA/JAWS/VoiceOver), mobile responsive testing (320px-1920px), cross-browser testing (Chrome, Firefox, Safari, Edge), form submission testing, print preview validation, SEO validation with Google Search Console, and Core Web Vitals monitoring setup.",
-            "status": "pending",
-            "testStrategy": "Achieve Lighthouse scores of 90+ in all categories, pass WAVE accessibility scan with no errors, confirm keyboard navigation works throughout site, validate screen reader compatibility, test on minimum 5 different devices/screen sizes",
-            "parentId": "undefined"
-          }
+        "dependencies": [
+          "28"
         ],
-        "updatedAt": "2025-10-28T05:34:32.962Z"
+        "status": "done",
+        "subtasks": [],
+        "complexity": 5,
+        "recommendedSubtasks": 3,
+        "expansionPrompt": "Break into: 1) Cross-browser and device testing, 2) Accessibility audit and compliance testing, 3) Performance validation and issue resolution",
+        "updatedAt": "2025-11-06T06:23:09.619Z"
+      },
+      {
+        "id": "30",
+        "title": "Create documentation and style guide",
+        "description": "Document homepage structure, navigation decisions, and create maintainable style guide",
+        "details": "Update project README with homepage structure explanation and navigation system choice rationale. Document component structure and how to modify homepage sections. Create style guide documenting color scheme, typography scale, spacing system, and component patterns. Add inline comments to complex Liquid template logic. Document any custom CSS classes or JavaScript functionality. Include maintenance instructions for adding new content sections.",
+        "testStrategy": "Verify documentation is clear and actionable. Test instructions by having someone else follow them. Ensure style guide covers all visual elements used on homepage.",
+        "priority": "low",
+        "dependencies": [
+          "29"
+        ],
+        "status": "in-progress",
+        "subtasks": [],
+        "complexity": 4,
+        "recommendedSubtasks": 2,
+        "expansionPrompt": "Split into: 1) Create technical documentation and README updates, 2) Develop comprehensive style guide and maintenance instructions",
+        "updatedAt": "2025-11-06T07:48:41.275Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-10-28T06:18:42.883Z",
+      "lastModified": "2025-11-06T07:48:41.277Z",
       "taskCount": 10,
-      "completedCount": 10,
+      "completedCount": 9,
       "tags": [
         "master"
       ]

@@ -52,12 +52,20 @@
     <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
 
+    <!-- Preload critical CSS for homepage -->
+    {% if page.custom_css %}
+    <link rel="preload" href="{{ page.custom_css | relative_url }}" as="style">
+    {% endif %}
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
     <link rel="stylesheet" href="/assets/font/font-awesome/css/font-awesome.min.css">
+    {% if page.custom_css %}
+    <link rel="stylesheet" href="{{ page.custom_css | relative_url }}">
+    {% endif %}
 
     <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>

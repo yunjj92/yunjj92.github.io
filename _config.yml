@@ -28,6 +28,20 @@ kramdown:
     line_numbers: table
     bold_every: 5
 
+# Performance Optimizations
+liquid:
+  error_mode: warn
+  strict_filters: false
+
+# Exclude from build
+exclude:
+  - node_modules/
+  - .taskmaster/
+  - .performance-optimization.md
+  - vendor/
+  - Gemfile
+  - Gemfile.lock
+
 
 
 # plugins

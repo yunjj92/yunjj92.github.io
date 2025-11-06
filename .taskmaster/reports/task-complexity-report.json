@@ -1,21 +1,93 @@
 {
 	"meta": {
-		"generatedAt": "2025-10-21T05:50:31.729Z",
-		"tasksAnalyzed": 1,
+		"generatedAt": "2025-11-05T02:11:47.302Z",
+		"tasksAnalyzed": 10,
 		"totalTasks": 10,
-		"analysisCount": 1,
+		"analysisCount": 10,
 		"thresholdScore": 5,
 		"projectName": "Taskmaster",
-		"usedResearch": true
+		"usedResearch": false
 	},
 	"complexityAnalysis": [
 		{
-			"taskId": 16,
-			"taskTitle": "Create portfolio homepage layout with hero and featured sections",
-			"complexityScore": 8,
+			"taskId": 21,
+			"taskTitle": "Fix duplicate footer rendering bug",
+			"complexityScore": 3,
+			"recommendedSubtasks": 0,
+			"expansionPrompt": "This task is straightforward and doesn't need subtasks - it's a simple debugging and removal task.",
+			"reasoning": "Simple debugging task involving layout inheritance analysis and removing duplicate includes. Requires basic Jekyll/Liquid knowledge but is straightforward to implement and test."
+		},
+		{
+			"taskId": 22,
+			"taskTitle": "Resolve navigation system conflict",
+			"complexityScore": 5,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Break this into: 1) Document and compare both navigation systems, 2) Remove sidebar navigation and update header, 3) Test navigation across all breakpoints and page types",
+			"reasoning": "Moderate complexity involving architectural decisions, multiple file modifications, responsive testing, and accessibility considerations. Affects entire site navigation structure."
+		},
+		{
+			"taskId": 23,
+			"taskTitle": "Design and implement homepage hero section",
+			"complexityScore": 4,
+			"recommendedSubtasks": 2,
+			"expansionPrompt": "Split into: 1) Design hero section layout and content structure with Tailwind CSS, 2) Implement responsive behavior and test across all breakpoints",
+			"reasoning": "Moderate complexity requiring design decisions, responsive implementation, and proper semantic HTML. Involves both visual design and technical implementation."
+		},
+		{
+			"taskId": 24,
+			"taskTitle": "Implement featured posts section",
+			"complexityScore": 6,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Break into: 1) Implement Jekyll logic to fetch and process posts, 2) Design post card component with all metadata, 3) Create responsive grid layout with Tailwind, 4) Add hover effects and handle edge cases",
+			"reasoning": "Complex task involving Jekyll/Liquid templating, responsive grid systems, multiple data scenarios, and advanced CSS interactions. Requires handling various edge cases."
+		},
+		{
+			"taskId": 25,
+			"taskTitle": "Create categories overview section",
+			"complexityScore": 5,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Split into: 1) Extract and process categories from Jekyll collections, 2) Design responsive category cards with navigation, 3) Implement grid layout and hover effects",
+			"reasoning": "Moderate-high complexity involving Jekyll data processing, responsive design, and navigation integration. Similar to featured posts but with different data structures."
+		},
+		{
+			"taskId": 26,
+			"taskTitle": "Add about/bio section to homepage",
+			"complexityScore": 3,
+			"recommendedSubtasks": 0,
+			"expansionPrompt": "This is a straightforward content section implementation that doesn't need breakdown.",
+			"reasoning": "Relatively simple content section with standard responsive layout and external links. Minimal technical complexity and clear requirements."
+		},
+		{
+			"taskId": 27,
+			"taskTitle": "Implement visual refinements and animations",
+			"complexityScore": 6,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Break into: 1) Implement scroll animations and section reveals, 2) Add hover effects and micro-interactions, 3) Ensure accessibility compliance with reduced motion, 4) Performance testing and optimization",
+			"reasoning": "Complex task requiring advanced CSS/JavaScript animations, accessibility considerations, performance optimization, and cross-browser testing. Multiple technical challenges."
+		},
+		{
+			"taskId": 28,
+			"taskTitle": "Optimize homepage performance",
+			"complexityScore": 7,
 			"recommendedSubtasks": 5,
-			"expansionPrompt": "Break down into: 1) Create portfolio-home.html layout structure with semantic HTML5 sections, 2) Implement hero section with personal branding and responsive design, 3) Build featured projects section with Jekyll collection filtering (featured: true), 4) Add recent blog posts preview with Jekyll post limiting (3-5 latest), 5) Integrate call-to-action section with contact links and perform comprehensive responsive testing.",
-			"reasoning": "High complexity (8/10) due to multiple interconnected components requiring Jekyll collections integration, Liquid templating, responsive design with existing SCSS/custom styling (no Tailwind CDN yet integrated), featured project filtering logic, blog post limiting, and comprehensive cross-device testing. The existing codebase shows custom SCSS styling with Korean fonts and specific navigation patterns that need to be maintained. Task already has 5 well-defined subtasks matching the recommended breakdown."
+			"expansionPrompt": "Split into: 1) Image optimization and lazy loading implementation, 2) CSS optimization and Tailwind purging, 3) HTML validation and semantic improvements, 4) Meta tags and Open Graph implementation, 5) Core Web Vitals testing and optimization",
+			"reasoning": "High complexity involving multiple optimization techniques, build process modifications, and performance measurement. Requires expertise in web performance best practices."
+		},
+		{
+			"taskId": 29,
+			"taskTitle": "Conduct comprehensive testing and validation",
+			"complexityScore": 5,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Break into: 1) Cross-browser and device testing, 2) Accessibility audit and compliance testing, 3) Performance validation and issue resolution",
+			"reasoning": "Moderate-high complexity requiring systematic testing across multiple dimensions. Involves various testing tools and methodologies but is primarily validation work."
+		},
+		{
+			"taskId": 30,
+			"taskTitle": "Create documentation and style guide",
+			"complexityScore": 4,
+			"recommendedSubtasks": 2,
+			"expansionPrompt": "Split into: 1) Create technical documentation and README updates, 2) Develop comprehensive style guide and maintenance instructions",
+			"reasoning": "Moderate complexity requiring comprehensive documentation of technical decisions and creation of maintainable style guides. Involves both technical writing and system documentation."
 		}
 	]
 }
