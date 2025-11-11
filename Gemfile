@@ -14,6 +14,7 @@ gem 'jekyll-sitemap'
 gem 'jekyll-coffeescript'
 gem 'jekyll-commonmark-ghpages'
 gem 'jekyll-titles-from-headings'
+gem 'jekyll-compose'
 gem 'csv', '3.3.2'
 gem 'json', '2.9.1'
 

@@ -45,10 +45,22 @@ exclude:
 
 
 # plugins
-plugins: 
+plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-compose
+
+# Jekyll Compose Configuration
+jekyll_compose:
+  default_front_matter:
+    posts:
+      layout: post
+      author: TreeKangaroo
+      categories: []
+      tags: []
+      image:
+      description:
 
 # Serving
 port : 4000

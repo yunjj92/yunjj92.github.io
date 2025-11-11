@@ -115,6 +115,11 @@ custom_css: /assets/css/homepage-animations.css
       </p>
     </div>
 
+    {%
+      # Fetch up to 6 recent posts, excluding drafts
+      # where_exp filters out posts with draft: true in front matter
+      # slice limits results to first 6 posts (posts are already sorted by date)
+    %}
     {% assign recent_posts = site.posts | where_exp: "post", "post.draft != true" | slice: 0, 6 %}
 
     {% if recent_posts.size > 0 %}
@@ -155,6 +160,11 @@ custom_css: /assets/css/homepage-animations.css
                   </time>
                 </div>
 
+                {%
+                  # Calculate estimated reading time
+                  # Assumes average reading speed of 200 words per minute
+                  # Adds 1 minute to account for images and code blocks
+                %}
                 <!-- Reading Time (estimated) -->
                 {% assign words = post.content | number_of_words %}
                 {% assign reading_time = words | divided_by: 200 | plus: 1 %}
@@ -260,10 +270,15 @@ custom_css: /assets/css/homepage-animations.css
     {% if site.categories.size > 0 %}
       <!-- Categories Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 stagger-children">
+        {%
+          # Process categories from site-wide category collection
+          # site.categories is a hash: { "Category Name" => [post1, post2, ...] }
+          # Sort alphabetically and limit display to 8 categories on homepage
+        %}
         {% assign sorted_categories = site.categories | sort %}
         {% for category in sorted_categories limit:8 %}
-          {% assign category_name = category[0] %}
-          {% assign posts = category[1] %}
+          {% assign category_name = category[0] %}  {%# Extract category name from hash %}
+          {% assign posts = category[1] %}          {%# Extract array of posts in this category %}
 
           <!-- Category Card -->
           <a href="{{ site.baseurl }}/categories/#{{ category_name | slugify }}"
@@ -281,16 +296,24 @@ custom_css: /assets/css/homepage-animations.css
                 </svg>
               </div>
 
+              {%
+                # Dynamic Icon Selection Logic
+                # Intelligently selects icon based on category name keywords
+                # Process: Convert to lowercase → Check for keywords → Display matching icon
+                # Falls through to default icon if no keywords match
+              %}
               <!-- Category Icon -->
               <div class="relative z-10">
                 {% assign category_lower = category_name | downcase %}
 
+                {%# Web Development Keywords: web, frontend, html, css %}
                 {% if category_lower contains 'web' or category_lower contains 'frontend' or category_lower contains 'html' or category_lower contains 'css' %}
                   <!-- Web Development Icon -->
                   <svg class="w-16 h-16 text-blue-600 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                   </svg>
 
+                {%# Database Keywords: database, sql, data %}
                 {% elsif category_lower contains 'database' or category_lower contains 'sql' or category_lower contains 'data' %}
                   <!-- Database Icon -->
                   <svg class="w-16 h-16 text-indigo-600 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -539,30 +562,47 @@ custom_css: /assets/css/homepage-animations.css
 
 <!-- Scroll reveal animation script -->
 <script>
+  /**
+   * Scroll Reveal Animation System
+   * Uses Intersection Observer API for performant scroll-based animations
+   * Respects user's prefers-reduced-motion setting for accessibility
+   */
   document.addEventListener('DOMContentLoaded', function() {
-    // Check if user prefers reduced motion
+    // Accessibility: Check if user prefers reduced motion
+    // Returns true if user has enabled "Reduce motion" in OS settings
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReducedMotion) {
-      // Skip animations if user prefers reduced motion
+      // Skip all animations for accessibility - instantly show all content
       document.querySelectorAll('.scroll-reveal, .fade-in-up').forEach(el => {
         el.classList.add('revealed', 'animate');
       });
       return;
     }
 
-    // Intersection Observer for scroll reveal animations
+    /**
+     * Intersection Observer Configuration
+     * threshold: 0.1 = trigger when 10% of element is visible
+     * rootMargin: Add 50px margin at bottom to trigger slightly before element enters viewport
+     */
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
     };
 
+    /**
+     * Observer Callback: Triggered when elements enter/exit viewport
+     * Adds 'revealed' and 'animate' classes to trigger CSS transitions
+     * Unobserves elements after animation for performance optimization
+     */
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
+          // Element is visible - trigger animation
           entry.target.classList.add('revealed', 'animate');
 
-          // Optionally unobserve after revealing (performance optimization)
+          // Performance: Stop observing this element after it's revealed
+          // Element won't animate again even if scrolled out and back in
           observer.unobserve(entry.target);
         }
       });
@@ -573,7 +613,12 @@ custom_css: /assets/css/homepage-animations.css
       observer.observe(el);
     });
 
-    // Add stagger animation to grid children
+    /**
+     * Staggered Children Animation
+     * For grids/containers with .stagger-children class:
+     * - Each child gets progressive delay (via CSS nth-child selectors)
+     * - Creates cascading reveal effect
+     */
     document.querySelectorAll('.stagger-children').forEach(container => {
       const children = container.children;
       Array.from(children).forEach((child, index) => {

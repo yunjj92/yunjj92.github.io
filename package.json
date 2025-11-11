@@ -1,0 +1,22 @@
+{
+  "name": "yunjj92.github.io",
+  "version": "1.0.0",
+  "description": "A modern, performant Jekyll-based blog showcasing programming tutorials, insights, and projects. Built with Tailwind CSS and optimized for accessibility and user experience.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yunjj92/yunjj92.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yunjj92/yunjj92.github.io/issues"
+  },
+  "homepage": "https://github.com/yunjj92/yunjj92.github.io#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.0"
+  }
+}
