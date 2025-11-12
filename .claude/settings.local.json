@@ -11,7 +11,8 @@
       "Bash(task-master show:*)",
       "Bash(task-master update-task:*)",
       "Bash(ruby:*)",
-      "Bash(bundle:*)"
+      "Bash(bundle:*)",
+      "Bash(where:*)"
     ],
     "deny": [],
     "ask": []
