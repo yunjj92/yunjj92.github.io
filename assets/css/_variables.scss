@@ -1,10 +1,21 @@
 
+// Handwriting font - use sparingly for decorative purposes
 $myCustomFont: 'NanumhandWriteMongdol' !default;
-$serif: $myCustomFont , Georgia, Times, serif !default;
-$sans-serif: $myCustomFont  "Roboto", "Segoe UI",
-"Helvetica Neue", "Lucida Grande", Arial, sans-serif !default;
 
+// Readable serif fonts for body text
+$serif: Georgia, 'Times New Roman', Times, serif !default;
+
+// Modern sans-serif fonts for better readability
+$sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+"Helvetica Neue", Arial, "Noto Sans", sans-serif,
+"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+
+// Use sans-serif for main content (better readability)
 $global-font-family: $sans-serif !default;
+
+// Monospace fonts for code
+$monospace: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono',
+Consolas, 'Courier New', monospace !default;
 
 
 

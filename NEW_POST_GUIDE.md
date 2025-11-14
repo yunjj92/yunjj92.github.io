@@ -98,6 +98,38 @@ Then follow the prompts to:
 
 ---
 
+## Special: English Expression Notes 📝
+
+**Best for**: Taking notes on English vocabulary and expressions from technical materials
+
+### Quick Start:
+```bash
+# Copy the template
+cp _posts/english/.template.md _posts/english/$(date +%Y-%m-%d)-topic-name.md
+
+# Or create manually
+touch _posts/english/2024-11-14-algorithm-terms.md
+```
+
+### Template Structure:
+The English notes template includes sections for:
+- **Source information** (what you're reading)
+- **New words & expressions** (with definitions and examples)
+- **Grammar patterns** (sentence structures you noticed)
+- **Technical terminology** (field-specific terms with Korean translations)
+- **Review notes** (additional observations)
+
+### Example Usage:
+See `_posts/english/2024-11-14-sample-english-notes.md` for a complete example.
+
+### Tips:
+- Create one note per reading session or topic
+- Include both the original context and your own examples
+- Add Korean translations for technical terms when helpful
+- Use tags to categorize by subject: `[vocabulary, mathematics]`, `[expressions, computer-science]`
+
+---
+
 ## Frontmatter Reference
 
 Here's what each field means:
@@ -112,6 +144,18 @@ categories: [Web, Tutorial]     # Categories (multiple allowed)
 tags: [javascript, react]       # Tags (multiple allowed)
 image: /assets/images/post.jpg  # Featured image (optional)
 description: "Brief summary"    # SEO description (optional)
+---
+```
+
+### For English Notes:
+```yaml
+---
+layout: post
+author: TreeKangaroo
+categories: english             # Always "english" for language notes
+tags: [vocabulary, mathematics] # Specific topics
+date: 2024-11-14
+title: "English Notes - Algorithm Analysis"
 ---
 ```
 

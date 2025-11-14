@@ -27,9 +27,7 @@
 }
 
 body, head{
-
-  font-family: $myCustomFont;
-  
+  font-family: $global-font-family;
 }
 
 .horizontal {
@@ -255,7 +253,7 @@ select:focus-visible {
 
   // Ensure content is readable
   body {
-    font-size: 12pt;
+    font-size: 15pt;
     color: black;
     background: white;
   }
