@@ -36,9 +36,9 @@ layout: post
 title: "Your Compelling Post Title"
 date: 2024-01-15
 categories: [Web Development, JavaScript]
-image: /assets/images/posts/my-post-image.jpg  # Optional but recommended
+image: /assets/images/posts/my-post-image.jpg # Optional but recommended
 excerpt: "A brief 1-2 sentence summary that appears in post previews"
-draft: false  # Set to true to hide from homepage while working
+draft: false # Set to true to hide from homepage while working
 ---
 ```
 
@@ -46,10 +46,10 @@ draft: false  # Set to true to hide from homepage while working
 
 Write your post content in Markdown below the front matter:
 
-```markdown
+````markdown
 ## Introduction
 
-Your content here with **bold**, *italic*, and [links](https://example.com).
+Your content here with **bold**, _italic_, and [links](https://example.com).
 
 ### Code Blocks
 
@@ -68,6 +68,7 @@ function example() {
 1. Numbered item 1
 2. Numbered item 2
 ```
+````
 
 #### Step 4: Test Locally
 
@@ -77,6 +78,7 @@ bundle exec jekyll serve
 ```
 
 Your post will automatically appear on:
+
 - Homepage (up to 6 most recent)
 - Blog page (all posts)
 - Appropriate category pages
@@ -99,11 +101,11 @@ layout: project
 title: "Project Name"
 description: "Brief one-liner description"
 image: /assets/images/projects/project-thumbnail.jpg
-github: https://github.com/username/repo  # Optional
-demo: https://demo-url.com  # Optional
+github: https://github.com/username/repo # Optional
+demo: https://demo-url.com # Optional
 technologies: [React, Node.js, MongoDB, Tailwind CSS]
-featured: true  # Show on homepage featured projects section
-status: completed  # completed, in-progress, or planned
+featured: true # Show on homepage featured projects section
+status: completed # completed, in-progress, or planned
 duration: "3 months"
 team_size: "Solo project"
 role: "Full Stack Developer"
@@ -151,21 +153,28 @@ Quantifiable results and impact...
 
 ```html
 <!-- Main Title -->
-<h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+<h1
+  class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight"
+>
   Your Archive for
-  <span class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent gradient-animate">
-    Programming Excellence  <!-- CHANGE THIS TEXT -->
+  <span
+    class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent gradient-animate"
+  >
+    Programming Excellence
+    <!-- CHANGE THIS TEXT -->
   </span>
 </h1>
 
 <!-- Tagline -->
 <p class="text-xl sm:text-2xl text-gray-600 font-medium mb-6">
-  Exploring code, solving problems, and sharing knowledge  <!-- CHANGE THIS -->
+  Exploring code, solving problems, and sharing knowledge
+  <!-- CHANGE THIS -->
 </p>
 
 <!-- Description -->
 <p class="text-lg text-gray-600 mb-10">
-  Dive into comprehensive tutorials...  <!-- CHANGE THIS DESCRIPTION -->
+  Dive into comprehensive tutorials...
+  <!-- CHANGE THIS DESCRIPTION -->
 </p>
 ```
 
@@ -174,20 +183,25 @@ Quantifiable results and impact...
 ```html
 <!-- Feature 1 -->
 <div class="flex flex-col items-center p-6 bg-white rounded-xl shadow-md">
-  <div class="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4">
+  <div
+    class="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-lg mb-4"
+  >
     <!-- CHANGE ICON HERE -->
     <svg class="w-6 h-6 text-blue-600">...</svg>
   </div>
   <h3 class="text-lg font-semibold text-gray-900 mb-2">
-    In-Depth Tutorials  <!-- CHANGE TITLE -->
+    In-Depth Tutorials
+    <!-- CHANGE TITLE -->
   </h3>
   <p class="text-sm text-gray-600 text-center">
-    Comprehensive guides...  <!-- CHANGE DESCRIPTION -->
+    Comprehensive guides...
+    <!-- CHANGE DESCRIPTION -->
   </p>
 </div>
 ```
 
 **Adding a New Feature Card**: Copy one of the existing feature divs (lines 68-77) and paste it as a 4th card. Update:
+
 - Icon SVG path
 - Title
 - Description
@@ -202,10 +216,10 @@ Quantifiable results and impact...
 **Changing Number of Featured Posts**:
 
 ```liquid
-{# Current: Shows 6 posts %}
+{% comment %}Current: Shows 6 posts{% endcomment %}
 {% assign recent_posts = site.posts | where_exp: "post", "post.draft != true" | slice: 0, 6 %}
 
-{# To show 9 posts: %}
+{% comment %}To show 9 posts{% endcomment %}
 {% assign recent_posts = site.posts | where_exp: "post", "post.draft != true" | slice: 0, 9 %}
 ```
 
@@ -214,19 +228,21 @@ Quantifiable results and impact...
 ```html
 <!-- Current: 1 → 2 → 3 columns -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-<!-- To show 4 columns on large screens: -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+  <!-- To show 4 columns on large screens: -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"></div>
+</div>
 ```
 
 **Modifying Section Header**:
 
 ```html
 <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-  Recent Articles  <!-- CHANGE TITLE -->
+  Recent Articles
+  <!-- CHANGE TITLE -->
 </h2>
 <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-  Explore the latest tutorials...  <!-- CHANGE DESCRIPTION -->
+  Explore the latest tutorials...
+  <!-- CHANGE DESCRIPTION -->
 </p>
 ```
 
@@ -239,14 +255,20 @@ Quantifiable results and impact...
 **Changing Number of Displayed Categories**:
 
 ```liquid
-{# Current: Shows 8 categories %}
+{% comment %}Current: Shows 8 categories{% endcomment %}
 {% for category in sorted_categories limit:8 %}
+  <!-- Category card markup -->
+{% endfor %}
 
-{# To show all categories: %}
+{% comment %}To show all categories{% endcomment %}
 {% for category in sorted_categories %}
+  <!-- Category card markup -->
+{% endfor %}
 
-{# To show 12 categories: %}
+{% comment %}To show 12 categories{% endcomment %}
 {% for category in sorted_categories limit:12 %}
+  <!-- Category card markup -->
+{% endfor %}
 ```
 
 **Adding New Category Icon**:
@@ -264,6 +286,7 @@ Find the icon selection logic (line 300+) and add your new category:
 ```
 
 **Icon Color Options**:
+
 - `text-blue-600` - Blue
 - `text-indigo-600` - Indigo
 - `text-purple-600` - Purple
@@ -286,17 +309,20 @@ Get more icons from [Heroicons](https://heroicons.com/)
 ```html
 <!-- Name -->
 <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
-  TreeKangaroo  <!-- CHANGE YOUR NAME -->
+  TreeKangaroo
+  <!-- CHANGE YOUR NAME -->
 </h2>
 
 <!-- Title -->
 <p class="text-xl text-blue-600 font-semibold">
-  Full Stack Developer  <!-- CHANGE YOUR TITLE -->
+  Full Stack Developer
+  <!-- CHANGE YOUR TITLE -->
 </p>
 
 <!-- Bio -->
 <p class="text-lg text-gray-700 leading-relaxed">
-  Passionate Full Stack Developer...  <!-- CHANGE YOUR BIO -->
+  Passionate Full Stack Developer...
+  <!-- CHANGE YOUR BIO -->
 </p>
 ```
 
@@ -304,9 +330,12 @@ Get more icons from [Heroicons](https://heroicons.com/)
 
 ```html
 <!-- Add/Remove/Modify skill badges -->
-<span class="px-4 py-2 bg-white text-blue-700 text-sm font-semibold rounded-lg shadow-sm
-             border border-blue-200 hover:border-blue-400 hover:shadow-md transition-all">
-  Java & Spring  <!-- CHANGE SKILL NAME -->
+<span
+  class="px-4 py-2 bg-white text-blue-700 text-sm font-semibold rounded-lg shadow-sm
+             border border-blue-200 hover:border-blue-400 hover:shadow-md transition-all"
+>
+  Java & Spring
+  <!-- CHANGE SKILL NAME -->
 </span>
 
 <!-- Change badge color by modifying text-* and border-* classes -->
@@ -315,16 +344,22 @@ Get more icons from [Heroicons](https://heroicons.com/)
 **Updating Social Links**:
 
 ```html
-<!-- GitHub -->
-<a href="https://github.com/yunjj92"  <!-- CHANGE URL -->
-   target="_blank"
-   rel="noopener noreferrer">
+<!-- GitHub (CHANGE URL) -->
+<a href="https://github.com/yunjj92" target="_blank" rel="noopener noreferrer">
+  GitHub
+</a>
 
-<!-- LinkedIn -->
-<a href="#"  <!-- ADD YOUR LINKEDIN URL -->
+<!-- LinkedIn (ADD YOUR URL) -->
+<a
+  href="https://www.linkedin.com/in/your-profile"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  LinkedIn
+</a>
 
-<!-- Email -->
-<a href="mailto:your.email@example.com"  <!-- ADD YOUR EMAIL -->
+<!-- Email (ADD YOUR ADDRESS) -->
+<a href="mailto:your.email@example.com"> Email </a>
 ```
 
 **Changing Status Badge**:
@@ -367,13 +402,15 @@ Get more icons from [Heroicons](https://heroicons.com/)
 ```html
 <!-- Primary button -->
 <a class="bg-gradient-to-r from-blue-600 to-indigo-600">
-<!-- Change to: -->
-<a class="bg-gradient-to-r from-green-600 to-emerald-600">
-
-<!-- Badges -->
-<span class="bg-blue-50 text-blue-700 border-blue-200">
-<!-- Change to: -->
-<span class="bg-green-50 text-green-700 border-green-200">
+  <!-- Change to: -->
+  <a class="bg-gradient-to-r from-green-600 to-emerald-600">
+    <!-- Badges -->
+    <span class="bg-blue-50 text-blue-700 border-blue-200">
+      <!-- Change to: -->
+      <span
+        class="bg-green-50 text-green-700 border-green-200"
+      ></span></span></a
+></a>
 ```
 
 ### Changing Typography
@@ -384,9 +421,9 @@ Get more icons from [Heroicons](https://heroicons.com/)
 <!-- Make hero title larger -->
 <!-- Before: -->
 <h1 class="text-4xl sm:text-5xl lg:text-6xl">
-
-<!-- After: -->
-<h1 class="text-5xl sm:text-6xl lg:text-7xl">
+  <!-- After: -->
+  <h1 class="text-5xl sm:text-6xl lg:text-7xl"></h1>
+</h1>
 ```
 
 **Change Font Weights**:
@@ -395,9 +432,10 @@ Get more icons from [Heroicons](https://heroicons.com/)
 <!-- Make text bolder -->
 <!-- Before: -->
 <p class="font-medium">
+  <!-- After: -->
+</p>
 
-<!-- After: -->
-<p class="font-semibold">
+<p class="font-semibold"></p>
 ```
 
 ### Adjusting Spacing
@@ -408,9 +446,9 @@ Get more icons from [Heroicons](https://heroicons.com/)
 <!-- Reduce section padding -->
 <!-- Before: -->
 <section class="py-16 sm:py-20 lg:py-24">
-
-<!-- After: -->
-<section class="py-12 sm:py-16 lg:py-20">
+  <!-- After: -->
+  <section class="py-12 sm:py-16 lg:py-20"></section>
+</section>
 ```
 
 **Component Spacing**:
@@ -419,9 +457,9 @@ Get more icons from [Heroicons](https://heroicons.com/)
 <!-- Increase card gap -->
 <!-- Before: -->
 <div class="grid gap-8">
-
-<!-- After: -->
-<div class="grid gap-10 lg:gap-12">
+  <!-- After: -->
+  <div class="grid gap-10 lg:gap-12"></div>
+</div>
 ```
 
 ### Modifying Animations
@@ -434,24 +472,12 @@ Remove animation classes from elements:
 <!-- Remove hover lift effect -->
 <!-- Before: -->
 <button class="btn-hover-lift">
-
-<!-- After: -->
-<button>
+  <!-- After: -->
+  <button></button>
+</button>
 ```
 
 **Adjust Animation Speed** in `assets/css/homepage-animations.css`:
-
-```css
-/* Make animations faster */
-.scroll-reveal {
-  transition: opacity 0.4s ease-out, transform 0.4s ease-out;  /* was 0.8s */
-}
-
-/* Make animations slower */
-.card-hover-scale {
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);  /* was 0.4s */
-}
-```
 
 ---
 
@@ -480,8 +506,8 @@ Then use picture element:
 
 ```html
 <picture>
-  <source srcset="image.webp" type="image/webp">
-  <img src="image.jpg" alt="Description" loading="lazy">
+  <source srcset="image.webp" type="image/webp" />
+  <img src="image.jpg" alt="Description" loading="lazy" />
 </picture>
 ```
 
@@ -490,25 +516,24 @@ Then use picture element:
 #### Purge Unused Tailwind Classes (Future)
 
 1. Install Tailwind CLI:
+
 ```bash
 npm install -D tailwindcss
 ```
 
 2. Create `tailwind.config.js`:
+
 ```javascript
 module.exports = {
-  content: [
-    "./_includes/**/*.html",
-    "./_layouts/**/*.html",
-    "./*.html",
-  ],
+  content: ["./_includes/**/*.html", "./_layouts/**/*.html", "./*.html"],
   theme: {
     extend: {},
   },
-}
+};
 ```
 
 3. Build optimized CSS:
+
 ```bash
 npx tailwindcss -i ./src/input.css -o ./assets/css/tailwind.min.css --minify
 ```
@@ -526,6 +551,7 @@ lighthouse http://localhost:4000 --view
 ```
 
 **Target Scores**:
+
 - Performance: > 90
 - Accessibility: > 95
 - Best Practices: > 90
@@ -534,6 +560,7 @@ lighthouse http://localhost:4000 --view
 #### Check Core Web Vitals
 
 **Target Metrics**:
+
 - LCP (Largest Contentful Paint): < 2.5s
 - FID (First Input Delay): < 100ms
 - CLS (Cumulative Layout Shift): < 0.1
@@ -581,12 +608,12 @@ Fill in your content based on section purpose.
 ```html
 <!-- White background -->
 <section class="bg-white">
-
-<!-- Light gray background -->
-<section class="bg-gray-50">
-
-<!-- Gradient background -->
-<section class="bg-gradient-to-br from-blue-50 to-indigo-50">
+  <!-- Light gray background -->
+  <section class="bg-gray-50">
+    <!-- Gradient background -->
+    <section class="bg-gradient-to-br from-blue-50 to-indigo-50"></section>
+  </section>
+</section>
 ```
 
 ### Updating Navigation Menu
@@ -617,11 +644,13 @@ Navigation will automatically update in header!
 ### Changing Site Logo
 
 1. Add your logo to `assets/images/`:
+
 ```bash
 cp your-logo.png assets/images/logo.png
 ```
 
 2. Update `_config.yml`:
+
 ```yaml
 logo: "/assets/images/logo.png"
 logo-icon: "/assets/images/logo.png"
@@ -647,10 +676,12 @@ Add/modify footer content, social links, copyright text, etc.
 **Issue**: New post doesn't show on homepage
 
 **Solutions**:
+
 1. Check filename format: `YYYY-MM-DD-title.md`
 2. Verify `draft: false` in front matter
 3. Ensure date is not in the future
 4. Clear Jekyll cache:
+
 ```bash
 bundle exec jekyll clean
 bundle exec jekyll serve
@@ -661,6 +692,7 @@ bundle exec jekyll serve
 **Issue**: Images show broken link icon
 
 **Solutions**:
+
 1. Check path is correct (relative to site root):
    - ✅ `/assets/images/photo.jpg`
    - ❌ `assets/images/photo.jpg` (missing leading slash)
@@ -673,6 +705,7 @@ bundle exec jekyll serve
 **Issue**: Tailwind classes not working
 
 **Solutions**:
+
 1. Check Tailwind CDN link in `_includes/head.html`
 2. Verify class names are correct (no typos)
 3. Clear browser cache (Ctrl+Shift+R / Cmd+Shift+R)
@@ -683,6 +716,7 @@ bundle exec jekyll serve
 **Issue**: Menu doesn't toggle on mobile
 
 **Solutions**:
+
 1. Check `_data/navigation.yml` exists and has correct format
 2. Verify JavaScript in `_includes/navigation.html` is present
 3. Check browser console for JavaScript errors
@@ -693,6 +727,7 @@ bundle exec jekyll serve
 **Issue**: Scroll animations not triggering
 
 **Solutions**:
+
 1. Verify elements have correct classes: `.scroll-reveal` or `.fade-in-up`
 2. Check JavaScript at end of `index.html` is present
 3. Ensure browser supports Intersection Observer (all modern browsers)
@@ -703,10 +738,12 @@ bundle exec jekyll serve
 **Issue**: Jekyll build fails with error
 
 **Solutions**:
+
 1. Check error message for specific file/line
 2. Verify all Liquid tags are properly closed: `{% if %}...{% endif %}`
 3. Check for syntax errors in YAML front matter
 4. Run with verbose flag:
+
 ```bash
 bundle exec jekyll serve --verbose
 ```
@@ -725,9 +762,11 @@ bundle exec jekyll serve --verbose
 ### Monthly
 
 - [ ] Update Jekyll and dependencies:
+
 ```bash
 bundle update
 ```
+
 - [ ] Review Google Analytics (if configured)
 - [ ] Optimize any new images
 - [ ] Check for broken links with [broken-link-checker](https://github.com/stevenvachon/broken-link-checker)
