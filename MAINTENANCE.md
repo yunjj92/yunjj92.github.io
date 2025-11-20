@@ -276,6 +276,7 @@ Quantifiable results and impact...
 Find the icon selection logic (line 300+) and add your new category:
 
 ```liquid
+{% raw %}
 {% elsif category_lower contains 'mobile' or category_lower contains 'ios' or category_lower contains 'android' %}
   <!-- Mobile Development Icon -->
   <svg class="w-16 h-16 text-purple-600 group-hover:scale-110 transition-transform duration-300"
@@ -283,6 +284,7 @@ Find the icon selection logic (line 300+) and add your new category:
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
   </svg>
+{% endraw %}
 ```
 
 **Icon Color Options**:
