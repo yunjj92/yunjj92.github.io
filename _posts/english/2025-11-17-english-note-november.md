@@ -3,7 +3,7 @@ layout: post
 author: TreeKangaroo
 categories: english
 tags: [vocabulary, expressions]
-date: YYYY-MM-DD
+date: 2025-11-17
 title: "English Notes - [Topic/Date]"
 ---
 
@@ -76,6 +76,14 @@ title: "English Notes - [Topic/Date]"
   > "Claude Code can provide subjective code reviews beyond what traditional linting tools detect, identifying issues like typos, stale comments, misleading function or variable names, and more."
 - **My example**:
   > "an audiotape of the surreptitiously recorded conversation."
+
+### 6. feedback
+- **Part of Speech**: noun
+- **usage**: 
+  - (noun) get feedback on
+  - (noun) have feedback (from sb), give sb feedback (on/about sth)
+  - (noun) feedback from
+
 ---
 
 ## Phrase

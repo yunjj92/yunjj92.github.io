@@ -12,7 +12,8 @@
       "Bash(task-master update-task:*)",
       "Bash(ruby:*)",
       "Bash(bundle:*)",
-      "Bash(where:*)"
+      "Bash(where:*)",
+      "Bash(C:Ruby32-x64binbundle.bat exec jekyll build)"
     ],
     "deny": [],
     "ask": []

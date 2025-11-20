@@ -1,0 +1,273 @@
+/* Post Content Styling - Unified Layout for Markdown and HTML */
+
+/* Article and Section Elements */
+.post-content article {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-content section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.post-content section:last-child {
+  border-bottom: none;
+}
+
+/* HTML Headings (h4, h5, h6) */
+.post-content article h4,
+.post-content section h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.post-content article h5,
+.post-content section h5 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #374151;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.post-content article h6,
+.post-content section h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4b5563;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Paragraph Spacing */
+.post-content article p,
+.post-content section p {
+  color: #374151;
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
+}
+
+.post-content article p:last-child,
+.post-content section p:last-child {
+  margin-bottom: 0;
+}
+
+/* First Paragraph Special Styling */
+.post-content .firstP {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+}
+
+/* Code Blocks within Articles */
+.post-content article pre,
+.post-content section pre {
+  background-color: #1f2937;
+  color: #f3f4f6;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.post-content .codeblock {
+  background-color: #1f2937;
+  color: #f3f4f6;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Lists within Articles */
+.post-content article ul,
+.post-content section ul {
+  list-style-type: disc;
+  padding-left: 1.75rem;
+  margin: 1.25rem 0;
+  color: #374151;
+}
+
+.post-content article ol,
+.post-content section ol {
+  list-style-type: decimal;
+  padding-left: 1.75rem;
+  margin: 1.25rem 0;
+  color: #374151;
+}
+
+.post-content article li,
+.post-content section li {
+  margin-bottom: 0.5rem;
+  line-height: 1.75;
+}
+
+.post-content article li:last-child,
+.post-content section li:last-child {
+  margin-bottom: 0;
+}
+
+/* Nested Lists */
+.post-content article ul ul,
+.post-content article ol ul,
+.post-content section ul ul,
+.post-content section ol ul {
+  list-style-type: circle;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-content article ul ol,
+.post-content article ol ol,
+.post-content section ul ol,
+.post-content section ol ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Images within Articles */
+.post-content article img,
+.post-content section img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+/* Links within Articles */
+.post-content article a,
+.post-content section a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.post-content article a:hover,
+.post-content section a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* Blockquotes within Articles */
+.post-content article blockquote,
+.post-content section blockquote {
+  border-left: 4px solid #3b82f6;
+  background-color: #eff6ff;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #374151;
+}
+
+/* Tables within Articles */
+.post-content article table,
+.post-content section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.post-content article th,
+.post-content section th {
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  padding: 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.post-content article td,
+.post-content section td {
+  border: 1px solid #d1d5db;
+  padding: 0.75rem;
+  color: #374151;
+}
+
+.post-content article tr:nth-child(even),
+.post-content section tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+/* Horizontal Rules */
+.post-content article hr,
+.post-content section hr {
+  border: none;
+  border-top: 2px solid #e5e7eb;
+  margin: 3rem 0;
+}
+
+/* Inline Code */
+.post-content article code:not(pre code),
+.post-content section code:not(pre code) {
+  background-color: #f3f4f6;
+  color: #2563eb;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Strong and Emphasis */
+.post-content article strong,
+.post-content section strong {
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.post-content article em,
+.post-content section em {
+  font-style: italic;
+  color: #374151;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .post-content article h4,
+  .post-content section h4 {
+    font-size: 1.125rem;
+  }
+
+  .post-content article h5,
+  .post-content section h5 {
+    font-size: 1rem;
+  }
+
+  .post-content article p,
+  .post-content section p,
+  .post-content .firstP {
+    font-size: 0.9375rem;
+  }
+
+  .post-content section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .post-content article pre,
+  .post-content section pre,
+  .post-content .codeblock {
+    padding: 1rem;
+    font-size: 0.8125rem;
+  }
+}
