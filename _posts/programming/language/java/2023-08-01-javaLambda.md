@@ -15,53 +15,56 @@ title: Lambda Expression in Java
     세 번째는 람다 표현식의 경우 객체의 형태로, 요구사항에 따라서 수행되어야 한다면, 건너 뛰는 것도 가능하다. 
     </p>
     <pre class="codeblock">
-    public class SupplierTestMainApplication {
 
-	public static void main(String[] args) {
-		
-		//FuncInterface를 여기서 구현한다. 이 인터페이스의 경우 기본적으로 abstractFun() 함수를 구현한다. 
-		FuncInterface fobj = (int x) -> System.out.println(2*x);
-		
-		//밑의 코드는 기본적으로 10을 인출할 것이다. 
-		fobj.abstractFun(5);
-		
-		
-		ArrayList<Integer> arrL =  new ArrayList<Integer>();
-		arrL.add(1);
-		arrL.add(2);
-		arrL.add(3);
-		arrL.add(4);
-		
-		arrL.forEach(n -> System.out.println(n));
-		
-		arrL.forEach(n ->{
-			
-			if(n%2==0) System.out.println(n);
-			
-		});
-		
-	}
+    public class SupplierTestMainApplication &#123;
 
-}
-    </pre>
-    <pre class="codeblock">
-    public interface FuncInterface {
+	public static void main&#40;String&#91;&#93; args&#41; &#123;
 
-	void abstractFun(int x);
-	
-	default void normalFunc() {
-		
-		System.out.println("Hello!!");
-	}
-	
-}
-    </pre>
-    <p>Supplier 인터페이스 사용하여 람다식 사용하기<br>
-    Supplier<"T"> 인터페이스는 미리 정의된 인터페이스로, 결과의 전달 역할을 수행한다. 
-    </p>
-    <p>method reference란?<br>
+		//FuncInterface를 여기서 구현한다. 이 인터페이스의 경우 기본적으로 abstractFun&#40;&#41; 함수를 구현한다.
+		FuncInterface fobj = &#40;int x&#41; -&gt; System.out.println&#40;2*x&#41;;
+
+		//밑의 코드는 기본적으로 10을 인출할 것이다.
+		fobj.abstractFun&#40;5&#41;;
+
+
+		ArrayList&lt;Integer&gt; arrL =  new ArrayList&lt;Integer&gt;&#40;&#41;;
+		arrL.add&#40;1&#41;;
+		arrL.add&#40;2&#41;;
+		arrL.add&#40;3&#41;;
+		arrL.add&#40;4&#41;;
+
+		arrL.forEach&#40;n -&gt; System.out.println&#40;n&#41;&#41;;
+
+		arrL.forEach&#40;n -&gt;&#123;
+
+			if&#40;n%2==0&#41; System.out.println&#40;n&#41;;
+
+		&#125;&#41;;
+
+        &#125;
+    
+    &#125;
+
+</pre>
+
+<pre class="codeblock">
+
+    public interface FuncInterface &#123;
+
+	void abstractFun&#40;int x&#41;;
+
+	default void normalFunc&#40;&#41; &#123;
+
+		System.out.println&#40;"Hello!!"&#41;;
+	&#125;
+
+    &#125;
+</pre>
+
+<p>Supplier 인터페이스 사용하여 람다식 사용하기<br>
+    Supplier&lt;T&gt; 인터페이스는 미리 정의된 인터페이스로, 결과의 전달 역할을 수행한다.
+</p>
+<p>method reference란?<br>
     ClassName::MethodName 형식으로 입력하며, method를 호출하는 것이지만 괄호는 쓰지 않고 생략
-    </p>
-    <pre class="codeblock">
-    </pre>
+</p>
 </article>
